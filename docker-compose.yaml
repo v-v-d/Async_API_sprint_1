@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: api-app
+    build:
+      context: .
+    ports:
+      - "8088:8088"
+    depends_on:
+      - es
+      - redis
+    volumes:
+      - ./src:/app
+      - ./shared:/app/shared
+      - ./shared/logs:/app/shared/logs
+    env_file:
+      - .env
+
+  redis:
+    image: redis:6.2.5
+    container_name: api-redis
+    env_file:
+      - .env
+    expose:
+      - "6379"
+    command:
+      - redis-server
+
+  es:
+    image: elasticsearch:7.14.1
+    container_name: api-es
+    depends_on:
+      - kibana
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    env_file:
+      - .env
+
+  kibana:
+    image: kibana:7.14.1
+    container_name: api-kibana
+    ports:
+      - "5601:5601"
+    env_file:
+      - .env

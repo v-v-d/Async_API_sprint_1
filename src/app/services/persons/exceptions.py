@@ -1,0 +1,2 @@
+class BasePersonsServiceError(Exception):
+    pass
