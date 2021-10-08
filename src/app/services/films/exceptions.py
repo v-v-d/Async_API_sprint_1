@@ -1,0 +1,2 @@
+class BaseFilmsServiceError(Exception):
+    pass
