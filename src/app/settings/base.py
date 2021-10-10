@@ -50,7 +50,6 @@ class BaseDSNSettings(BaseSettings):
 
 class ElasticSearchSettings(BaseDSNSettings):
     PROTOCOL: str = "http"
-    PATH: str = "movies"
     DSN: AnyHttpUrl = None
     TIMEOUT: int = 30
 
