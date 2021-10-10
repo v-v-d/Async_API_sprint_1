@@ -1,19 +1,23 @@
 from logging import getLogger
 
+from app.elastic import IndexNameEnum
+from app.services.base import (
+    BaseService,
+    MethodEnum,
+    exc_handled,
+)
+from app.services.films.exceptions import BaseFilmsServiceError
 from app.services.films.schemas import FilmSchema
-from elasticsearch import AsyncElasticsearch
+from app.services.schemas import DocSchema
 
 logger = getLogger(__name__)
 
 
-class FilmsService:
-    def __init__(self, elastic: AsyncElasticsearch):
-        self.elastic = elastic
-    
+class FilmsService(BaseService):
     # @cached()  # TODO
+    @exc_handled(logger, BaseFilmsServiceError)
     async def get_by_id(self, film_id: str) -> FilmSchema | None:
-        return await self._get_film_from_elastic(film_id)
-
-    async def _get_film_from_elastic(self, film_id: str) -> FilmSchema | None:
-        doc = await self.elastic.get("movies", film_id)
-        return FilmSchema(**doc["_source"])
+        doc = await self._request(
+            method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
+        )
+        return FilmSchema(**DocSchema(**doc).source)
