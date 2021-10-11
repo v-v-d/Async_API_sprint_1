@@ -1,32 +1,26 @@
 from http import HTTPStatus
 
-from app.services.films.exceptions import BaseFilmsServiceError
-
-from app.dependencies.films import get_film_service
-
-from app.services.films.main import FilmsService
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.api.v1.schemas import FilmSchema
+from app.api.v1.schemas import FilmFullSchema
+from app.dependencies.films import get_film_service
+from app.services.base import BaseServiceError, NotFoundError
+from app.services.films.main import FilmsService
 
 router = APIRouter()
 
 
-@router.get("/{film_id}", response_model=FilmSchema)
+@router.get("/{film_id}", response_model=FilmFullSchema)
 async def film_details(
-    film_id: str, 
-    film_service: FilmsService = Depends(get_film_service)
-) -> FilmSchema:
+    film_id: str, film_service: FilmsService = Depends(get_film_service)
+) -> FilmFullSchema:
     try:
         film = await film_service.get_by_id(film_id)
-    except BaseFilmsServiceError:
+    except NotFoundError:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="film not found.")
+    except BaseServiceError:
         raise HTTPException(
-            status_code=HTTPStatus.SERVICE_UNAVAILABLE, detail="service unavailable"
+            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
         )
 
-    if not film:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, detail="film not found"
-        )
-
-    return FilmSchema(id=film.id, title=film.title)
+    return FilmFullSchema(**film.dict())

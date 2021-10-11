@@ -1,5 +1,7 @@
+from typing import Any
+
 import orjson
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 def orjson_dumps(v, *, default):
@@ -10,3 +12,7 @@ class ORJSONModel(BaseModel):
     class Config:
         json_loads = orjson.loads
         json_dumps = orjson_dumps
+
+
+class DocSchema(ORJSONModel):
+    source: dict[str, Any] = Field(..., alias="_source")
