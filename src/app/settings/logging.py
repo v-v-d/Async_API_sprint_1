@@ -1,7 +1,6 @@
 import logging
 
 from app.settings import settings
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -39,6 +38,14 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "default",
             "filename": settings.DIR_LOGS / "error.log",
+            "maxBytes": 1024 ** 3 * 10,
+            "backupCount": 10,
+        },
+        "services": {
+            "level": settings.LOG_LEVEL,
+            "class": "logging.handlers.RotatingFileHandler",
+            "formatter": "verbose",
+            "filename": settings.DIR_LOGS / "services.log",
             "maxBytes": 1024 ** 3 * 10,
             "backupCount": 10,
         },
@@ -81,6 +88,11 @@ LOGGING = {
         "uvicorn.error": {
             "handlers": ["uvicorn.error", "console"],
             "level": "WARNING",
+            "propagate": False,
+        },
+        "app.services.base": {
+            "handlers": ["services", "console"],
+            "level": settings.LOG_LEVEL,
             "propagate": False,
         },
         "app.services.films.main": {

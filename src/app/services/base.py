@@ -1,12 +1,16 @@
 from enum import Enum
-from functools import wraps
-from logging import Logger
-from typing import Callable
+from logging import getLogger
 
-from elasticsearch import AsyncElasticsearch
+import elasticsearch
+
+logger = getLogger(__name__)
 
 
 class BaseServiceError(Exception):
+    pass
+
+
+class NotFoundError(BaseServiceError):
     pass
 
 
@@ -20,7 +24,7 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
-    def __init__(self, elastic: AsyncElasticsearch):
+    def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 
     async def _request(self, method: MethodEnum, *args, **kwargs):
@@ -31,20 +35,8 @@ class BaseService:
 
         try:
             return await method(*args, **kwargs)
+        except elasticsearch.exceptions.NotFoundError:
+            raise NotFoundError
         except Exception as err:
+            logger.exception("Request to elasticsearch failed!")
             raise BaseServiceError from err
-
-
-def exc_handled(logger: Logger, exc: Callable):
-    def decorator(func: Callable):
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            try:
-                return await func(*args, **kwargs)
-            except (BaseServiceError, MethodNotAllowed) as err:
-                logger.exception("Request to elasticsearch failed!")
-                raise exc from err
-
-        return wrapper
-
-    return decorator
