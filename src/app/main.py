@@ -31,4 +31,4 @@ async def shutdown():
     await elastic.es.close()
 
 
-app.include_router(films.router, prefix='/api/v1/film', tags=['film'])
+app.include_router(films.router, prefix='/api/v1/films', tags=['films'])

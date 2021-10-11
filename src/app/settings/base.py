@@ -52,6 +52,8 @@ class ElasticSearchSettings(BaseDSNSettings):
     PROTOCOL: str = "http"
     DSN: AnyHttpUrl = None
     TIMEOUT: int = 30
+    DEFAULT_PAGE: int = 1
+    DEFAULT_PAGE_SIZE: int = 50
 
     class Config:
         env_prefix = "ES_"
