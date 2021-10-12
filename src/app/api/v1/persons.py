@@ -12,7 +12,8 @@ router = APIRouter()
 
 @router.get("/search", response_model=OutputPersonSchema)
 async def search_person_name(
-        query: str, person_service: PersonService = Depends(get_persons_service)
+        query: str,
+        person_service: PersonService = Depends(get_persons_service)
 ) -> list[OutputPersonSchema]:
     try:
         persons = await person_service.get_name_person(query)
@@ -43,12 +44,13 @@ async def person_details(
     return OutputPersonSchema(**person.dict())
 
 
-@router.get("/", response_model=OutputPersonSchema)
-async def search_all_persons(
+@router.get("/{person_id}/film", response_model=OutputPersonSchema)
+async def search_film_by_person(
+        person_id: str,
         person_service: PersonService = Depends(get_persons_service)
 ) -> OutputPersonSchema:
     try:
-        person = await person_service.get_all_id()
+        person = await person_service.get_all_film_by_person(person_id)
     except NotFoundError:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="person not found.")
     except BaseServiceError:

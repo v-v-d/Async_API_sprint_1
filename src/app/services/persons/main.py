@@ -19,13 +19,14 @@ class PersonService(BaseService):
         )
         return InputPersonSchema(**DocSchema(**doc).source)
 
-    async def get_all_id(self) -> InputPersonSchema | None:
+    async def get_all_film_by_person(self, person_id: str) -> InputPersonSchema | None:
         doc = await self._request(
+            id=person_id,
             method=MethodEnum.search.value, index=IndexNameEnum.persons.value
         )
         return InputPersonSchema(**DocSchema(**doc).source)
 
-    async def get_name_person(self, name_person: str) -> InputPersonSchema:
+    async def get_name_person(self, name_person: str) -> InputListPersonSchema:
         response = await self._request(
             method=MethodEnum.search.value, index=IndexNameEnum.persons.value,
             body={'query': {'match': {'full_name': {'query': name_person, 'fuzziness': 'AUTO'}}}}

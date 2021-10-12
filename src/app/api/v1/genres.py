@@ -26,4 +26,17 @@ async def genre_details(
     return OutputGenreSchema(**genre.dict())
 
 
+@router.get("/", response_model=OutputGenreSchema)
+async def search_genres(
+        genres_service: GenreService = Depends(get_genre_service)
+) -> list[OutputGenreSchema]:
+    try:
+        genres = await genres_service.search()
+    except NotFoundError:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="genre not found.")
+    except BaseServiceError:
+        raise HTTPException(
+            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
+        )
 
+    return [OutputGenreSchema(**genre.dict()) for genre in genres]
