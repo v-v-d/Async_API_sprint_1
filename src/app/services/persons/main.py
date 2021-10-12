@@ -26,12 +26,14 @@ class PersonService(BaseService):
         )
         return InputPersonSchema(**DocSchema(**doc).source)
 
-    async def get_name_person(self, name_person: str) -> InputListPersonSchema:
+    async def search(self, query: str) -> InputListPersonSchema:
         response = await self._request(
             method=MethodEnum.search.value, index=IndexNameEnum.persons.value,
-            body={'query': {'match': {'full_name': {'query': name_person, 'fuzziness': 'AUTO'}}}}
+            body={'query': {'match': {'full_name': {'query': query, 'fuzziness': 'AUTO'}}}}
         )
+
         result = ResponseSchema(**response)
+
         return InputListPersonSchema(
             __root__=[
                 InputPersonSchema(**doc.source)

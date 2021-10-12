@@ -10,14 +10,13 @@ from app.services.persons.main import PersonService
 router = APIRouter()
 
 
-@router.get("/search", response_model=OutputPersonSchema)
-async def search_person_name(
-        query: str,
-        person_service: PersonService = Depends(get_persons_service)
+@router.get("/search", response_model=list[OutputPersonSchema])
+async def persons_search(
+    query: str,
+    person_service: PersonService = Depends(get_persons_service)
 ) -> list[OutputPersonSchema]:
     try:
-        persons = await person_service.get_name_person(query)
-
+        persons = await person_service.search(query)
     except NotFoundError:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="person not found.")
     except BaseServiceError:

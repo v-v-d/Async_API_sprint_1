@@ -32,8 +32,6 @@ async def shutdown():
 
 
 app.include_router(films.router, prefix='/api/v1/film', tags=['film'])
-app.include_router(genres.router, prefix='/api/v1/genre', tags=['genre'])
-app.include_router(persons.router, prefix='/api/v1/person', tags=['person'])
-app.include_router(persons.router, prefix='/api/v1/person', tags=['person'])
-app.include_router(persons.router, prefix='/api/v1/person', tags=['person'])
+app.include_router(genres.router, prefix='/api/v1/genres', tags=['genres'])
+app.include_router(persons.router, prefix='/api/v1/persons', tags=['persons'])
 
