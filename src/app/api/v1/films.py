@@ -24,3 +24,6 @@ async def film_details(
         )
 
     return FilmFullSchema(**film.dict())
+
+
+

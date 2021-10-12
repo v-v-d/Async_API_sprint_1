@@ -1,7 +1,8 @@
 from app.services.schemas import ORJSONModel
 
 
-class PersonSchema(ORJSONModel):
+class InputPersonSchema(ORJSONModel):
     id: str
     full_name: str
-    role: str
+    roles: list[str]
+    film_ids: list[str]

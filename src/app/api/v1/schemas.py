@@ -20,3 +20,27 @@ class FilmFullSchema(ORJSONModel):
     actors_names: list[str]
     writers_names: list[str]
     directors_names: list[str]
+
+
+class OutputGenreSchema(ORJSONModel):
+    id: str
+    name: str
+    description: str
+
+
+class OutputPersonSchema(ORJSONModel):
+    id: str
+    full_name: str
+    roles: list[str]
+    film_ids: list[str]
+
+
+class OutputListPerson(ORJSONModel):
+    __root__: list[OutputPersonSchema]
+
+    def __iter__(self):
+        return iter(self.__root__)
+
+    def __getitem__(self, item):
+        return self.__root__[item]
+    
