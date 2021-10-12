@@ -10,9 +10,26 @@ from app.services.persons.main import PersonService
 router = APIRouter()
 
 
+@router.get("/search", response_model=OutputPersonSchema)
+async def search_person_name(
+        query: str, person_service: PersonService = Depends(get_persons_service)
+) -> list[OutputPersonSchema]:
+    try:
+        persons = await person_service.get_name_person(query)
+
+    except NotFoundError:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="person not found.")
+    except BaseServiceError:
+        raise HTTPException(
+            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
+        )
+
+    return [OutputPersonSchema(**person.dict()) for person in persons]
+
+
 @router.get("/{person_id}", response_model=OutputPersonSchema)
 async def person_details(
-    person_id: str, person_service: PersonService = Depends(get_persons_service)
+        person_id: str, person_service: PersonService = Depends(get_persons_service)
 ) -> OutputPersonSchema:
     try:
         person = await person_service.get_by_id(person_id)
@@ -27,8 +44,8 @@ async def person_details(
 
 
 @router.get("/", response_model=OutputPersonSchema)
-async def person_details(
-    person_service: PersonService = Depends(get_persons_service)
+async def search_all_persons(
+        person_service: PersonService = Depends(get_persons_service)
 ) -> OutputPersonSchema:
     try:
         person = await person_service.get_all_id()
@@ -40,25 +57,3 @@ async def person_details(
         )
 
     return OutputPersonSchema(**person.dict())
-
-
-@router.get("/search/{person_name}", response_model=OutputPersonSchema)
-async def person_details(
-    person_name: str, person_service: PersonService = Depends(get_persons_service)
-) -> OutputPersonSchema:
-    try:
-        persons = await person_service.get_name_person(person_name)
-
-    except NotFoundError:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="person not found.")
-    except BaseServiceError:
-        raise HTTPException(
-            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
-        )
-
-    return [OutputPersonSchema(**person.dict()) for person in persons]
-
-
-
-
-
