@@ -34,13 +34,4 @@ class OutputPersonSchema(ORJSONModel):
     roles: list[str]
     film_ids: list[str]
 
-
-class OutputListPerson(ORJSONModel):
-    __root__: list[OutputPersonSchema]
-
-    def __iter__(self):
-        return iter(self.__root__)
-
-    def __getitem__(self, item):
-        return self.__root__[item]
     

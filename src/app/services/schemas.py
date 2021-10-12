@@ -16,3 +16,11 @@ class ORJSONModel(BaseModel):
 
 class DocSchema(ORJSONModel):
     source: dict[str, Any] = Field(..., alias="_source")
+
+
+class HitsSchema(ORJSONModel):
+    hits: list[DocSchema]
+
+
+class ResponseSchema(ORJSONModel):
+    hits: HitsSchema

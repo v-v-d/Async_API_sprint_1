@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.api.v1.schemas import OutputPersonSchema, OutputListPerson
+from app.api.v1.schemas import OutputPersonSchema
 from app.dependencies.persons import get_persons_service
 from app.services.base import BaseServiceError, NotFoundError
 from app.services.persons.main import PersonService
