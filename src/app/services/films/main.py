@@ -10,7 +10,18 @@ from app.services.films.schemas import (
     InputFilmSchema,
     InputListFilmSchema,
 )
-from app.services.schemas import DocSchema, ResponseSchema, MatchSchema, MultiMatchQuerySchema
+from app.services.schemas import (
+    DocSchema,
+    ResponseSchema,
+    MultiMatchSchema,
+    MatchSchema,
+    FilterSchema,
+    NestedSchema,
+    SortSchema,
+    OrderSchema,
+    RootQuerySchema,
+    BoolSchema,
+)
 
 logger = getLogger(__name__)
 
@@ -31,65 +42,15 @@ class FilmsService(BaseService):
         *,
         query: Optional[str] = None,
         genre_id: Optional[str] = None,
+        person_id: Optional[str] = None,
         sort: Optional[str] = None,
     ) -> InputListFilmSchema:
-        # q = MatchSchema(multi_match=MultiMatchQuerySchema(query=query)).dict()
-        q = {
-            "query": {
-                "bool": {
-                    "must": []
-                }
-            }
-        }
-
-        if query:
-            search_query = {
-                "multi_match": {
-                    "query": query,
-                    "fields": ["title^3", "description"],
-                    "fuzziness": "AUTO"
-                }
-            }
-            q["query"]["bool"]["must"].append(search_query)
-
-        if genre_id:
-            filter_by_genre = {
-                "nested": {
-                    "path": "genres",
-                    "query": {
-                        "bool": {
-                            "must": [
-                                {
-                                    "match": {
-                                        "genres.id": genre_id
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-            q["query"]["bool"]["must"].append(filter_by_genre)
-
-        if sort:
-            mapper = {
-                "rating": "asc",
-                "-rating": "desc",
-            }
-
-            if mapper.get(sort):
-                sort_by_rating = {
-                    "rating": {
-                        "order": mapper.get(sort)
-                    }
-                }
-                q["sort"] = sort_by_rating
+        q = self._get_query(query, genre_id, person_id, sort)
 
         response = await self._request(
             method=MethodEnum.search.value,
             index=IndexNameEnum.movies.value,
             body=q,
-            # query=q,
             from_=page,
             size=size,
         )
@@ -97,8 +58,62 @@ class FilmsService(BaseService):
         result = ResponseSchema(**response)
 
         return InputListFilmSchema(
-            __root__=[
-                InputFilmSchema(**doc.source)
-                for doc in result.hits.hits
-            ]
+            __root__=[InputFilmSchema(**doc.source) for doc in result.hits.hits]
         )
+
+    def _get_query(
+        self,
+        query: Optional[str] = None,
+        genre_id: Optional[str] = None,
+        person_id: Optional[str] = None,
+        sort: Optional[str] = None,
+    ) -> str:
+        q = RootQuerySchema(__root__={"query": BoolSchema(bool={})})
+
+        if query or genre_id:
+            q.__root__["query"].bool["must"] = []
+
+        if query:
+            mm_q = MultiMatchSchema(query=query, fields=["title^3", "description"])
+            q.__root__["query"].bool["must"].append(mm_q)
+
+        if genre_id:
+            f_query = self._get_filter_by_id_query("genres", genre_id)
+            q.__root__["query"].bool["must"].append(f_query)
+
+        if person_id:
+            q.__root__["query"].bool["should"] = []
+
+            for field_name in ("directors", "actors", "writers"):
+                f_query = self._get_filter_by_id_query(field_name, person_id)
+                q.__root__["query"].bool["should"].append(f_query)
+
+        if sort:
+            field = self._get_sorting_field(sort)
+            order = self._get_sorting_type(sort)
+            q.__root__["sort"] = SortSchema(sort={field: OrderSchema(order=order)})
+
+        return q.json()
+
+    @staticmethod
+    def _get_filter_by_id_query(
+        field_name: str,
+        field_id: str,
+    ) -> FilterSchema:
+        nested_field_name = f"{field_name}.id"
+        sub_q = BoolSchema(bool={"must": []})
+        match = MatchSchema(match={nested_field_name: field_id})
+        sub_q.bool["must"].append(match)
+
+        return FilterSchema(nested=NestedSchema(path=field_name, query=sub_q))
+
+    @staticmethod
+    def _get_sorting_field(sort: str) -> str:
+        return sort.removeprefix("-")
+
+    @staticmethod
+    def _get_sorting_type(sort: str) -> str:
+        if sort.startswith("-"):
+            return "desc"
+
+        return "asc"

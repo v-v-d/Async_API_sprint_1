@@ -16,7 +16,7 @@ router = APIRouter()
 async def films_search(
     query: str,
     default: DefaultParamsSchema = Depends(get_default_query_params),
-    film_service: FilmsService = Depends(get_film_service)
+    film_service: FilmsService = Depends(get_film_service),
 ) -> list[OutputFilmSchema]:
     try:
         films = await film_service.search(default.page, default.size, query=query)
@@ -31,15 +31,17 @@ async def films_search(
 @router.get("/", response_model=list[OutputFilmSchema])
 async def films_list(
     genre_id: Optional[str] = Query(None),
+    person_id: Optional[str] = Query(None),
     sort: Optional[str] = Query(None),
     default: DefaultParamsSchema = Depends(get_default_query_params),
-    film_service: FilmsService = Depends(get_film_service)
+    film_service: FilmsService = Depends(get_film_service),
 ) -> list[OutputFilmSchema]:
     try:
         films = await film_service.search(
             default.page,
             default.size,
             genre_id=genre_id,
+            person_id=person_id,
             sort=sort,
         )
     except NotFoundError:

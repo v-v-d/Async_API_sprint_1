@@ -20,7 +20,6 @@ class MethodNotAllowed(BaseServiceError):
 
 class MethodEnum(str, Enum):
     get = "get"
-    post = "post"
     search = "search"
 
 
