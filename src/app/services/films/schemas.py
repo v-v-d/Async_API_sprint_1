@@ -30,12 +30,3 @@ class InputListFilmSchema(ORJSONModel):
 
     def __getitem__(self, item):
         return self.__root__.__getitem__(item)
-
-
-class QuerySchema(ORJSONModel):
-    query: str
-    fields: list[str] = ["title", "description"]
-
-
-class MatchSchema(ORJSONModel):
-    multi_match: QuerySchema

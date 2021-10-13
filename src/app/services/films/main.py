@@ -1,4 +1,5 @@
 from logging import getLogger
+from typing import Optional
 
 from app.elastic import IndexNameEnum
 from app.services.base import (
@@ -7,11 +8,9 @@ from app.services.base import (
 )
 from app.services.films.schemas import (
     InputFilmSchema,
-    QuerySchema,
-    MatchSchema,
     InputListFilmSchema,
 )
-from app.services.schemas import DocSchema, ResponseSchema
+from app.services.schemas import DocSchema, ResponseSchema, MatchSchema, MultiMatchQuerySchema
 
 logger = getLogger(__name__)
 
@@ -25,14 +24,74 @@ class FilmsService(BaseService):
         return InputFilmSchema(**DocSchema(**response).source)
 
     # @cached()  # TODO
-    async def search(self, query: str, page: int, size: int) -> InputListFilmSchema:
-        q = MatchSchema(multi_match=QuerySchema(query=query)).dict()
+    async def search(
+        self,
+        page: int,
+        size: int,
+        *,
+        query: Optional[str] = None,
+        genre_id: Optional[str] = None,
+        sort: Optional[str] = None,
+    ) -> InputListFilmSchema:
+        # q = MatchSchema(multi_match=MultiMatchQuerySchema(query=query)).dict()
+        q = {
+            "query": {
+                "bool": {
+                    "must": []
+                }
+            }
+        }
+
+        if query:
+            search_query = {
+                "multi_match": {
+                    "query": query,
+                    "fields": ["title^3", "description"],
+                    "fuzziness": "AUTO"
+                }
+            }
+            q["query"]["bool"]["must"].append(search_query)
+
+        if genre_id:
+            filter_by_genre = {
+                "nested": {
+                    "path": "genres",
+                    "query": {
+                        "bool": {
+                            "must": [
+                                {
+                                    "match": {
+                                        "genres.id": genre_id
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+            q["query"]["bool"]["must"].append(filter_by_genre)
+
+        if sort:
+            mapper = {
+                "rating": "asc",
+                "-rating": "desc",
+            }
+
+            if mapper.get(sort):
+                sort_by_rating = {
+                    "rating": {
+                        "order": mapper.get(sort)
+                    }
+                }
+                q["sort"] = sort_by_rating
+
         response = await self._request(
             method=MethodEnum.search.value,
             index=IndexNameEnum.movies.value,
-            query=q,
+            body=q,
+            # query=q,
             from_=page,
-            size=size
+            size=size,
         )
 
         result = ResponseSchema(**response)

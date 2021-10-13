@@ -1,6 +1,7 @@
 from http import HTTPStatus
+from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.api.v1.schemas import OutputFilmSchema
 from app.dependencies.api import DefaultParamsSchema, get_default_query_params
@@ -18,7 +19,31 @@ async def films_search(
     film_service: FilmsService = Depends(get_film_service)
 ) -> list[OutputFilmSchema]:
     try:
-        films = await film_service.search(query, default.page, default.size)
+        films = await film_service.search(default.page, default.size, query=query)
+    except BaseServiceError:
+        raise HTTPException(
+            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
+        )
+
+    return [OutputFilmSchema(**film.dict()) for film in films]
+
+
+@router.get("/", response_model=list[OutputFilmSchema])
+async def films_list(
+    genre_id: Optional[str] = Query(None),
+    sort: Optional[str] = Query(None),
+    default: DefaultParamsSchema = Depends(get_default_query_params),
+    film_service: FilmsService = Depends(get_film_service)
+) -> list[OutputFilmSchema]:
+    try:
+        films = await film_service.search(
+            default.page,
+            default.size,
+            genre_id=genre_id,
+            sort=sort,
+        )
+    except NotFoundError:
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="film not found.")
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."

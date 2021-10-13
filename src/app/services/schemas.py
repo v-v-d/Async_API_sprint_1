@@ -14,6 +14,15 @@ class ORJSONModel(BaseModel):
         json_dumps = orjson_dumps
 
 
+class MultiMatchQuerySchema(ORJSONModel):
+    query: str
+    fields: list[str]
+
+
+class MatchSchema(ORJSONModel):
+    multi_match: MultiMatchQuerySchema
+
+
 class DocSchema(ORJSONModel):
     source: dict[str, Any] = Field(..., alias="_source")
 
