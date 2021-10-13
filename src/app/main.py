@@ -1,6 +1,6 @@
 from logging import config
 
-from app.api.v1 import films
+from app.api.v1 import films, genres, persons
 from elasticsearch import AsyncElasticsearch
 
 from app import elastic
@@ -32,3 +32,6 @@ async def shutdown():
 
 
 app.include_router(films.router, prefix='/api/v1/film', tags=['film'])
+app.include_router(genres.router, prefix='/api/v1/genres', tags=['genres'])
+app.include_router(persons.router, prefix='/api/v1/persons', tags=['persons'])
+
