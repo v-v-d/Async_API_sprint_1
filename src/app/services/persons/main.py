@@ -5,8 +5,7 @@ from app.services.base import (
     BaseService,
     MethodEnum,
 )
-from app.services.persons.schemas import InputPersonSchema, InputListPersonSchema, InputFilmPersonSchema, \
-    InputListFilmPersonSchema
+from app.services.persons.schemas import InputPersonSchema, InputListPersonSchema
 from app.services.schemas import DocSchema, ResponseSchema
 
 logger = getLogger(__name__)
@@ -20,24 +19,7 @@ class PersonService(BaseService):
         )
         return InputPersonSchema(**DocSchema(**doc).source)
 
-    async def get_all_film_by_person(self, person_id: str) -> InputListFilmPersonSchema:
-        person = await self._request(
-            id=person_id,
-            method=MethodEnum.get.value, index=IndexNameEnum.persons.value
-        )
-        response = await self._request(
-            method=MethodEnum.search.value, index=IndexNameEnum.movies.value,
-            body={'query': {'ids': {'values': person['_source']['film_ids']}}}
-        )
 
-        result = ResponseSchema(**response)
-
-        return InputListFilmPersonSchema(
-            __root__=[
-                InputFilmPersonSchema(**film.source)
-                for film in result.hits.hits
-            ]
-        )
 
     async def search(self, query: str) -> InputListPersonSchema:
         response = await self._request(
