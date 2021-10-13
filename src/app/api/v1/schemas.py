@@ -35,4 +35,7 @@ class OutputPersonSchema(ORJSONModel):
     film_ids: list[str]
 
 
-    
+class OutputFilmPersonSchema(ORJSONModel):
+    id: str
+    rating: Optional[float]
+    title: str

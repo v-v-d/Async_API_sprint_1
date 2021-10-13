@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.api.v1.schemas import OutputPersonSchema
+from app.api.v1.schemas import OutputPersonSchema, OutputFilmPersonSchema
 from app.dependencies.persons import get_persons_service
 from app.services.base import BaseServiceError, NotFoundError
 from app.services.persons.main import PersonService
@@ -43,18 +43,18 @@ async def person_details(
     return OutputPersonSchema(**person.dict())
 
 
-@router.get("/{person_id}/film", response_model=OutputPersonSchema)
+@router.get("/{person_id}/film", response_model=list[OutputFilmPersonSchema])
 async def search_film_by_person(
         person_id: str,
         person_service: PersonService = Depends(get_persons_service)
-) -> OutputPersonSchema:
+) -> list[OutputFilmPersonSchema]:
     try:
-        person = await person_service.get_all_film_by_person(person_id)
+        film_person = await person_service.get_all_film_by_person(person_id)
     except NotFoundError:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="person not found.")
+        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="film not found.")
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
         )
 
-    return OutputPersonSchema(**person.dict())
+    return [OutputFilmPersonSchema(**film.dict()) for film in film_person]

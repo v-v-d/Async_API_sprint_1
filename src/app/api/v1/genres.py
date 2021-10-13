@@ -26,7 +26,7 @@ async def genre_details(
     return OutputGenreSchema(**genre.dict())
 
 
-@router.get("/", response_model=OutputGenreSchema)
+@router.get("/", response_model=list[OutputGenreSchema])
 async def search_genres(
         genres_service: GenreService = Depends(get_genre_service)
 ) -> list[OutputGenreSchema]:
