@@ -23,6 +23,6 @@ CACHE_CONFIG = {
     "endpoint": settings.CACHE.REDIS_HOST,
     "port": settings.CACHE.REDIS_PORT,
     "serializer": JsonPickleSerializer(),
-    "ttl": 60 * 5,
+    "ttl": settings.CACHE.TTL
 
 }
