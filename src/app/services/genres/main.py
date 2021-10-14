@@ -1,5 +1,5 @@
 from logging import getLogger
-
+from typing import Optional
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -7,22 +7,21 @@ from app.services.base import (
 )
 from app.services.genres.schemas import InputGenreSchema, InputListGenreSchema
 from app.services.schemas import DocSchema, ResponseSchema
-from app.settings.base import CacheSettings
-from aiocache import cached, Cache
-from aiocache.serializers import PickleSerializer
+from app.cache import CACHE_CONFIG
+from aiocache import cached
 
 logger = getLogger(__name__)
 
 
 class GenreService(BaseService):
-    @cached(CacheSettings(), serializer=PickleSerializer(), cache=Cache.REDIS)
-    async def get_by_id(self, genre_id: str) -> InputGenreSchema | None:
+    @cached(**CACHE_CONFIG)
+    async def get_by_id(self, genre_id: str) -> Optional[InputGenreSchema]:
         doc = await self._request(
             method=MethodEnum.get.value, index=IndexNameEnum.genres.value, id=genre_id
         )
         return InputGenreSchema(**DocSchema(**doc).source)
 
-    @cached(CacheSettings(), serializer=PickleSerializer(), cache=Cache.REDIS)
+    @cached(**CACHE_CONFIG)
     async def search(self) -> InputListGenreSchema:
         response = await self._request(
             method=MethodEnum.search.value, index=IndexNameEnum.genres.value,

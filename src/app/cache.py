@@ -23,23 +23,6 @@ CACHE_CONFIG = {
     "endpoint": settings.CACHE.REDIS_HOST,
     "port": settings.CACHE.REDIS_PORT,
     "serializer": JsonPickleSerializer(),
+    "ttl": 60 * 5,
+
 }
-
-cache = Cache(
-    cache_class=RedisCache,
-    endpoint=CACHE_CONFIG["endpoint"],
-    port=CACHE_CONFIG["port"],
-    serializer=CACHE_CONFIG["serializer"]
-)
-
-
-class CacheNamespaceEnum(str, Enum):
-    films = "films"
-    persons = "persons"
-    genres = "genres"
-
-
-def build_cache_key(
-    namespace: CacheNamespaceEnum, key: int | str
-) -> str:
-    return f"{namespace.value}:{key}"

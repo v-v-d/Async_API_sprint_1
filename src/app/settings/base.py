@@ -14,10 +14,8 @@ class UvicornSettings(BaseSettings):
 
 
 class CacheSettings(BaseSettings):
-    endpoint: str = "api-redis"
-    port: int = 6379
-    ttl: int = 60 * 5
-    namespace: str = "main"
+    REDIS_HOST: str = "api-redis"
+    REDIS_PORT: int = 6379
 
 
 class BaseDSNSettings(BaseSettings):
