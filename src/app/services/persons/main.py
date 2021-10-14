@@ -4,24 +4,27 @@ from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
     MethodEnum,
+
 )
 from app.services.persons.schemas import InputPersonSchema, InputListPersonSchema
 from app.services.schemas import DocSchema, ResponseSchema
+from app.settings.base import CacheSettings
+from aiocache import cached, Cache
+from aiocache.serializers import PickleSerializer
 
 logger = getLogger(__name__)
 
 
 class PersonService(BaseService):
-    # @cached()  # TODO
+    @cached(CacheSettings(), serializer=PickleSerializer(), cache=Cache.REDIS)
     async def get_by_id(self, person_id: str) -> InputPersonSchema | None:
         doc = await self._request(
             method=MethodEnum.get.value, index=IndexNameEnum.persons.value, id=person_id
         )
         return InputPersonSchema(**DocSchema(**doc).source)
 
-
-
-    async def search(self, query: str) -> InputListPersonSchema:
+    @cached(CacheSettings(), serializer=PickleSerializer(), cache=Cache.REDIS)
+    async def search(self, query: str, page_number: int = 0, page_size: int = 25) -> InputListPersonSchema:
         response = await self._request(
             method=MethodEnum.search.value, index=IndexNameEnum.persons.value,
             body={'query': {'match': {'full_name': {'query': query, 'fuzziness': 'AUTO'}}}}

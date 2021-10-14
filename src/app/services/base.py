@@ -1,5 +1,7 @@
 from enum import Enum
 from logging import getLogger
+from aioredis import Redis
+
 
 import elasticsearch
 
@@ -25,8 +27,10 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
-    def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
+    def __init__(self, elastic: elasticsearch.AsyncElasticsearch, redis: Redis):
+        self.redis = redis
         self.elastic = elastic
+
 
     async def _request(self, method: MethodEnum, *args, **kwargs):
         method = getattr(self.elastic, method, None)
