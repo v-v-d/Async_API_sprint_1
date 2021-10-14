@@ -9,6 +9,6 @@ from fastapi import Depends
 
 @lru_cache()
 def get_persons_service(
-    elastic: AsyncElasticsearch = Depends(get_elastic),
+        elastic: AsyncElasticsearch = Depends(get_elastic),
 ) -> PersonService:
     return PersonService(elastic)

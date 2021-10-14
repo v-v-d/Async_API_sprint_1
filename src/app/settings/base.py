@@ -16,9 +16,7 @@ class UvicornSettings(BaseSettings):
 class CacheSettings(BaseSettings):
     REDIS_HOST: str = "api-redis"
     REDIS_PORT: int = 6379
-
-    class Config:
-        env_prefix = "CACHE_"
+    TTL: int = 60 * 5
 
 
 class BaseDSNSettings(BaseSettings):
