@@ -24,7 +24,7 @@ class PersonService(BaseService):
         return InputPersonSchema(**DocSchema(**doc).source)
 
     @cached(CacheSettings(), serializer=PickleSerializer(), cache=Cache.REDIS)
-    async def search(self, query: str, page_number: int = 0, page_size: int = 25) -> InputListPersonSchema:
+    async def search(self, query: str) -> InputListPersonSchema:
         response = await self._request(
             method=MethodEnum.search.value, index=IndexNameEnum.persons.value,
             body={'query': {'match': {'full_name': {'query': query, 'fuzziness': 'AUTO'}}}}
