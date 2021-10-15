@@ -22,6 +22,7 @@ from app.services.schemas import (
     RootQuerySchema,
     BoolSchema,
 )
+from app.settings import settings
 
 logger = getLogger(__name__)
 
@@ -68,6 +69,7 @@ class FilmsService(BaseService):
         person_id: Optional[str] = None,
         sort: Optional[str] = None,
     ) -> str:
+        """Query management imitation."""
         q = RootQuerySchema(__root__={"query": BoolSchema(bool={})})
 
         if query or genre_id:
@@ -82,16 +84,20 @@ class FilmsService(BaseService):
             q.__root__["query"].bool["must"].append(f_query)
 
         if person_id:
-            q.__root__["query"].bool["should"] = []
+            sub_q = BoolSchema(bool={"should": []})
 
             for field_name in ("directors", "actors", "writers"):
                 f_query = self._get_filter_by_id_query(field_name, person_id)
-                q.__root__["query"].bool["should"].append(f_query)
+                sub_q.bool["should"].append(f_query)
+
+            q.__root__["query"].bool["must"].append(sub_q)
 
         if sort:
             field = self._get_sorting_field(sort)
-            order = self._get_sorting_type(sort)
-            q.__root__["sort"] = SortSchema(sort={field: OrderSchema(order=order)})
+
+            if field:
+                order = self._get_sorting_type(sort)
+                q.__root__.update(SortSchema(sort={field: OrderSchema(order=order)}))
 
         return q.json()
 
@@ -108,8 +114,13 @@ class FilmsService(BaseService):
         return FilterSchema(nested=NestedSchema(path=field_name, query=sub_q))
 
     @staticmethod
-    def _get_sorting_field(sort: str) -> str:
-        return sort.removeprefix("-")
+    def _get_sorting_field(sort: str) -> Optional[str]:
+        field_name = sort.removeprefix("-")
+
+        if field_name not in settings.VALID_SORTING_FIELDS:
+            return
+
+        return field_name
 
     @staticmethod
     def _get_sorting_type(sort: str) -> str:

@@ -65,6 +65,7 @@ class CommonSettings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     SHARED_DIR: str = "/app/shared"
     DIR_LOGS: Path = Path(SHARED_DIR, "/app/shared/logs")
+    VALID_SORTING_FIELDS: list = ["rating"]
 
     UVICORN: UvicornSettings = UvicornSettings()
     CACHE: CacheSettings = CacheSettings()
