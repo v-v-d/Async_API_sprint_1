@@ -1,6 +1,8 @@
 from logging import getLogger
 from typing import Optional
 
+from aiocache import cached
+
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -23,12 +25,13 @@ from app.services.schemas import (
     BoolSchema,
 )
 from app.settings import settings
+from app.cache import CACHE_CONFIG
 
 logger = getLogger(__name__)
 
 
 class FilmsService(BaseService):
-    # @cached()  # TODO
+    @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
         response = await self._request(
             method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id

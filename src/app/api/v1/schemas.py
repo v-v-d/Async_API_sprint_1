@@ -20,3 +20,22 @@ class OutputFilmSchema(ORJSONModel):
     actors_names: list[str]
     writers_names: list[str]
     directors_names: list[str]
+
+
+class OutputGenreSchema(ORJSONModel):
+    id: str
+    name: str
+    description: str
+
+
+class OutputPersonSchema(ORJSONModel):
+    id: str
+    full_name: str
+    roles: list[str]
+    film_ids: list[str]
+
+
+class OutputFilmPersonSchema(ORJSONModel):
+    id: str
+    rating: Optional[float]
+    title: str

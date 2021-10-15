@@ -68,3 +68,4 @@ async def film_details(
         )
 
     return OutputFilmSchema(**film.dict())
+
