@@ -19,7 +19,9 @@ async def films_search(
     film_service: FilmsService = Depends(get_film_service),
 ) -> list[OutputFilmSchema]:
     try:
-        films = await film_service.search(default.page, default.size, query=query)
+        films = await film_service.search_by_query(
+            default.page, default.size, query=query
+        )
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
@@ -37,15 +39,13 @@ async def films_list(
     film_service: FilmsService = Depends(get_film_service),
 ) -> list[OutputFilmSchema]:
     try:
-        films = await film_service.search(
+        films = await film_service.get_all(
             default.page,
             default.size,
             genre_id=genre_id,
             person_id=person_id,
             sort=sort,
         )
-    except NotFoundError:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="film not found.")
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
@@ -68,4 +68,3 @@ async def film_details(
         )
 
     return OutputFilmSchema(**film.dict())
-

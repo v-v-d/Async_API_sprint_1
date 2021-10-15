@@ -1,9 +1,7 @@
-from enum import Enum
-
 import jsonpickle
-from aiocache import Cache
 from aiocache.backends.redis import RedisCache
 from aiocache.serializers import BaseSerializer
+
 from app.settings import settings
 
 
@@ -23,6 +21,5 @@ CACHE_CONFIG = {
     "endpoint": settings.CACHE.REDIS_HOST,
     "port": settings.CACHE.REDIS_PORT,
     "serializer": JsonPickleSerializer(),
-    "ttl": settings.CACHE.TTL
-
+    "ttl": settings.CACHE.TTL,
 }

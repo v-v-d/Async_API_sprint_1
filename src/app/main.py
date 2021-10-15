@@ -1,12 +1,11 @@
 from logging import config
 
-from app.api.v1 import films, genres, persons
 from elasticsearch import AsyncElasticsearch
-
-from app import elastic
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
+from app import elastic
+from app.api.v1 import films, genres, persons
 from app.settings import settings
 from app.settings.logging import LOGGING
 
@@ -23,7 +22,9 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup():
-    elastic.es = AsyncElasticsearch(hosts=[settings.ES.DSN], timeout=settings.ES.TIMEOUT)
+    elastic.es = AsyncElasticsearch(
+        hosts=[settings.ES.DSN], timeout=settings.ES.TIMEOUT
+    )
 
 
 @app.on_event("shutdown")
@@ -31,6 +32,6 @@ async def shutdown():
     await elastic.es.close()
 
 
-app.include_router(films.router, prefix='/api/v1/films', tags=['films'])
-app.include_router(genres.router, prefix='/api/v1/genres', tags=['genres'])
-app.include_router(persons.router, prefix='/api/v1/persons', tags=['persons'])
+app.include_router(films.router, prefix="/api/v1/films", tags=["films"])
+app.include_router(genres.router, prefix="/api/v1/genres", tags=["genres"])
+app.include_router(persons.router, prefix="/api/v1/persons", tags=["persons"])

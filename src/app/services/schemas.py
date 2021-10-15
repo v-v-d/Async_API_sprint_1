@@ -14,10 +14,14 @@ class ORJSONModel(BaseModel):
         json_dumps = orjson_dumps
 
 
-class MultiMatchSchema(ORJSONModel):
+class MultiMatchQuerySchema(ORJSONModel):
     query: str
     fields: list[str]
     fuzziness: str = "AUTO"
+
+
+class MultiMatchSchema(ORJSONModel):
+    multi_match: MultiMatchQuerySchema
 
 
 class MatchSchema(ORJSONModel):

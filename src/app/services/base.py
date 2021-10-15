@@ -1,5 +1,6 @@
 from enum import Enum
 from logging import getLogger
+from typing import Any
 
 import elasticsearch
 
@@ -27,7 +28,7 @@ class BaseService:
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 
-    async def _request(self, method: MethodEnum, *args, **kwargs):
+    async def _request(self, method: MethodEnum, *args, **kwargs) -> dict[str, Any]:
         method = getattr(self.elastic, method, None)
 
         if not method:

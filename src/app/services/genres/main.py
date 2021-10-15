@@ -1,5 +1,9 @@
 from logging import getLogger
 from typing import Optional
+
+from aiocache import cached
+
+from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -7,8 +11,6 @@ from app.services.base import (
 )
 from app.services.genres.schemas import InputGenreSchema, InputListGenreSchema
 from app.services.schemas import DocSchema, ResponseSchema
-from app.cache import CACHE_CONFIG
-from aiocache import cached
 
 logger = getLogger(__name__)
 
@@ -22,15 +24,15 @@ class GenreService(BaseService):
         return InputGenreSchema(**DocSchema(**doc).source)
 
     @cached(**CACHE_CONFIG)
-    async def search(self) -> InputListGenreSchema:
+    async def search(self, page: int, size: int) -> InputListGenreSchema:
         response = await self._request(
-            method=MethodEnum.search.value, index=IndexNameEnum.genres.value,
-            body={'query': {'match_all': {}}}
+            method=MethodEnum.search.value,
+            index=IndexNameEnum.genres.value,
+            body={"query": {"match_all": {}}},
+            from_=page,
+            size=size,
         )
         result = ResponseSchema(**response)
         return InputListGenreSchema(
-            __root__=[
-                InputGenreSchema(**doc.source)
-                for doc in result.hits.hits
-            ]
+            __root__=[InputGenreSchema(**doc.source) for doc in result.hits.hits]
         )

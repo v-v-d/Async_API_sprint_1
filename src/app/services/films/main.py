@@ -3,6 +3,7 @@ from typing import Optional
 
 from aiocache import cached
 
+from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -23,9 +24,9 @@ from app.services.schemas import (
     OrderSchema,
     RootQuerySchema,
     BoolSchema,
+    MultiMatchQuerySchema,
 )
 from app.settings import settings
-from app.cache import CACHE_CONFIG
 
 logger = getLogger(__name__)
 
@@ -38,8 +39,30 @@ class FilmsService(BaseService):
         )
         return InputFilmSchema(**DocSchema(**response).source)
 
-    # @cached()  # TODO
-    async def search(
+    @cached(**CACHE_CONFIG)
+    async def get_all(
+        self,
+        page: int,
+        size: int,
+        *,
+        genre_id: Optional[str] = None,
+        person_id: Optional[str] = None,
+        sort: Optional[str] = None,
+    ) -> InputListFilmSchema:
+        return await self._search(
+            page, size, genre_id=genre_id, person_id=person_id, sort=sort
+        )
+
+    async def search_by_query(
+        self,
+        page: int,
+        size: int,
+        *,
+        query: Optional[str] = None,
+    ) -> InputListFilmSchema:
+        return await self._search(page, size, query=query)
+
+    async def _search(
         self,
         page: int,
         size: int,
@@ -75,11 +98,15 @@ class FilmsService(BaseService):
         """Query management imitation."""
         q = RootQuerySchema(__root__={"query": BoolSchema(bool={})})
 
-        if query or genre_id:
+        if query or genre_id or person_id:
             q.__root__["query"].bool["must"] = []
 
         if query:
-            mm_q = MultiMatchSchema(query=query, fields=["title^3", "description"])
+            mm_q = MultiMatchSchema(
+                multi_match=MultiMatchQuerySchema(
+                    query=query, fields=["title^3", "description"]
+                )
+            )
             q.__root__["query"].bool["must"].append(mm_q)
 
         if genre_id:
