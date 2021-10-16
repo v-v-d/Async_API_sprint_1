@@ -1,10 +1,15 @@
 from app.api import v1
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 
 from app.api import docs
+from app.api.schemas import ErrorSchema
 from app.utils import verify_credentials
 
-api_root = APIRouter()
+api_root = APIRouter(
+    responses={
+        status.HTTP_424_FAILED_DEPENDENCY: {"model": ErrorSchema},
+    }
+)
 
 api_root.include_router(
     docs.router,
