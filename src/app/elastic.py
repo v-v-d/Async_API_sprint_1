@@ -12,5 +12,6 @@ class IndexNameEnum(str, Enum):
 
 es: Optional[AsyncElasticsearch]
 
+
 async def get_elastic() -> AsyncElasticsearch:
     return es

@@ -50,6 +50,8 @@ class ElasticSearchSettings(BaseDSNSettings):
     PROTOCOL: str = "http"
     DSN: AnyHttpUrl = None
     TIMEOUT: int = 30
+    DEFAULT_PAGE: int = 0
+    DEFAULT_PAGE_SIZE: int = 50
 
     class Config:
         env_prefix = "ES_"
@@ -61,6 +63,7 @@ class CommonSettings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     SHARED_DIR: str = "/app/shared"
     DIR_LOGS: Path = Path(SHARED_DIR, "/app/shared/logs")
+    VALID_SORTING_FIELDS: list = ["rating"]
 
     UVICORN: UvicornSettings = UvicornSettings()
     CACHE: CacheSettings = CacheSettings()

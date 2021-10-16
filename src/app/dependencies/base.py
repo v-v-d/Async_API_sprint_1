@@ -1,5 +1,6 @@
-from app.elastic import es
 from elasticsearch import AsyncElasticsearch
+
+from app.elastic import es
 
 
 async def get_elastic() -> AsyncElasticsearch:
