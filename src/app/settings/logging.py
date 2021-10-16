@@ -78,7 +78,7 @@ LOGGING = {
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": settings.LOG_LEVEL,
             "propagate": False,
         },
         "uvicorn.access": {
@@ -113,7 +113,7 @@ LOGGING = {
         },
     },
     "root": {
-        "level": "INFO",
+        "level": settings.LOG_LEVEL,
         "formatter": "verbose",
         "handlers": ["console"],
     },

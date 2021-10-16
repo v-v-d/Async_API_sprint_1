@@ -1,6 +1,20 @@
 version: "3.8"
 
 services:
+  web:
+    image: nginx:1.21.3
+    container_name: api-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      yandex:
+
   app:
     container_name: api-app
     build:
