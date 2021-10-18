@@ -28,7 +28,7 @@ class BaseService:
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 
-    async def _request(self, method: MethodEnum, *args, **kwargs):
+    async def _request_elastic(self, method: MethodEnum, *args, **kwargs):
         method = getattr(self.elastic, method, None)
 
         if not method:

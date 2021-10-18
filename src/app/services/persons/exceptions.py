@@ -1,2 +1,5 @@
-class BasePersonsServiceError(Exception):
+from app.services.base import BaseServiceError
+
+
+class BasePersonsServiceError(BaseServiceError):
     pass

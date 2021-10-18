@@ -17,7 +17,7 @@ logger = getLogger(__name__)
 class FilmsService(BaseService):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> Optional[FilmSchema]:
-        doc = await self._request(
+        doc = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
         )
         return FilmSchema(**DocSchema(**doc).source)
