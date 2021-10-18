@@ -34,7 +34,7 @@ async def films_search(
 async def films_list(
     genre_id: Optional[str] = Query(None),
     person_id: Optional[str] = Query(None),
-    sort: Optional[str] = Query(None),
+    sort: Optional[str] = Query(None, regex="-rating|rating"),
     default: DefaultParamsSchema = Depends(get_default_query_params),
     film_service: FilmsService = Depends(get_film_service),
 ) -> list[OutputFilmSchema]:
