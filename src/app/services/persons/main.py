@@ -18,7 +18,7 @@ logger = getLogger(__name__)
 class PersonService(BaseService):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, person_id: str) -> Optional[InputPersonSchema]:
-        doc = await self._request(
+        doc = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.persons.value, id=person_id
         )
         return InputPersonSchema(**DocSchema(**doc).source)
@@ -26,7 +26,7 @@ class PersonService(BaseService):
     async def search(
         self, page: int, size: int, *, query: str
     ) -> InputListPersonSchema:
-        response = await self._request(
+        response = await self._request_elastic(
             method=MethodEnum.search.value,
             index=IndexNameEnum.persons.value,
             body={

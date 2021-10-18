@@ -18,14 +18,14 @@ logger = getLogger(__name__)
 class GenreService(BaseService):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, genre_id: str) -> Optional[InputGenreSchema]:
-        doc = await self._request(
+        doc = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.genres.value, id=genre_id
         )
         return InputGenreSchema(**DocSchema(**doc).source)
 
     @cached(**CACHE_CONFIG)
     async def search(self, page: int, size: int) -> InputListGenreSchema:
-        response = await self._request(
+        response = await self._request_elastic(
             method=MethodEnum.search.value,
             index=IndexNameEnum.genres.value,
             body={"query": {"match_all": {}}},

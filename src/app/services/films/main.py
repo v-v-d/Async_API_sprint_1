@@ -34,7 +34,7 @@ logger = getLogger(__name__)
 class FilmsService(BaseService):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
-        response = await self._request(
+        response = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
         )
         return InputFilmSchema(**DocSchema(**response).source)
@@ -74,7 +74,7 @@ class FilmsService(BaseService):
     ) -> InputListFilmSchema:
         q = self._get_query(query, genre_id, person_id, sort)
 
-        response = await self._request(
+        response = await self._request_elastic(
             method=MethodEnum.search.value,
             index=IndexNameEnum.movies.value,
             body=q,
@@ -145,12 +145,7 @@ class FilmsService(BaseService):
 
     @staticmethod
     def _get_sorting_field(sort: str) -> Optional[str]:
-        field_name = sort.removeprefix("-")
-
-        if field_name not in settings.VALID_SORTING_FIELDS:
-            return
-
-        return field_name
+        return sort.removeprefix("-")
 
     @staticmethod
     def _get_sorting_type(sort: str) -> str:
