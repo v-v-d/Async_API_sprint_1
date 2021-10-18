@@ -145,12 +145,7 @@ class FilmsService(BaseService):
 
     @staticmethod
     def _get_sorting_field(sort: str) -> Optional[str]:
-        field_name = sort.removeprefix("-")
-
-        if field_name not in settings.VALID_SORTING_FIELDS:
-            return
-
-        return field_name
+        return sort.removeprefix("-")
 
     @staticmethod
     def _get_sorting_type(sort: str) -> str:

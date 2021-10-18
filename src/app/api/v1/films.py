@@ -12,24 +12,6 @@ from app.services.films.main import FilmsService
 router = APIRouter()
 
 
-@router.get("/search", response_model=list[OutputFilmSchema])
-async def films_search(
-    query: str,
-    default: DefaultParamsSchema = Depends(get_default_query_params),
-    film_service: FilmsService = Depends(get_film_service),
-) -> list[OutputFilmSchema]:
-    try:
-        films = await film_service.search_by_query(
-            default.page, default.size, query=query
-        )
-    except BaseServiceError:
-        raise HTTPException(
-            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
-        )
-
-    return [OutputFilmSchema(**film.dict()) for film in films]
-
-
 @router.get("/", response_model=list[OutputFilmSchema])
 async def films_list(
     genre_id: Optional[str] = Query(None),
