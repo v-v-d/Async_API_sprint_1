@@ -3,6 +3,7 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.api.v1.schemas import OutputGenreSchema
+from app.dependencies.api import DefaultParamsSchema, get_default_query_params
 from app.dependencies.genres import get_genre_service
 from app.services.base import BaseServiceError, NotFoundError
 from app.services.genres.main import GenreService
@@ -27,11 +28,12 @@ async def genre_details(
 
 
 @router.get("/", response_model=list[OutputGenreSchema])
-async def search_genres(
-        genres_service: GenreService = Depends(get_genre_service)
+async def genres_list(
+    default: DefaultParamsSchema = Depends(get_default_query_params),
+    genres_service: GenreService = Depends(get_genre_service),
 ) -> list[OutputGenreSchema]:
     try:
-        genres = await genres_service.search()
+        genres = await genres_service.search(default.page, default.size)
     except NotFoundError:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="genre not found.")
     except BaseServiceError:

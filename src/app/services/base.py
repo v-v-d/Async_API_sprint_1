@@ -1,5 +1,6 @@
 from enum import Enum
 from logging import getLogger
+from typing import Any
 
 import elasticsearch
 
@@ -20,7 +21,6 @@ class MethodNotAllowed(BaseServiceError):
 
 class MethodEnum(str, Enum):
     get = "get"
-    post = "post"
     search = "search"
 
 

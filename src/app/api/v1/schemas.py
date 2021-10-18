@@ -8,7 +8,7 @@ class ItemSchema(ORJSONModel):
     name: str
 
 
-class FilmFullSchema(ORJSONModel):
+class OutputFilmSchema(ORJSONModel):
     id: str
     rating: Optional[float]
     title: str

@@ -15,5 +15,3 @@ class InputListGenreSchema(ORJSONModel):
 
     def __getitem__(self, item):
         return self.__root__.__getitem__(item)
-
-

@@ -4,10 +4,15 @@ from pydantic import BaseSettings, AnyHttpUrl, AnyUrl, validator
 
 
 class UvicornSettings(BaseSettings):
+    """
+    Config for running the app. Not used in main app config.
+    """
+
     app: str = "app.main:app"
     host: str = "0.0.0.0"
     port: int = 8088
     reload: bool = False
+    workers: int = 3
 
     class Config:
         env_prefix = "UVICORN_"
@@ -50,6 +55,8 @@ class ElasticSearchSettings(BaseDSNSettings):
     PROTOCOL: str = "http"
     DSN: AnyHttpUrl = None
     TIMEOUT: int = 30
+    DEFAULT_PAGE: int = 0
+    DEFAULT_PAGE_SIZE: int = 50
 
     class Config:
         env_prefix = "ES_"
@@ -57,10 +64,17 @@ class ElasticSearchSettings(BaseDSNSettings):
 
 class CommonSettings(BaseSettings):
     PROJECT_NAME: str = "movies"
+    OPENAPI_URL: str = "/api/openapi.json"
+    BASIC_AUTH_USERNAME: str
+    BASIC_AUTH_PASSWD: str
+    ALLOWED_HOSTS: list[str]
+
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
     SHARED_DIR: str = "/app/shared"
     DIR_LOGS: Path = Path(SHARED_DIR, "/app/shared/logs")
+
+    VALID_SORTING_FIELDS: list[str] = ["rating"]
 
     UVICORN: UvicornSettings = UvicornSettings()
     CACHE: CacheSettings = CacheSettings()
