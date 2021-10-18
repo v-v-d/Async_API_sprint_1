@@ -12,10 +12,10 @@ def shell():
     embed()
 
 
-@app.command()
+# @app.command()
 def runserver():
     uvicorn.run(**settings.UVICORN.dict())
 
 
 if __name__ == "__main__":
-    app()
+    runserver()
