@@ -16,10 +16,17 @@ class JsonPickleSerializer(BaseSerializer):
         return jsonpickle.decode(value)
 
 
-CACHE_CONFIG = {
+DEFAULT_CACHE_CONFIG = {
     "cache": RedisCache,
     "endpoint": settings.CACHE.REDIS_HOST,
     "port": settings.CACHE.REDIS_PORT,
     "serializer": JsonPickleSerializer(),
     "ttl": settings.CACHE.TTL,
 }
+
+
+def get_cache_config():
+    if settings.TESTING:
+        return {}
+
+    return DEFAULT_CACHE_CONFIG

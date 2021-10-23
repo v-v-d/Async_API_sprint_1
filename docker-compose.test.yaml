@@ -10,4 +10,6 @@ services:
       - ./shared/logs:/code/shared/logs
     env_file:
       - .env
+    environment:
+      - TESTING=True
     entrypoint: ["sh", "/entrypoint.sh"]

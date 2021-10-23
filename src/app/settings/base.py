@@ -70,6 +70,7 @@ class CommonSettings(BaseSettings):
     ALLOWED_HOSTS: list[str]
 
     DEBUG: bool = False
+    TESTING: bool = False
     LOG_LEVEL: str = "INFO"
     SHARED_DIR: str = "/code/shared"
     DIR_LOGS: Path = Path(SHARED_DIR, "/code/shared/logs")
