@@ -1,5 +1,7 @@
+import itertools
 import secrets
 
+import backoff
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
@@ -21,3 +23,25 @@ def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)):
             detail="Incorrect credentials",
             headers={"WWW-Authenticate": "Basic"},
         )
+
+
+def testing_constant(interval=0.01):
+    """
+    Copied from backoff.constant with patched interval value
+    for faster reaction when testing.
+    """
+    try:
+        itr = iter(interval)
+    except TypeError:
+        itr = itertools.repeat(interval)
+
+    for val in itr:
+        yield val
+
+
+def get_backoff_type():
+    if settings.TESTING:
+        return testing_constant
+
+    return backoff.expo
+
