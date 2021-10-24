@@ -24,9 +24,10 @@ services:
     depends_on:
       - redis
     volumes:
-      - ./src:/app
-      - ./shared:/app/shared
-      - ./shared/logs:/app/shared/logs
+      - ./src/app:/code/app
+      - ./src/manage.py:/code/manage.py
+      - ./shared:/code/shared
+      - ./shared/logs:/code/shared/logs
     env_file:
       - .env
     networks:

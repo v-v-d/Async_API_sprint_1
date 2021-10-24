@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  sut:
+    build: .
+    volumes:
+      - ./src/tests:/code/tests
+      - ./tests.entrypoint.sh:/entrypoint.sh
+      - ./shared:/code/shared
+      - ./shared/logs:/code/shared/logs
+    env_file:
+      - .env
+    environment:
+      - TESTING=True
+    entrypoint: ["sh", "/entrypoint.sh"]

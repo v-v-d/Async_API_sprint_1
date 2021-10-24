@@ -4,6 +4,8 @@ from typing import Any
 
 import elasticsearch
 
+from app.cache import get_cache_config
+
 logger = getLogger(__name__)
 
 
@@ -25,10 +27,14 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
+    CACHE_CONFIG = get_cache_config()
+
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 
-    async def _request_elastic(self, method: MethodEnum, *args, **kwargs) -> dict[str, Any]:
+    async def _request_elastic(
+        self, method: MethodEnum, *args, **kwargs
+    ) -> dict[str, Any]:
         method = getattr(self.elastic, method, None)
 
         if not method:
