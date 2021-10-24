@@ -6,12 +6,15 @@ import backoff
 import elasticsearch
 
 from app.settings import settings
-from app.utils import get_backoff_type
 
 logger = getLogger(__name__)
 
 
 class BaseServiceError(Exception):
+    pass
+
+
+class ESConnectionError(BaseServiceError):
     pass
 
 
@@ -29,15 +32,13 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
-    BACKOFF_TYPE = get_backoff_type()
-
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 
     @backoff.on_exception(
-        wait_gen=BACKOFF_TYPE,
+        wait_gen=backoff.expo,
         max_time=settings.BACKOFF.MAX_TIME_SEC,
-        exception=elasticsearch.ConnectionError,
+        exception=ESConnectionError,
     )
     async def _request_elastic(self, method: MethodEnum, *args, **kwargs) -> dict[str, Any]:
         method = getattr(self.elastic, method, None)
@@ -47,6 +48,8 @@ class BaseService:
 
         try:
             return await method(*args, **kwargs)
+        except elasticsearch.exceptions.ConnectionError as err:
+            raise ESConnectionError from err
         except elasticsearch.exceptions.NotFoundError:
             raise NotFoundError
         except Exception as err:

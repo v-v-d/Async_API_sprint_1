@@ -1,7 +1,6 @@
 import itertools
 import secrets
 
-import backoff
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
@@ -37,11 +36,4 @@ def testing_constant(interval=0.01):
 
     for val in itr:
         yield val
-
-
-def get_backoff_type():
-    if settings.TESTING:
-        return testing_constant
-
-    return backoff.expo
 
