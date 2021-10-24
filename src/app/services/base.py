@@ -5,7 +5,9 @@ from typing import Any
 import backoff
 import elasticsearch
 
+from app.cache import get_cache_config
 from app.settings import settings
+
 
 logger = getLogger(__name__)
 
@@ -32,6 +34,8 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
+    CACHE_CONFIG = get_cache_config()
+
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 

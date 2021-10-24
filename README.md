@@ -1,10 +1,11 @@
 # API для кинотеатра
 
+Точка входа для всех клиентов.
+
 - Репозиторий для сервиса API: https://github.com/v-v-d/Async_API_sprint_1
 - Репозиторий для сервиса ETL: https://github.com/v-v-d/ETL
 - Доска: https://github.com/users/v-v-d/projects/3
 
-Точка входа для всех клиентов.
 
 ### Основные сущности
 - Фильм — заголовок, содержание, дата создания, возрастной ценз, режиссёры, актёры, сценаристы, жанры, ссылка на файл.
@@ -25,6 +26,7 @@
 - ElasticSearch
 - Redis
 - Docker
+- Pytest + pytest coverage
 
 ## Запуск
 1. Создать общую сеть для всех проектов практикума, чтобы была связь между всеми контейнерами курса
@@ -52,3 +54,9 @@ sudo docker exec -it srv-etl python manage.py start-etl
 sudo docker-compose up --build
 ```
 6. Перейти к документации по адресу 0.0.0.0/api/docs. Дока закрыта бэйсик авторизацией.
+
+## Тестирование
+Собрать тестовое окружение и запустить тесты
+```shell
+sudo docker-compose -f docker-compose.test.yaml up --build
+```

@@ -3,7 +3,6 @@ from typing import Optional
 
 from aiocache import cached
 
-from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -26,20 +25,19 @@ from app.services.schemas import (
     BoolSchema,
     MultiMatchQuerySchema,
 )
-from app.settings import settings
 
 logger = getLogger(__name__)
 
 
 class FilmsService(BaseService):
-    @cached(**CACHE_CONFIG)
+    @cached(**BaseService.CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
         response = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
         )
         return InputFilmSchema(**DocSchema(**response).source)
 
-    @cached(**CACHE_CONFIG)
+    @cached(**BaseService.CACHE_CONFIG)
     async def get_all(
         self,
         page: int,
@@ -72,7 +70,7 @@ class FilmsService(BaseService):
         person_id: Optional[str] = None,
         sort: Optional[str] = None,
     ) -> InputListFilmSchema:
-        q = self._get_query(query, genre_id, person_id, sort)
+        q = self.get_query(query, genre_id, person_id, sort)
 
         response = await self._request_elastic(
             method=MethodEnum.search.value,
@@ -88,7 +86,7 @@ class FilmsService(BaseService):
             __root__=[InputFilmSchema(**doc.source) for doc in result.hits.hits]
         )
 
-    def _get_query(
+    def get_query(
         self,
         query: Optional[str] = None,
         genre_id: Optional[str] = None,
