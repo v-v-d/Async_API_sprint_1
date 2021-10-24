@@ -40,7 +40,9 @@ class BaseService:
         max_time=settings.BACKOFF.MAX_TIME_SEC,
         exception=ESConnectionError,
     )
-    async def _request_elastic(self, method: MethodEnum, *args, **kwargs) -> dict[str, Any]:
+    async def _request_elastic(
+        self, method: MethodEnum, *args, **kwargs
+    ) -> dict[str, Any]:
         method = getattr(self.elastic, method, None)
 
         if not method:

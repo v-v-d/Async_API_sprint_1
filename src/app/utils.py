@@ -36,4 +36,3 @@ def testing_constant(interval=0.01):
 
     for val in itr:
         yield val
-
