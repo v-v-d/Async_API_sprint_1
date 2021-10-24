@@ -24,9 +24,4 @@ DEFAULT_CACHE_CONFIG = {
     "ttl": settings.CACHE.TTL,
 }
 
-
-def get_cache_config():
-    if settings.TESTING:
-        return {}
-
-    return DEFAULT_CACHE_CONFIG
+CACHE_CONFIG = {} if settings.TESTING else DEFAULT_CACHE_CONFIG

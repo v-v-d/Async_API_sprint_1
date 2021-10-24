@@ -62,6 +62,13 @@ class ElasticSearchSettings(BaseDSNSettings):
         env_prefix = "ES_"
 
 
+class BackoffSettings(BaseSettings):
+    MAX_TIME_SEC: int = 10
+
+    class Config:
+        env_prefix = "BACKOFF_"
+
+
 class CommonSettings(BaseSettings):
     PROJECT_NAME: str = "movies"
     OPENAPI_URL: str = "/api/openapi.json"
@@ -80,3 +87,4 @@ class CommonSettings(BaseSettings):
     UVICORN: UvicornSettings = UvicornSettings()
     CACHE: CacheSettings = CacheSettings()
     ES: ElasticSearchSettings = ElasticSearchSettings()
+    BACKOFF: BackoffSettings = BackoffSettings()

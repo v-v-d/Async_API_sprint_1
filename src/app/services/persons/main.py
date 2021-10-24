@@ -3,6 +3,7 @@ from typing import Optional
 
 from aiocache import cached
 
+from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -15,7 +16,7 @@ logger = getLogger(__name__)
 
 
 class PersonService(BaseService):
-    @cached(**BaseService.CACHE_CONFIG)
+    @cached(**CACHE_CONFIG)
     async def get_by_id(self, person_id: str) -> Optional[InputPersonSchema]:
         doc = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.persons.value, id=person_id
