@@ -17,26 +17,6 @@ from app.services.persons.main import PersonService
 router = APIRouter()
 
 
-@router.get("/search", response_model=list[OutputPersonSchema])
-async def persons_search(
-    query: str,
-    default: DefaultParamsSchema = Depends(get_default_query_params),
-    person_service: PersonService = Depends(get_persons_service),
-) -> list[OutputPersonSchema]:
-    try:
-        persons = await person_service.search(default.page, default.size, query=query)
-    except NotFoundError:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, detail="person not found."
-        )
-    except BaseServiceError:
-        raise HTTPException(
-            status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
-        )
-
-    return [OutputPersonSchema(**person.dict()) for person in persons]
-
-
 @router.get("/{person_id}", response_model=OutputPersonSchema)
 async def person_details(
     person_id: str, person_service: PersonService = Depends(get_persons_service)
