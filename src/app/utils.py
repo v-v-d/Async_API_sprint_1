@@ -22,17 +22,3 @@ def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)):
             detail="Incorrect credentials",
             headers={"WWW-Authenticate": "Basic"},
         )
-
-
-def testing_constant(interval=0.01):
-    """
-    Copied from backoff.constant with patched interval value
-    for faster reaction when testing.
-    """
-    try:
-        itr = iter(interval)
-    except TypeError:
-        itr = itertools.repeat(interval)
-
-    for val in itr:
-        yield val
