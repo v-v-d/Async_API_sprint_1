@@ -1,4 +1,3 @@
-import itertools
 import secrets
 
 from fastapi import Depends, HTTPException, status
