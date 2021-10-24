@@ -34,8 +34,6 @@ class MethodEnum(str, Enum):
 
 
 class BaseService:
-    CACHE_CONFIG = get_cache_config()
-
     def __init__(self, elastic: elasticsearch.AsyncElasticsearch):
         self.elastic = elastic
 

@@ -3,6 +3,7 @@ from typing import Optional
 
 from aiocache import cached
 
+from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -30,14 +31,14 @@ logger = getLogger(__name__)
 
 
 class FilmsService(BaseService):
-    @cached(**BaseService.CACHE_CONFIG)
+    @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
         response = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
         )
         return InputFilmSchema(**DocSchema(**response).source)
 
-    @cached(**BaseService.CACHE_CONFIG)
+    @cached(**CACHE_CONFIG)
     async def get_all(
         self,
         page: int,
