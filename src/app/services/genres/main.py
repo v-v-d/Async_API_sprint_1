@@ -3,7 +3,6 @@ from typing import Optional
 
 from aiocache import cached
 
-from app.cache import CACHE_CONFIG
 from app.elastic import IndexNameEnum
 from app.services.base import (
     BaseService,
@@ -16,14 +15,14 @@ logger = getLogger(__name__)
 
 
 class GenreService(BaseService):
-    @cached(**CACHE_CONFIG)
+    @cached(**BaseService.CACHE_CONFIG)
     async def get_by_id(self, genre_id: str) -> Optional[InputGenreSchema]:
         doc = await self._request_elastic(
             method=MethodEnum.get.value, index=IndexNameEnum.genres.value, id=genre_id
         )
         return InputGenreSchema(**DocSchema(**doc).source)
 
-    @cached(**CACHE_CONFIG)
+    @cached(**BaseService.CACHE_CONFIG)
     async def search(self, page: int, size: int) -> InputListGenreSchema:
         response = await self._request_elastic(
             method=MethodEnum.search.value,

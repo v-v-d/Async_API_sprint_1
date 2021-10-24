@@ -7,9 +7,10 @@ COPY requirements/*.txt ./
 RUN pip3 install --upgrade pip \
     && pip3 install -r prod.txt
 
-ADD ./src /app
-WORKDIR /app
+ADD ./src/app /code/app
+ADD ./src/manage.py /code/manage.py
+WORKDIR /code
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/code
 
 CMD python manage.py runserver
