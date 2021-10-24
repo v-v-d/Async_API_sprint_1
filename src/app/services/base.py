@@ -5,7 +5,6 @@ from typing import Any
 import backoff
 import elasticsearch
 
-from app.cache import get_cache_config
 from app.settings import settings
 
 
