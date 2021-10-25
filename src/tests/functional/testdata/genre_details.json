@@ -1,0 +1,11 @@
+{
+  "_index": "genres",
+  "_type": "_doc",
+  "_id": "55c723c1-6d90-4a04-a44b-e9792040251a",
+  "_score": 1.0,
+  "_source": {
+    "id": "55c723c1-6d90-4a04-a44b-e9792040251a",
+    "name": "Family",
+    "description": ""
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 26,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "55c723c1-6d90-4a04-a44b-e9792040251a",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "55c723c1-6d90-4a04-a44b-e9792040251a",
+          "name" : "Family",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "237fd1e4-c98e-454e-aa13-8a13fb7547b5",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "237fd1e4-c98e-454e-aa13-8a13fb7547b5",
+          "name" : "Romance",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "9c91a5b2-eb70-4889-8581-ebe427370edd",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "9c91a5b2-eb70-4889-8581-ebe427370edd",
+          "name" : "Musical",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "2f89e116-4827-4ff4-853c-b6e058f71e31",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "2f89e116-4827-4ff4-853c-b6e058f71e31",
+          "name" : "Sport",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "526769d7-df18-4661-9aa6-49ed24e9dfd8",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "526769d7-df18-4661-9aa6-49ed24e9dfd8",
+          "name" : "Thriller",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "f24fd632-b1a5-4273-a835-0119bd12f829",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "f24fd632-b1a5-4273-a835-0119bd12f829",
+          "name" : "News",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+          "name" : "Action",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "ca88141b-a6b4-450d-bbc3-efa940e4953f",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "ca88141b-a6b4-450d-bbc3-efa940e4953f",
+          "name" : "Mystery",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "eb7212a7-dd10-4552-bf7b-7a505a8c0b95",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "eb7212a7-dd10-4552-bf7b-7a505a8c0b95",
+          "name" : "History",
+          "description" : ""
+        }
+      },
+      {
+        "_index" : "genres",
+        "_type" : "_doc",
+        "_id" : "c020dab2-e9bd-4758-95ca-dbe363462173",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "c020dab2-e9bd-4758-95ca-dbe363462173",
+          "name" : "War",
+          "description" : ""
+        }
+      }
+    ]
+  }
+}
