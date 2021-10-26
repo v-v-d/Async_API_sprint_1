@@ -29,8 +29,8 @@ def invalid_sort_query(monkeypatch):
 
 @pytest.fixture
 async def mocked_es_valid_response(monkeypatch):
-    monkeypatch.setattr(FilmsService, "_request_elastic", AsyncMock())
-    main.FilmsService._request_elastic.return_value = LIST_FILMS_ES_RESPONSE  # noqa
+    monkeypatch.setattr(FilmsService, "_execute", AsyncMock())
+    main.FilmsService._execute.return_value = LIST_FILMS_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio
@@ -86,7 +86,7 @@ async def test_films_list__cached_result(
         for idx, result_item in enumerate(response.json()):
             assert result_item == EXPECTED_LIST_FILMS_RESPONSE[idx]
 
-    assert main.FilmsService._request_elastic.call_count == 1
+    assert main.FilmsService._execute.call_count == 1
 
 
 @pytest.mark.asyncio
