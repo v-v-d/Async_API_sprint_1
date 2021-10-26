@@ -12,7 +12,7 @@ def v1_films_url():
 
 
 @pytest.fixture
-async def v1_genres_url():
+def v1_genres_url():
     return "/api/v1/genres/"
 
 
