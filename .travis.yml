@@ -18,6 +18,5 @@ jobs:
       name: "Unit Tests"
       script:
         - docker-compose -f docker-compose.test.yaml up --build --exit-code-from sut
-
-after_success:
-  - codecov
+      after_success:
+        - codecov
