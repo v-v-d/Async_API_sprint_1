@@ -15,7 +15,7 @@ from tests.functional.testdata.api_genres import (
 
 @pytest.fixture
 def genre_id():
-    return "55c723c1-6d90-4a04-a44b-e9792040251a"
+    return "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff"
 
 
 @pytest.fixture
@@ -54,7 +54,7 @@ async def test_genre_details__cached_result(
 
 @pytest.mark.asyncio
 async def test_genre_details__bad_es_response(
-        client, genre_details_url, mocked_es_genre_invalid_response
+        client, genre_details_url, mocked_es_invalid_response
 ):
     with pytest.raises(pydantic.ValidationError):
         await client.get(path=genre_details_url)
@@ -62,7 +62,7 @@ async def test_genre_details__bad_es_response(
 
 @pytest.mark.asyncio
 async def test_genre_details__es_error(
-        client, genre_details_url, mocked_es_genre_unexpected_exception
+        client, genre_details_url, mocked_es_unexpected_exception
 ):
     response = await client.get(path=genre_details_url)
     assert response.status_code == status.HTTP_424_FAILED_DEPENDENCY
@@ -70,7 +70,7 @@ async def test_genre_details__es_error(
 
 @pytest.mark.asyncio
 async def test_genre_details__not_found(
-        client, genre_details_url, mocked_es_genre_not_found_error
+        client, genre_details_url, mocked_es_not_found_error
 ):
     response = await client.get(path=genre_details_url)
     assert response.status_code == status.HTTP_404_NOT_FOUND

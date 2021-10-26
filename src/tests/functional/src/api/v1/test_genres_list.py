@@ -19,8 +19,8 @@ async def mocked_es_genre_valid_response(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_films_list_ok__default(client, v1_genre_url, mocked_es_genre_valid_response):
-    response = await client.get(path=v1_genre_url)
+async def test_films_list_ok__default(client, v1_genres_url, mocked_es_genre_valid_response):
+    response = await client.get(path=v1_genres_url)
 
     assert response.status_code == status.HTTP_200_OK
 
@@ -30,12 +30,12 @@ async def test_films_list_ok__default(client, v1_genre_url, mocked_es_genre_vali
 
 @pytest.mark.asyncio
 async def test_genre_list__cached_result(
-    client, v1_genre_url, mocked_es_genre_valid_response
+        client, v1_genres_url, mocked_es_genre_valid_response
 ):
     method_call_count = 2
 
     for _ in range(method_call_count):
-        response = await client.get(path=v1_genre_url)
+        response = await client.get(path=v1_genres_url)
         assert response.status_code == status.HTTP_200_OK
 
         for idx, result_item in enumerate(response.json()):
@@ -46,15 +46,15 @@ async def test_genre_list__cached_result(
 
 @pytest.mark.asyncio
 async def test_genre_list__bad_es_response(
-    client, v1_genre_url, mocked_es_genre_invalid_response
+        client, v1_genres_url, mocked_es_invalid_response
 ):
     with pytest.raises(pydantic.ValidationError):
-        await client.get(path=v1_genre_url)
+        await client.get(path=v1_genres_url)
 
 
 @pytest.mark.asyncio
 async def test_genre_list__es_error(
-    client, v1_genre_url, mocked_es_genre_unexpected_exception
+        client, v1_genres_url, mocked_es_unexpected_exception
 ):
-    response = await client.get(path=v1_genre_url)
+    response = await client.get(path=v1_genres_url)
     assert response.status_code == status.HTTP_424_FAILED_DEPENDENCY

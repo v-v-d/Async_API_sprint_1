@@ -13,7 +13,7 @@ def v1_films_url():
 
 @pytest.fixture
 async def v1_genres_url():
-    return "/api/v1/genres"
+    return "/api/v1/genres/"
 
 
 @pytest.fixture
