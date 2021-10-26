@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/v-v-d/Async_API_sprint_1.svg?branch=main)](https://app.travis-ci.com/v-v-d/Async_API_sprint_1)
+
 # API для кинотеатра
 
 Точка входа для всех клиентов.
