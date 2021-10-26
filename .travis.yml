@@ -17,4 +17,4 @@ jobs:
     - stage: tests
       name: "Unit Tests"
       script:
-        - docker-compose -f docker-compose.test.yaml up --build
+        - docker-compose -f docker-compose.test.yaml up --build --exit-code-from sut
