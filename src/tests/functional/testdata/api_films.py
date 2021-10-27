@@ -10,6 +10,2599 @@ with open(TEST_CONTAINER_SRC_DIR_PATH / "films_list.json", encoding="utf-8") as 
 with open(TEST_CONTAINER_SRC_DIR_PATH / "film_details.json", encoding="utf-8") as file:
     FILM_DETAILS_ES_RESPONSE = orjson.loads(file.read())
 
+with open(TEST_CONTAINER_SRC_DIR_PATH / "film_search_list.json", encoding="utf-8") as file:
+    LIST_FILMS_SEARCH_ES_RESPONSE = orjson.loads(file.read())
+
+EXPECTED_LIST_SEARCH_FILMS_RESPONSE = [
+    {
+        "id": "1d2fb7ce-8b65-4c71-87d8-bea2dfc36a75",
+        "rating": 8.6,
+        "title": "2011 NBA All-Star Game",
+        "description": "A documented movie about the 2011 All-star game which was held in Los Angeles, California. The game was held February 20, 2011 and was broadcasted by TNT.",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "555d9dcd-2733-4bb5-b62a-b58d2b43465f",
+                "name": "Ray Allen"
+            },
+            {
+                "id": "8a6fb388-e67c-4e29-8580-8d8db578c5fe",
+                "name": "Kobe Bryant"
+            },
+            {
+                "id": "b3cfe2e6-859f-4ae9-a6a3-457fd65d95c1",
+                "name": "Carmelo Anthony"
+            },
+            {
+                "id": "fd1f5117-8138-4a25-a9c4-5e26450f122e",
+                "name": "Chris Bosh"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Carmelo Anthony",
+            "Chris Bosh",
+            "Kobe Bryant",
+            "Ray Allen"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "e49c02da-e7ee-4da7-bae4-538a5dc7c0f2",
+        "rating": 7.6,
+        "title": "1987 NBA All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "05c64f45-d003-4748-b591-91b5b2a61c9c",
+                "name": "Charles Barkley"
+            },
+            {
+                "id": "18cc968f-11d0-401e-9740-bfc64080d32e",
+                "name": "Larry Bird"
+            },
+            {
+                "id": "4df78934-ac20-431d-8d45-6cebff0c9c6a",
+                "name": "Mark Aguirre"
+            },
+            {
+                "id": "7abc1fe0-73e5-4d84-b78a-ed386dca8c64",
+                "name": "Kareem Abdul-Jabbar"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Charles Barkley",
+            "Kareem Abdul-Jabbar",
+            "Larry Bird",
+            "Mark Aguirre"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "667dbe90-4648-47fc-83a9-ca7c71392a4e",
+        "rating": 7.2,
+        "title": "2001 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "b8824198-efb9-4869-972f-e7f3b9e3dd90",
+                "name": "Steve Lyons"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Steve Lyons",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "a0bdd4e7-84a0-4ec5-9dae-0d16371dc303",
+        "rating": 7,
+        "title": "2002 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [
+            {
+                "id": "1f0fa70c-45da-4037-bc54-eaf0143f80ae",
+                "name": "Bill Webb"
+            }
+        ],
+        "actors": [
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "a66c3dca-8d64-4406-b577-012019850678",
+                "name": "Kevin Kennedy"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Kevin Kennedy",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Bill Webb"
+        ]
+    },
+    {
+        "id": "efb73bf5-9b65-453e-a627-3435e0c11904",
+        "rating": 7.2,
+        "title": "2004 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [
+            {
+                "id": "1f0fa70c-45da-4037-bc54-eaf0143f80ae",
+                "name": "Bill Webb"
+            }
+        ],
+        "actors": [
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "a66c3dca-8d64-4406-b577-012019850678",
+                "name": "Kevin Kennedy"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Kevin Kennedy",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Bill Webb"
+        ]
+    },
+    {
+        "id": "2f2486ba-23b2-46c8-90e7-bf0680f2e482",
+        "rating": 6.6,
+        "title": "2000 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "1412a101-8ae1-4d21-b44a-23e66c8c71ba",
+                "name": "Jim Gray"
+            },
+            {
+                "id": "1d66e258-b327-4b2c-b946-acdcf7436fd4",
+                "name": "Joe Morgan"
+            },
+            {
+                "id": "947748ec-e90f-4c8f-bd43-594700d33dbc",
+                "name": "Bob Costas"
+            },
+            {
+                "id": "b757060b-dffd-4f9c-956f-ca34fff4a231",
+                "name": "Hannah Storm"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Bob Costas",
+            "Hannah Storm",
+            "Jim Gray",
+            "Joe Morgan"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "2c009dda-f637-4a7a-a3e2-9419ca0ad6e6",
+        "rating": 7.8,
+        "title": "2005 MLB All-Star Game",
+        "description": "In the annual mid-summer game between the American League and National League, the AL defeats the NL 7-5 to extend their record in the last nine All-Star Games to 8-0-1.",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [
+            {
+                "id": "1f0fa70c-45da-4037-bc54-eaf0143f80ae",
+                "name": "Bill Webb"
+            }
+        ],
+        "actors": [
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "a66c3dca-8d64-4406-b577-012019850678",
+                "name": "Kevin Kennedy"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Kevin Kennedy",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Bill Webb"
+        ]
+    },
+    {
+        "id": "80e23a27-2306-4734-9987-c76d229e8d2a",
+        "rating": 7.7,
+        "title": "1997 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [
+            {
+                "id": "1f0fa70c-45da-4037-bc54-eaf0143f80ae",
+                "name": "Bill Webb"
+            }
+        ],
+        "actors": [
+            {
+                "id": "1a484b73-3207-4191-b1f3-23f9da801c81",
+                "name": "Chip Caray"
+            },
+            {
+                "id": "520b977a-430f-4e4f-84df-874ed742b1da",
+                "name": "Bob Brenly"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Bob Brenly",
+            "Chip Caray",
+            "Joe Buck",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Bill Webb"
+        ]
+    },
+    {
+        "id": "97bddcae-bf97-4c4f-be11-f0d7e060c230",
+        "rating": 6.4,
+        "title": "2007 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "3eb7aee7-d4f9-4901-a427-902a02866aed",
+                "name": "Ken Rosenthal"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            },
+            {
+                "id": "f84e2365-d9e8-4ba1-8e00-78f4ba510d8a",
+                "name": "Jose Mota"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Joe Buck",
+            "Jose Mota",
+            "Ken Rosenthal",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "a5ae834a-050e-44ac-9dae-071f41b6fe8f",
+        "rating": 7.5,
+        "title": "1999 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [
+            {
+                "id": "1f0fa70c-45da-4037-bc54-eaf0143f80ae",
+                "name": "Bill Webb"
+            }
+        ],
+        "actors": [
+            {
+                "id": "5d06cf88-2846-468f-9438-b352b37f5373",
+                "name": "Brad Ausmus"
+            },
+            {
+                "id": "5fd14f68-e7da-485c-b0e2-8c308df998f3",
+                "name": "Andy Ashby"
+            },
+            {
+                "id": "a020f921-e16c-4be9-9da4-b4b7e778507a",
+                "name": "Jeff Bagwell"
+            },
+            {
+                "id": "b1ec6d73-7a89-4765-8f28-b7890f410e5b",
+                "name": "Roberto Alomar"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Andy Ashby",
+            "Brad Ausmus",
+            "Jeff Bagwell",
+            "Roberto Alomar"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Bill Webb"
+        ]
+    },
+    {
+        "id": "d2e3536d-07f7-490d-9801-e69253ab518e",
+        "rating": 7.6,
+        "title": "1998 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "1412a101-8ae1-4d21-b44a-23e66c8c71ba",
+                "name": "Jim Gray"
+            },
+            {
+                "id": "1d66e258-b327-4b2c-b946-acdcf7436fd4",
+                "name": "Joe Morgan"
+            },
+            {
+                "id": "947748ec-e90f-4c8f-bd43-594700d33dbc",
+                "name": "Bob Costas"
+            },
+            {
+                "id": "b757060b-dffd-4f9c-956f-ca34fff4a231",
+                "name": "Hannah Storm"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Bob Costas",
+            "Hannah Storm",
+            "Jim Gray",
+            "Joe Morgan"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "92f303c3-58f4-41bf-b5db-e00f0e6f70a7",
+        "rating": 7.8,
+        "title": "2008 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "115e88bc-1f74-4694-a78c-bdaf59cf6e2a",
+                "name": "Ernie Banks"
+            },
+            {
+                "id": "76223485-e9d7-4ae6-bfe7-78d88f6af5ea",
+                "name": "Bob Apodaca"
+            },
+            {
+                "id": "e19de701-5463-46e7-8f57-d1421e305064",
+                "name": "Luis Aparicio"
+            },
+            {
+                "id": "e5fa268b-62ad-4d49-95e1-dbfc8df6124d",
+                "name": "Hank Aaron"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Bob Apodaca",
+            "Ernie Banks",
+            "Hank Aaron",
+            "Luis Aparicio"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "63401833-6692-4d9a-aaa0-de803a92b64d",
+        "rating": 6.9,
+        "title": "2003 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "a66c3dca-8d64-4406-b577-012019850678",
+                "name": "Kevin Kennedy"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Kevin Kennedy",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "6ab2d71d-106c-4af8-bbec-822a87f94909",
+        "rating": 7.2,
+        "title": "2006 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "3eb7aee7-d4f9-4901-a427-902a02866aed",
+                "name": "Ken Rosenthal"
+            },
+            {
+                "id": "588d0675-3159-4142-8b1b-5c0a29a909c7",
+                "name": "Jeanne Zelasko"
+            },
+            {
+                "id": "7b0c328c-53b0-4cb1-abb3-cca0e5a0b0ec",
+                "name": "Joe Buck"
+            },
+            {
+                "id": "c144ced4-4740-4863-83da-c091bd58ef11",
+                "name": "Tim McCarver"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jeanne Zelasko",
+            "Joe Buck",
+            "Ken Rosenthal",
+            "Tim McCarver"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "d0e7e53a-8de1-4a21-b869-4ff8fc0e846e",
+        "rating": 6.5,
+        "title": "1983 MLB All-Star Game",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "45190b38-35c8-4ae4-b94d-42febc145096",
+                "name": "Joe Garagiola"
+            },
+            {
+                "id": "947748ec-e90f-4c8f-bd43-594700d33dbc",
+                "name": "Bob Costas"
+            },
+            {
+                "id": "b3538c40-d28f-4ba9-9784-34ba952904ab",
+                "name": "Vin Scully"
+            },
+            {
+                "id": "d6e4407c-afc7-4e22-b9b7-7fbfb04df455",
+                "name": "Joe Altobelli"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Bob Costas",
+            "Joe Altobelli",
+            "Joe Garagiola",
+            "Vin Scully"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "c604ca5d-4d07-4412-a7f6-ebb3942232b5",
+        "rating": 8.3,
+        "title": "Star Wars Celebration 2017",
+        "description": "",
+        "genres": [
+            {
+                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+                "name": "Sci-Fi"
+            },
+            {
+                "id": "e508c1c8-24c0-4136-80b4-340c4befb190",
+                "name": "Reality-TV"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "3c883480-9803-4c77-a0b3-a6c91244e674",
+                "name": "Anthony Carboni"
+            },
+            {
+                "id": "4903bbf3-2413-4cc9-9c67-32c55b398445",
+                "name": "Andi Gutierrez"
+            },
+            {
+                "id": "86f1f44b-39f5-41a6-8b3b-af5a9ed09858",
+                "name": "Anthony Daniels"
+            },
+            {
+                "id": "c5664b88-7286-4b38-9a3c-3f3cc6f72e9e",
+                "name": "Warwick Davis"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Andi Gutierrez",
+            "Anthony Carboni",
+            "Anthony Daniels",
+            "Warwick Davis"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "3e21bf14-ae47-40f0-b71d-459ec61eb4f8",
+        "rating": 6.6,
+        "title": "Star Trek: The Game Show",
+        "description": "You are stuck in the middle of one of Q's games as he makes you answer trivia about the 20th Century television science fiction phenomenon 'Star Trek'.",
+        "genres": [
+            {
+                "id": "55c723c1-6d90-4a04-a44b-e9792040251a",
+                "name": "Family"
+            },
+            {
+                "id": "fb58fd7f-7afd-447f-b833-e51e45e2a778",
+                "name": "Game-Show"
+            }
+        ],
+        "directors": [
+            {
+                "id": "c8f4604d-b730-4b13-8588-92356bc22600",
+                "name": "H. Quinn"
+            }
+        ],
+        "actors": [
+            {
+                "id": "1ce3e209-51b7-40f6-adfd-d4b0305d1bd9",
+                "name": "John de Lancie"
+            },
+            {
+                "id": "c540c6d9-e110-4fec-a733-b90a18f3158a",
+                "name": "Doug Stone"
+            },
+            {
+                "id": "da271596-f7c8-40d5-8c22-9fb0c9e6dac6",
+                "name": "Karen Cornwell"
+            },
+            {
+                "id": "f042db61-c492-4aae-9369-c1bb859dfc3d",
+                "name": "T. Buffalo Wagnon"
+            }
+        ],
+        "writers": [
+            {
+                "id": "61c4071b-6f1e-4897-992f-72f132226f83",
+                "name": "Tim Lynch"
+            },
+            {
+                "id": "66ecc6d1-0b9a-4b6c-ad6f-5ad4db4aed57",
+                "name": "Jim Wright"
+            },
+            {
+                "id": "94ecddc6-badc-423f-b689-c3bef21ec348",
+                "name": "Lisa Hazard"
+            },
+            {
+                "id": "a174c4f1-ff80-4762-bc60-8c11b7da2d38",
+                "name": "Chairman Barnes"
+            },
+            {
+                "id": "a444a1a8-a77a-46d0-b0e0-5321bd688238",
+                "name": "Alex Rosensweig"
+            },
+            {
+                "id": "c8f4604d-b730-4b13-8588-92356bc22600",
+                "name": "H. Quinn"
+            },
+            {
+                "id": "cf709a32-7df1-462d-b1be-2f3dc2496b20",
+                "name": "Ahna Wagnon"
+            }
+        ],
+        "actors_names": [
+            "Doug Stone",
+            "John de Lancie",
+            "Karen Cornwell",
+            "T. Buffalo Wagnon"
+        ],
+        "writers_names": [
+            "Ahna Wagnon",
+            "Alex Rosensweig",
+            "Chairman Barnes",
+            "H. Quinn",
+            "Jim Wright",
+            "Lisa Hazard",
+            "Tim Lynch"
+        ],
+        "directors_names": [
+            "H. Quinn"
+        ]
+    },
+    {
+        "id": "ded3515c-3220-42f4-9ec6-0d04556229e9",
+        "rating": 8.1,
+        "title": "All-Star Party for Lucille Ball",
+        "description": "Variety Clubs International hosted this tribute to Lucille ball. It brought Lucy and her husband, Gary Morton together on their anniversary, to present her with a humanitarian award. Lucy ...",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "cc2b4b6e-c5b7-4b96-8a5b-25b05f682659",
+                "name": "Dick McDonough"
+            }
+        ],
+        "actors": [
+            {
+                "id": "02c9eac3-83a1-453b-83a4-da6f20c3d729",
+                "name": "James Caan"
+            },
+            {
+                "id": "4ba3ab95-b70a-4ab7-ad0d-636a4c3c4906",
+                "name": "Lucie Arnaz"
+            },
+            {
+                "id": "6f93e82d-56ad-40a1-b3fc-393543de5073",
+                "name": "Desi Arnaz Jr."
+            },
+            {
+                "id": "e22f0a9a-cd7c-4937-a44c-648b4a12f193",
+                "name": "Lucille Ball"
+            }
+        ],
+        "writers": [
+            {
+                "id": "c17de384-8c55-46d8-b993-ee24e239d28e",
+                "name": "Paul Keyes"
+            }
+        ],
+        "actors_names": [
+            "Desi Arnaz Jr.",
+            "James Caan",
+            "Lucie Arnaz",
+            "Lucille Ball"
+        ],
+        "writers_names": [
+            "Paul Keyes"
+        ],
+        "directors_names": [
+            "Dick McDonough"
+        ]
+    },
+    {
+        "id": "d569ac4e-4e9f-4dcd-af3b-8267118d4664",
+        "rating": 5.8,
+        "title": "Shaquille O'Neal Presents: All-Star Comedy Jam - Live from Dallas",
+        "description": "Academy Award winner and one of the Original Queens of Comedy, Mo'Nique rules the stage as host of the 3rd installment in Shaquille O'Neal's All Star Comedy Jam concert series. Filmed in front of a live audience during the 2010 NBA All-Star Weekend in Dallas Texas, comedy queen Mo'Nique leads her court with some of the industry's most talented and sought after comedians. No topic is off limits on this night at AEG's Nokia Theatre stage. Seasoned comedians, Paul Mooney, Corey Holcomb, George Willborn and Michael Blackson deliver side busting, non-stop laughs in this energetic and memorable night of comedy.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "f09c267a-1a38-46c2-8b1a-35721b96ec34",
+                "name": "Leslie Small"
+            }
+        ],
+        "actors": [
+            {
+                "id": "7b2cede0-b37e-4c64-8b7c-5a5ca1c7027d",
+                "name": "Paul Mooney"
+            },
+            {
+                "id": "8ce7450e-c296-4fc5-b6e5-6c7e1626b231",
+                "name": "Michael Blackson"
+            },
+            {
+                "id": "a9e7d5ad-b790-47d1-9808-322a16459a2a",
+                "name": "Mo'Nique"
+            },
+            {
+                "id": "e958b222-4888-4791-b0b5-20d873b6f224",
+                "name": "Corey Holcomb"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Corey Holcomb",
+            "Michael Blackson",
+            "Mo'Nique",
+            "Paul Mooney"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Leslie Small"
+        ]
+    },
+    {
+        "id": "96bf7310-dbd3-4372-924d-bf920f38276d",
+        "rating": 7.5,
+        "title": "Disney Channel New Year Star Showdown",
+        "description": "Bring in 2010 with Disney channel stars as they compete in game show challenges and we countdown 2009's favorite music videos.",
+        "genres": [
+            {
+                "id": "55c723c1-6d90-4a04-a44b-e9792040251a",
+                "name": "Family"
+            }
+        ],
+        "directors": [
+            {
+                "id": "9221d30e-64dd-4a01-9e42-3d0c22df9a78",
+                "name": "Art Spigel"
+            }
+        ],
+        "actors": [
+            {
+                "id": "313b425b-0138-4e97-b020-903a36fed527",
+                "name": "Leo Howard"
+            },
+            {
+                "id": "4d7fc098-b25e-44b2-9710-86ec2ace999e",
+                "name": "David Henrie"
+            },
+            {
+                "id": "505bb0ee-86b5-4ed2-832a-d1f3f456cb17",
+                "name": "Selena Gomez"
+            },
+            {
+                "id": "afef5d90-0a17-4031-825e-1f7571c35621",
+                "name": "Nicole Gale Anderson"
+            }
+        ],
+        "writers": [
+            {
+                "id": "6863e0ca-65b7-472b-b5bf-9f4ae4100836",
+                "name": "Brian Alexander"
+            }
+        ],
+        "actors_names": [
+            "David Henrie",
+            "Leo Howard",
+            "Nicole Gale Anderson",
+            "Selena Gomez"
+        ],
+        "writers_names": [
+            "Brian Alexander"
+        ],
+        "directors_names": [
+            "Art Spigel"
+        ]
+    },
+    {
+        "id": "daae47e4-cbd0-4ffd-a150-55201b357d5b",
+        "rating": 8.2,
+        "title": "Lego Star Wars: The Video Game",
+        "description": "Play through the star wars prequel trilogy in episodes 1,2,and 3, in lego.",
+        "genres": [
+            {
+                "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+                "name": "Adventure"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            },
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "b505845f-d7bc-4271-a59d-5dc16a641cac",
+                "name": "Jon Burton"
+            }
+        ],
+        "actors": [
+            {
+                "id": "509c1168-0ced-4704-a3b9-f17b9dc37667",
+                "name": "Lindsay Duncan"
+            },
+            {
+                "id": "62df10e8-244d-4c31-b396-564dfbc2f9c5",
+                "name": "Hayden Christensen"
+            },
+            {
+                "id": "746b394f-7808-4386-a281-b06504c07b58",
+                "name": "Ahmed Best"
+            },
+            {
+                "id": "86f1f44b-39f5-41a6-8b3b-af5a9ed09858",
+                "name": "Anthony Daniels"
+            }
+        ],
+        "writers": [
+            {
+                "id": "a5a8f573-3cee-4ccc-8a2b-91cb9f55250a",
+                "name": "George Lucas"
+            }
+        ],
+        "actors_names": [
+            "Ahmed Best",
+            "Anthony Daniels",
+            "Hayden Christensen",
+            "Lindsay Duncan"
+        ],
+        "writers_names": [
+            "George Lucas"
+        ],
+        "directors_names": [
+            "Jon Burton"
+        ]
+    },
+    {
+        "id": "2c856df1-be00-46ff-b9c7-f9e880d6f4c7",
+        "rating": 6.9,
+        "title": "Wyclef Jean: All Star Jam at Carnegie Hall",
+        "description": "The show is fronted by Wyclef Jean and features guest appearances from a stellar line up of guests including Eric Clapton, Stevie Wonder, Destiny's Child, Macy Gray, Marc Anthony, Charlotte Church, Third World and Mary J Blige",
+        "genres": [
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            }
+        ],
+        "directors": [
+            {
+                "id": "3e4281de-2b49-4e94-a250-c497fc1767f5",
+                "name": "Bud Schaetzle"
+            }
+        ],
+        "actors": [
+            {
+                "id": "07c0d420-1a93-4a26-b0eb-5b8e671f36bc",
+                "name": "Marc Anthony"
+            },
+            {
+                "id": "1f7e393e-b862-4a24-99bc-bcd9f4e03980",
+                "name": "Eric Clapton"
+            },
+            {
+                "id": "ce080bbf-578b-4049-a29e-bd2965b1c9fa",
+                "name": "Mary J. Blige"
+            },
+            {
+                "id": "d86807ce-eed5-4271-98ee-142f82619d2d",
+                "name": "Destiny's Child"
+            }
+        ],
+        "writers": [
+            {
+                "id": "3e4281de-2b49-4e94-a250-c497fc1767f5",
+                "name": "Bud Schaetzle"
+            }
+        ],
+        "actors_names": [
+            "Destiny's Child",
+            "Eric Clapton",
+            "Marc Anthony",
+            "Mary J. Blige"
+        ],
+        "writers_names": [
+            "Bud Schaetzle"
+        ],
+        "directors_names": [
+            "Bud Schaetzle"
+        ]
+    },
+    {
+        "id": "87c64348-61a0-4e6c-99c5-a6bd8b0bcbc3",
+        "rating": 8,
+        "title": "A Star Named Ayrton Senna",
+        "description": "The Official Film of Brazil's greatest Formula One driver, Ayrton Senna, who's sudden death in the 1994 San Marino Grand Prix sent shock waves around the World. It cemented his reputation both within the sport, and his native Brazil, as a legend. The film looks at his life and career using archive footage and featuring revealing interviews with the man, as well as those who knew him well; friends, family and competitors. It also shows how the Ayrton Senna Foundation, set up in his honor, is working to help under privileged and street-bound children in his native Brazil using sport as an incentive to learn.",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            },
+            {
+                "id": "6d141ad2-d407-4252-bda4-95590aaf062a",
+                "name": "Documentary"
+            },
+            {
+                "id": "ca124c76-9760-4406-bfa0-409b1e38d200",
+                "name": "Biography"
+            }
+        ],
+        "directors": [
+            {
+                "id": "6c615482-994c-4f66-8ed3-f931ea615056",
+                "name": "Jean Claude Guiter"
+            }
+        ],
+        "actors": [
+            {
+                "id": "0398c6b9-ef70-4222-969e-d33459c4fde0",
+                "name": "Jean Alesi"
+            },
+            {
+                "id": "66c3c3a3-9b4e-42fa-a390-2442f8689985",
+                "name": "Juan Manuel Fangio"
+            },
+            {
+                "id": "87229db6-4a52-49f2-a4fb-2249142bd65b",
+                "name": "Martin Brundle"
+            },
+            {
+                "id": "9e1ea10f-fbcb-4332-990b-ec1ea8536c2e",
+                "name": "Alain Prost"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Alain Prost",
+            "Jean Alesi",
+            "Juan Manuel Fangio",
+            "Martin Brundle"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Jean Claude Guiter"
+        ]
+    },
+    {
+        "id": "22cd1a60-c386-462f-b5a3-e421b354226f",
+        "rating": 7,
+        "title": "All-Star Academy",
+        "description": "Together, Alex Guarnaschelli, Bobby Flay, Michael Symon and Curtis Stone make up one of the fiercest foursomes in culinary competitions. In this series, they will battle it out in the kitchen, as mentor versus mentor with teams of shining home cooks.",
+        "genres": [
+            {
+                "id": "e508c1c8-24c0-4136-80b4-340c4befb190",
+                "name": "Reality-TV"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "01ea2ac8-69e1-4967-be2b-117b5c409b70",
+                "name": "Ted Allen"
+            },
+            {
+                "id": "a7595efe-5c65-42e6-a092-8e8879bd4b67",
+                "name": "Curtis Stone"
+            },
+            {
+                "id": "e8c5660b-74ca-4082-b69f-c8c7ffd4d19e",
+                "name": "Robert Irvine"
+            },
+            {
+                "id": "eabb5a83-08dc-41a0-9075-b33e9f439f1c",
+                "name": "Alex Guarnaschelli"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Alex Guarnaschelli",
+            "Curtis Stone",
+            "Robert Irvine",
+            "Ted Allen"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "9c7dc26a-489d-4c08-9bba-6ae9dc8117f1",
+        "rating": 7,
+        "title": "All-Star Superman",
+        "description": "While saving the crew of the first manned mission to the sun, Superman is poisoned by solar radiation. Dying, he decides to fulfill his lifelong dreams, while still saving the Earth from various threats. But when Lex Luthor reveals his latest plot to control the world, Superman must use his remaining strength to stop him.",
+        "genres": [
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            },
+            {
+                "id": "6a0a479b-cfec-41ac-b520-41b2b007b611",
+                "name": "Animation"
+            },
+            {
+                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+                "name": "Sci-Fi"
+            }
+        ],
+        "directors": [
+            {
+                "id": "200a8ad1-fe5a-4246-a31c-57902b000613",
+                "name": "Sam Liu"
+            }
+        ],
+        "actors": [
+            {
+                "id": "477c81a7-4caf-4ce3-b354-831169a1a068",
+                "name": "James Denton"
+            },
+            {
+                "id": "78e917f3-a80b-4d44-82f4-80712a4160ee",
+                "name": "Anthony LaPaglia"
+            },
+            {
+                "id": "c05bfb01-60d1-42c7-b372-62bc0a916abf",
+                "name": "Christina Hendricks"
+            },
+            {
+                "id": "eac1449e-09ed-4912-8467-fba3d489c6bb",
+                "name": "Edward Asner"
+            }
+        ],
+        "writers": [
+            {
+                "id": "1f651d3f-b94a-4bc3-9a7d-68d79848124b",
+                "name": "Joe Shuster"
+            },
+            {
+                "id": "618ed131-f181-4932-b3cb-e637a87d594e",
+                "name": "Jerry Siegel"
+            },
+            {
+                "id": "7754f297-7531-4d31-9ae4-b46100a54982",
+                "name": "Grant Morrison"
+            },
+            {
+                "id": "9b401777-277e-40a2-8e69-cf6561b987ed",
+                "name": "Frank Quitely"
+            },
+            {
+                "id": "cff61032-be90-44b6-85e2-c0fd6049440c",
+                "name": "Dwayne McDuffie"
+            }
+        ],
+        "actors_names": [
+            "Anthony LaPaglia",
+            "Christina Hendricks",
+            "Edward Asner",
+            "James Denton"
+        ],
+        "writers_names": [
+            "Dwayne McDuffie",
+            "Frank Quitely",
+            "Grant Morrison",
+            "Jerry Siegel",
+            "Joe Shuster"
+        ],
+        "directors_names": [
+            "Sam Liu"
+        ]
+    },
+    {
+        "id": "c11df3f1-8b6a-4899-82f1-67a1c326a4b4",
+        "rating": 8.2,
+        "title": "All Star Revue",
+        "description": "This early comedy program started off with a rotating cast of four famous comedians, each of whom would take turns hosting the show. The program format was similar to that of a Vaudeville show or stage revue, with the prestige of the hosts enabling the show to bring in equally well-known talent for individual performances. As more hosts were added to the program's roster, the name was changed to \"All Star Revue\".",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "0d5b894f-25fe-4bb1-b04c-a59fc4f65b95",
+                "name": "Jack Roth"
+            },
+            {
+                "id": "4beb6833-9550-423a-a5c1-f3a46f8bc2b8",
+                "name": "Eddie Jackson"
+            },
+            {
+                "id": "4fa74dfb-5bbf-439e-bda2-b9c7a2feb199",
+                "name": "Jimmy Durante"
+            },
+            {
+                "id": "5f9b5959-31fc-43ba-8ab5-9551c34cd617",
+                "name": "Danny Thomas"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Danny Thomas",
+            "Eddie Jackson",
+            "Jack Roth",
+            "Jimmy Durante"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "1ca9a4b7-d78d-4cee-b590-c99c063bbd67",
+        "rating": 5.8,
+        "title": "All-Star Vaudeville",
+        "description": "A miniature vaudeville show, complete with a title card introducing each act, is presented. First up is The On-Wah Troupe, an East Asian group of contortionists. Next, Blossom Seeley and Benny Fields sing a duet of the song, \"Why Don't You Practice What You Preach\". Third up, father and son Pat Rooney and Pat Rooney Jr. perform a recitation and dance musing about if they will ever be as clever as their dad. And the last act on the bill is The Runaway Four, a group of comic acrobats.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            },
+            {
+                "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+                "name": "Short"
+            }
+        ],
+        "directors": [
+            {
+                "id": "57b6ba69-8fbd-41d2-9c4f-1e826a81e91b",
+                "name": "Roy Mack"
+            }
+        ],
+        "actors": [
+            {
+                "id": "317e3123-866a-48ad-b284-7ccacbabfd2e",
+                "name": "Blossom Seeley"
+            },
+            {
+                "id": "9fe4e4be-4961-4a08-93ad-f4ceb8fd2fd5",
+                "name": "Pat Rooney"
+            },
+            {
+                "id": "ce4fa822-0aa7-44ba-9fdd-ac39e76e99f6",
+                "name": "Pat Rooney Jr."
+            },
+            {
+                "id": "f0dbc382-b14e-4335-ab48-077acfdea6bd",
+                "name": "Benny Fields"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Benny Fields",
+            "Blossom Seeley",
+            "Pat Rooney",
+            "Pat Rooney Jr."
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Roy Mack"
+        ]
+    },
+    {
+        "id": "73ecd1e6-6326-405a-b51b-69008f383b72",
+        "rating": 8.5,
+        "title": "Lego Star Wars: The Complete Saga",
+        "description": "In Lego Star Wars: The Complete Saga, you can now experience all 6 episodes at once. Containing the same levels and locations. Only with newer features and improvements. Such as more extras to unlock, more vehicles to build, new playable characters, & a better customizing Lego character feature. Now all Lego & Star Wars fans alike can experience this game more than it's successors.",
+        "genres": [
+            {
+                "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+                "name": "Adventure"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            },
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "b505845f-d7bc-4271-a59d-5dc16a641cac",
+                "name": "Jon Burton"
+            }
+        ],
+        "actors": [
+            {
+                "id": "746b394f-7808-4386-a281-b06504c07b58",
+                "name": "Ahmed Best"
+            },
+            {
+                "id": "86f1f44b-39f5-41a6-8b3b-af5a9ed09858",
+                "name": "Anthony Daniels"
+            },
+            {
+                "id": "c5664b88-7286-4b38-9a3c-3f3cc6f72e9e",
+                "name": "Warwick Davis"
+            },
+            {
+                "id": "e039eedf-4daf-452a-bf92-a0085c68e156",
+                "name": "Peter Cushing"
+            }
+        ],
+        "writers": [
+            {
+                "id": "a5a8f573-3cee-4ccc-8a2b-91cb9f55250a",
+                "name": "George Lucas"
+            }
+        ],
+        "actors_names": [
+            "Ahmed Best",
+            "Anthony Daniels",
+            "Peter Cushing",
+            "Warwick Davis"
+        ],
+        "writers_names": [
+            "George Lucas"
+        ],
+        "directors_names": [
+            "Jon Burton"
+        ]
+    },
+    {
+        "id": "6d6a04d9-3e89-4f66-9256-7799beca0458",
+        "rating": 6.2,
+        "title": "Shuten Doji: The Star Hand Kid 4 - End Game",
+        "description": "Human vs Human. Oni vs Oni. The final battle has begun!",
+        "genres": [
+            {
+                "id": "6a0a479b-cfec-41ac-b520-41b2b007b611",
+                "name": "Animation"
+            },
+            {
+                "id": "b92ef010-5e4c-4fd0-99d6-41b6456272cd",
+                "name": "Fantasy"
+            },
+            {
+                "id": "f39d7b6d-aef2-40b1-aaf0-cf05e7048011",
+                "name": "Horror"
+            }
+        ],
+        "directors": [
+            {
+                "id": "665a488c-f84b-4317-aabf-529537279f40",
+                "name": "Junji Nishimura"
+            }
+        ],
+        "actors": [
+            {
+                "id": "30410f8f-cb09-4379-bbc3-1195d0890554",
+                "name": "Josh Meyer"
+            }
+        ],
+        "writers": [
+            {
+                "id": "1e49074b-f283-4793-a8ff-8027d67775ed",
+                "name": "Gô Nagai"
+            }
+        ],
+        "actors_names": [
+            "Josh Meyer"
+        ],
+        "writers_names": [
+            "Gô Nagai"
+        ],
+        "directors_names": [
+            "Junji Nishimura"
+        ]
+    },
+    {
+        "id": "af749d09-d3cb-40f6-a01c-c49f13df35ee",
+        "rating": 7.8,
+        "title": "WWF All-Star Wrestling",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "0ce1ce6c-adb6-4bdd-9579-9f7f96fd3450",
+                "name": "Merced Solis"
+            },
+            {
+                "id": "68bfa031-9067-4ff2-b3ac-718207fbb112",
+                "name": "Vince McMahon"
+            },
+            {
+                "id": "92501a55-cef3-47bb-80cf-a12897bc75ef",
+                "name": "Jimmy Hart"
+            },
+            {
+                "id": "da5600e9-263d-407b-a446-e2b97c24cdd6",
+                "name": "Don Muraco"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Don Muraco",
+            "Jimmy Hart",
+            "Merced Solis",
+            "Vince McMahon"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "f7b7dc7e-d5cc-4ea2-bd66-7496b6551c61",
+        "rating": 7.6,
+        "title": "ROH: All Star Extravaganza",
+        "description": "",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "2831abfa-cf84-4b6c-b818-0238445ccde6",
+                "name": "Shinjirô Ôtani"
+            },
+            {
+                "id": "4733e8cf-c1d0-42fa-9bdc-62776c194219",
+                "name": "Brandon Silvestry"
+            },
+            {
+                "id": "a15708fb-78d0-42bb-b434-cd57d9b7d288",
+                "name": "Masato Tanaka"
+            },
+            {
+                "id": "c5e7fc6e-e90f-49e4-8012-6ee29a9be097",
+                "name": "Steve Corino"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Brandon Silvestry",
+            "Masato Tanaka",
+            "Shinjirô Ôtani",
+            "Steve Corino"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "f09581c8-f364-4673-836e-ef584e8ebcb7",
+        "rating": 7.3,
+        "title": "Elvis All-Star Tribute",
+        "description": "A re-enactment by some of the music industry's biggest stars of Elvis Presley's 1968 NBC comeback special, in tribute to the King.",
+        "genres": [
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "00e2e97b-3a93-4d44-a31d-9346b1348cc6",
+                "name": "Jennifer Lopez"
+            },
+            {
+                "id": "03375539-7607-42b5-944a-0e98fe2128e5",
+                "name": "Post Malone"
+            },
+            {
+                "id": "28b406df-ee09-49d4-8cb9-741e96b373bd",
+                "name": "Alessia Cara"
+            },
+            {
+                "id": "a429c4d0-399c-4c2e-94d1-46f250717d6a",
+                "name": "Ed Sheeran"
+            }
+        ],
+        "writers": [
+            {
+                "id": "ef478f80-fe53-4bb8-942f-a9dac0cb2cd1",
+                "name": "David Wild"
+            }
+        ],
+        "actors_names": [
+            "Alessia Cara",
+            "Ed Sheeran",
+            "Jennifer Lopez",
+            "Post Malone"
+        ],
+        "writers_names": [
+            "David Wild"
+        ],
+        "directors_names": []
+    },
+    {
+        "id": "2b301aa8-7c13-4be7-a552-d80c14af7487",
+        "rating": 3.5,
+        "title": "The All Star Impressions Show",
+        "description": "Famous faces act out sketches impersonating other famous faces, and there is also an singing appearance by pop group JLS as themselves.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "d74eda1d-bdcc-428c-9458-69646c5a7636",
+                "name": "John F.D. Northover"
+            }
+        ],
+        "actors": [
+            {
+                "id": "31b84bca-0603-4b1d-a273-348f0085aa5f",
+                "name": "Stephen Mulhern"
+            },
+            {
+                "id": "68ac2126-f65d-4ab4-bdca-fd4732c68919",
+                "name": "Diane Abbott"
+            },
+            {
+                "id": "d0c33b8e-0a8a-45ae-9703-b32262eca1b0",
+                "name": "Peter Dickson"
+            },
+            {
+                "id": "de9a54fb-77a2-4fc3-b4ed-e0acb22aaf26",
+                "name": "Tony Blackburn"
+            }
+        ],
+        "writers": [
+            {
+                "id": "00591223-0fd4-4a5f-89f8-0317eff58c1b",
+                "name": "Marc Blakewill"
+            },
+            {
+                "id": "00a770fc-8964-41fa-9d3b-f6c958c9dddb",
+                "name": "Tony Cooke"
+            },
+            {
+                "id": "0c753724-fece-40cb-9115-abded78a7a2c",
+                "name": "Martin Trenaman"
+            },
+            {
+                "id": "3e0fd7d3-115e-4537-81f3-3e912b3cccb8",
+                "name": "James Harris"
+            },
+            {
+                "id": "4e4bacb2-a327-4b19-b579-5dfbfa410bd3",
+                "name": "Matthew Leys"
+            },
+            {
+                "id": "507e61e8-7d39-4ccb-9809-b317a9de5f9f",
+                "name": "Tony Way"
+            },
+            {
+                "id": "78d65b0c-51b0-4e03-8c28-fda307bb9c34",
+                "name": "Carl Carter"
+            },
+            {
+                "id": "c13e57a1-b771-4855-9359-b2b759bd2760",
+                "name": "Jane Lamacraft"
+            },
+            {
+                "id": "f80dcd60-9fcf-4550-922a-c05f21a8a309",
+                "name": "Steven Burge"
+            }
+        ],
+        "actors_names": [
+            "Diane Abbott",
+            "Peter Dickson",
+            "Stephen Mulhern",
+            "Tony Blackburn"
+        ],
+        "writers_names": [
+            "Carl Carter",
+            "James Harris",
+            "Jane Lamacraft",
+            "Marc Blakewill",
+            "Martin Trenaman",
+            "Matthew Leys",
+            "Steven Burge",
+            "Tony Cooke",
+            "Tony Way"
+        ],
+        "directors_names": [
+            "John F.D. Northover"
+        ]
+    },
+    {
+        "id": "5353633e-bd6d-4e6d-b284-918d66e5848f",
+        "rating": 7.7,
+        "title": "Smash Mouth: All Star",
+        "description": "Music video for Smash Mouth's song, 'All Star'.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            },
+            {
+                "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+                "name": "Short"
+            }
+        ],
+        "directors": [
+            {
+                "id": "ad3c2885-69d4-4e88-8fd2-ded3c1dc971b",
+                "name": "McG"
+            }
+        ],
+        "actors": [
+            {
+                "id": "3a2575a6-4f08-41dc-add3-d38a17ee2b85",
+                "name": "Greg Camp"
+            },
+            {
+                "id": "af090823-64ae-4fcb-813c-5f7ffc4d8b15",
+                "name": "Paul De Lisle"
+            },
+            {
+                "id": "c21e8f21-c412-4a76-bcd2-b82f48c1e669",
+                "name": "Dane Cook"
+            },
+            {
+                "id": "c926c431-4931-4123-90ef-05f203784538",
+                "name": "Hank Azaria"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Dane Cook",
+            "Greg Camp",
+            "Hank Azaria",
+            "Paul De Lisle"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "McG"
+        ]
+    },
+    {
+        "id": "7b9ead63-df01-4a5d-b34e-2252173df08a",
+        "rating": 7.4,
+        "title": "AWA All-Star Wrestling",
+        "description": "Syndicated series featuring wrestling matches as promoted by the American Wrestling Association (AWA).",
+        "genres": [
+            {
+                "id": "2f89e116-4827-4ff4-853c-b6e058f71e31",
+                "name": "Sport"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "70be91a0-6fbd-43e6-a08b-ebac9606d51f",
+                "name": "Giant Baba"
+            },
+            {
+                "id": "795d78e3-e0d2-4f74-a2e0-d7ab55195580",
+                "name": "Ox Baker"
+            },
+            {
+                "id": "87e85e9d-05fc-4312-9ff8-6dbf051be90b",
+                "name": "Gene Okerlund"
+            },
+            {
+                "id": "ea6ebdd0-cafc-4fa9-9d47-727e66aef3ec",
+                "name": "Penny Banner"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Gene Okerlund",
+            "Giant Baba",
+            "Ox Baker",
+            "Penny Banner"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "938eebcd-dc24-4026-beaf-c5d7fd3d958b",
+        "rating": 4.7,
+        "title": "All Star Mr & Mrs",
+        "description": "",
+        "genres": [
+            {
+                "id": "fb58fd7f-7afd-447f-b833-e51e45e2a778",
+                "name": "Game-Show"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "5129890a-bbb6-4296-aa1f-e838a12b789c",
+                "name": "Fern Britton"
+            },
+            {
+                "id": "c115acef-d8bd-4cb9-9784-8fc2f6fc9571",
+                "name": "Phillip Schofield"
+            },
+            {
+                "id": "d0c33b8e-0a8a-45ae-9703-b32262eca1b0",
+                "name": "Peter Dickson"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Fern Britton",
+            "Peter Dickson",
+            "Phillip Schofield"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "a9b57067-b910-47b8-bb83-3169429c84e1",
+        "rating": 7.5,
+        "title": "All Star Comedy Jam",
+        "description": "The Original King of Comedy and Shaquille O'Neal presents this Stand-Up Special with some of the industry's most talented and sought after comedians.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "6d141ad2-d407-4252-bda4-95590aaf062a",
+                "name": "Documentary"
+            }
+        ],
+        "directors": [
+            {
+                "id": "f09c267a-1a38-46c2-8b1a-35721b96ec34",
+                "name": "Leslie Small"
+            }
+        ],
+        "actors": [
+            {
+                "id": "22dbe9c3-cb14-4a1e-b6a9-47f9b76867c8",
+                "name": "Tommy Davidson"
+            },
+            {
+                "id": "272b3940-e37e-492a-9530-81848ed3a863",
+                "name": "Cedric the Entertainer"
+            },
+            {
+                "id": "474a88b6-110e-4a49-91b7-66839b9ebeaf",
+                "name": "Kevin Hart"
+            },
+            {
+                "id": "edc4f8f2-32a0-409d-9de2-4c34cbf1ae7d",
+                "name": "DeRay Davis"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Cedric the Entertainer",
+            "DeRay Davis",
+            "Kevin Hart",
+            "Tommy Davidson"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Leslie Small"
+        ]
+    },
+    {
+        "id": "572814ae-165a-44a8-8420-db0ebf299ac2",
+        "rating": 7.3,
+        "title": "The All-Star Bond Rally",
+        "description": "Inspirational documentary short film featuring Hollywood stars promoting the sales of War Bonds through songs and skits.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            },
+            {
+                "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+                "name": "Short"
+            }
+        ],
+        "directors": [
+            {
+                "id": "7e70921c-a4d5-409a-a571-b39bfeb658ee",
+                "name": "Michael Audley"
+            }
+        ],
+        "actors": [
+            {
+                "id": "41a4ae10-fe3e-4e06-ba60-ac70d26fb52f",
+                "name": "Bob Hope"
+            },
+            {
+                "id": "ab452435-59d2-43fc-a579-d3788317028a",
+                "name": "Jeanne Crain"
+            },
+            {
+                "id": "c475bfee-2b48-4183-853b-b4f1517d9fd9",
+                "name": "Vivian Blaine"
+            },
+            {
+                "id": "d05a86a4-b5b8-45ed-86ba-96eb6134b460",
+                "name": "Bing Crosby"
+            }
+        ],
+        "writers": [
+            {
+                "id": "80987b83-982b-48fe-9a36-87a5603b8abb",
+                "name": "Don Quinn"
+            }
+        ],
+        "actors_names": [
+            "Bing Crosby",
+            "Bob Hope",
+            "Jeanne Crain",
+            "Vivian Blaine"
+        ],
+        "writers_names": [
+            "Don Quinn"
+        ],
+        "directors_names": [
+            "Michael Audley"
+        ]
+    },
+    {
+        "id": "dd410e88-0c6a-4954-80ac-4c004bcba229",
+        "rating": 5.2,
+        "title": "All Star Family Fortunes",
+        "description": "A celebrity version of Family Fortunes (1980).",
+        "genres": [
+            {
+                "id": "fb58fd7f-7afd-447f-b833-e51e45e2a778",
+                "name": "Game-Show"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "5b2b8d9d-ecf1-47f7-a3da-79355d2ff901",
+                "name": "Vernon Kay"
+            },
+            {
+                "id": "d0c33b8e-0a8a-45ae-9703-b32262eca1b0",
+                "name": "Peter Dickson"
+            },
+            {
+                "id": "d88abc26-e5bb-41a4-8761-6f8ada717440",
+                "name": "Neil Hurst"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Neil Hurst",
+            "Peter Dickson",
+            "Vernon Kay"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "5f1a4219-b533-489f-8af2-0d2692504857",
+        "rating": 7.2,
+        "title": "An All-Star Toast to the Improv",
+        "description": "To celebrate the \"birthday\" of the famous Improv comedy club, 6 famous comedians get up on stage and do their thing. However, to make things interesting, while each one does his particular routine, the other 5 comics sit at the back of the stage and heckle the performer. This video is especially notable for Martin Mull issuing a zinger at Robin Williams that shuts-up the otherwise motor-mouthed comic for at least 5 seconds.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "006d10a0-b0ba-4dac-bcf0-1111411c178b",
+                "name": "Walter C. Miller"
+            }
+        ],
+        "actors": [
+            {
+                "id": "45780fad-6861-457b-8617-80adf3c7b839",
+                "name": "Richard Lewis"
+            },
+            {
+                "id": "88ed8c24-fad6-4465-8304-2cc4927b55f9",
+                "name": "Martin Mull"
+            },
+            {
+                "id": "d85b6385-c814-44a2-92af-de93b936be80",
+                "name": "Billy Crystal"
+            },
+            {
+                "id": "e5b7d3e5-5c26-475b-803a-8575f724614e",
+                "name": "Robert Klein"
+            }
+        ],
+        "writers": [
+            {
+                "id": "7d47be2f-2e66-4c38-a9ef-e9d5bce360cc",
+                "name": "Robin Williams"
+            },
+            {
+                "id": "d85b6385-c814-44a2-92af-de93b936be80",
+                "name": "Billy Crystal"
+            },
+            {
+                "id": "e5b7d3e5-5c26-475b-803a-8575f724614e",
+                "name": "Robert Klein"
+            }
+        ],
+        "actors_names": [
+            "Billy Crystal",
+            "Martin Mull",
+            "Richard Lewis",
+            "Robert Klein"
+        ],
+        "writers_names": [
+            "Billy Crystal",
+            "Robert Klein",
+            "Robin Williams"
+        ],
+        "directors_names": [
+            "Walter C. Miller"
+        ]
+    },
+    {
+        "id": "5f51ddbc-4966-40a6-9030-262faa3b9b79",
+        "rating": 7.4,
+        "title": "Star Stories",
+        "description": "Comedy Thats Shows Us How Some Of The Worlds Biggest Stars Came To Fame",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "81c353e7-a5d3-4e31-83e9-2cbe26c11808",
+                "name": "Kevin Bishop"
+            },
+            {
+                "id": "ccf47e38-eba1-41c1-961c-a96035a3165f",
+                "name": "Harry Peacock"
+            },
+            {
+                "id": "db40711a-d9d1-4071-91d4-d74af4cfbf81",
+                "name": "Laura Patch"
+            },
+            {
+                "id": "f111a93f-0a31-4b6f-bf3b-3a7177915bef",
+                "name": "Tom Basden"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Harry Peacock",
+            "Kevin Bishop",
+            "Laura Patch",
+            "Tom Basden"
+        ],
+        "writers_names": [],
+        "directors_names": []
+    },
+    {
+        "id": "f20e8a75-a7b0-4204-b3e6-edbc366e31d4",
+        "rating": 7.5,
+        "title": "Star na si Van Damme Stallone",
+        "description": "The life story of a kid diagnosed with Down syndrome. He dreams of being an artista; his family has to make ends (and dreams) meet.",
+        "genres": [
+            {
+                "id": "1cacff68-643e-4ddd-8f57-84b62538081a",
+                "name": "Drama"
+            }
+        ],
+        "directors": [
+            {
+                "id": "04439984-a8c5-4c53-ac74-1c39ac74b6e8",
+                "name": "Randolph Longjas"
+            }
+        ],
+        "actors": [
+            {
+                "id": "5b7206ed-9364-4b09-a4b8-430003a6fc02",
+                "name": "Richard Joson"
+            },
+            {
+                "id": "6c1dbabf-ce35-4471-b222-67e1ac052956",
+                "name": "Acey Aguilar"
+            },
+            {
+                "id": "8dc6c94a-18a6-4493-8856-b31dca7b4650",
+                "name": "Candy Pangilinan"
+            },
+            {
+                "id": "ba43c641-a595-461f-b7c9-866ab2d45cae",
+                "name": "Sarah Pagcaliwagan"
+            }
+        ],
+        "writers": [
+            {
+                "id": "017713b9-24cf-43a6-ab62-6b5e476499b8",
+                "name": "Rod Marmol"
+            },
+            {
+                "id": "524cbecd-d64f-4577-9736-5b5cb858767d",
+                "name": "Alpha Habon"
+            }
+        ],
+        "actors_names": [
+            "Acey Aguilar",
+            "Candy Pangilinan",
+            "Richard Joson",
+            "Sarah Pagcaliwagan"
+        ],
+        "writers_names": [
+            "Alpha Habon",
+            "Rod Marmol"
+        ],
+        "directors_names": [
+            "Randolph Longjas"
+        ]
+    },
+    {
+        "id": "0ddc8a23-e625-4aa8-91f5-5aeb7ac82253",
+        "rating": 8.5,
+        "title": "Star Trek: The Next Generation: Interactive VCR Board Game - A Klingon Challenge",
+        "description": "A Klingon named Kavok hijacks the USS Enterprise NCC-1701-D while it is docked for repairs at starbase 74. It is up to a repair crew to take the ship back before Kavok uses the ship to start a war between the United Federation of Planets and the Klingon Empire.",
+        "genres": [
+            {
+                "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+                "name": "Adventure"
+            },
+            {
+                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+                "name": "Sci-Fi"
+            }
+        ],
+        "directors": [
+            {
+                "id": "cf54fca7-65f6-4b6a-a2b4-171ea2c6743e",
+                "name": "Les Landau"
+            }
+        ],
+        "actors": [
+            {
+                "id": "27b03478-fb81-4557-a306-bf27144122b5",
+                "name": "Robert O'Reilly"
+            },
+            {
+                "id": "5bddea2c-8609-499a-a444-77e0142743c0",
+                "name": "Jonathan Frakes"
+            }
+        ],
+        "writers": [],
+        "actors_names": [
+            "Jonathan Frakes",
+            "Robert O'Reilly"
+        ],
+        "writers_names": [],
+        "directors_names": [
+            "Les Landau"
+        ]
+    },
+    {
+        "id": "a9ee0b3f-ec56-4107-9b6d-0458dfa3f415",
+        "rating": 7,
+        "title": "Star Trek: Short Treks",
+        "description": "A series of stand-alone short films featuring characters and storylines from Star Trek: Discovery (2017).",
+        "genres": [
+            {
+                "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+                "name": "Adventure"
+            },
+            {
+                "id": "1cacff68-643e-4ddd-8f57-84b62538081a",
+                "name": "Drama"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            },
+            {
+                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+                "name": "Sci-Fi"
+            },
+            {
+                "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+                "name": "Short"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "165f52f9-48bf-47b8-b14e-0b81079d1ba9",
+                "name": "Ethan Peck"
+            },
+            {
+                "id": "1d565221-1e6d-4bb1-b82a-b8d70d258c88",
+                "name": "Rebecca Romijn"
+            },
+            {
+                "id": "87a32a48-fdaa-4b6d-bd0d-ee4edfaec18d",
+                "name": "Anson Mount"
+            },
+            {
+                "id": "cd3765d7-a725-47a6-b602-02da78259f4b",
+                "name": "Jenette Goldstein"
+            }
+        ],
+        "writers": [
+            {
+                "id": "772faacb-5d57-4e72-b44f-01fde7f08c1a",
+                "name": "Akiva Goldsman"
+            },
+            {
+                "id": "82b7dffe-6254-4598-b6ef-5be747193946",
+                "name": "Alex Kurtzman"
+            },
+            {
+                "id": "8a9cb7b2-dd61-4f7f-94ec-61aac18ed5d9",
+                "name": "Kirsten Beyer"
+            },
+            {
+                "id": "b670fa3e-9f7b-4786-a00c-09d95f1e7b5c",
+                "name": "Bryan Fuller"
+            },
+            {
+                "id": "c5affe3b-e9f2-4fdb-a5ee-018dd751d3f4",
+                "name": "Michael Chabon"
+            }
+        ],
+        "actors_names": [
+            "Anson Mount",
+            "Ethan Peck",
+            "Jenette Goldstein",
+            "Rebecca Romijn"
+        ],
+        "writers_names": [
+            "Akiva Goldsman",
+            "Alex Kurtzman",
+            "Bryan Fuller",
+            "Kirsten Beyer",
+            "Michael Chabon"
+        ],
+        "directors_names": []
+    },
+    {
+        "id": "61dcf7a8-63b4-4cca-b6ea-e3f574acf93c",
+        "rating": 5.4,
+        "title": "Star Pink",
+        "description": "In the year 2001 ½, the Pink Panther is a gas station attendant on a small planet. When a particularly dangerous-looking spaceship arrives, the panther panics and closes his station, which makes the green little pointy-nosed man flying the ship furious. The panther tries to elude the man and his search robot by all possible means, even evaporating himself in a molecular disassembler and reassembling himself in another. The man does the same, but the panther throws a flower into the reassembler, which turns the man into part flower.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "6a0a479b-cfec-41ac-b520-41b2b007b611",
+                "name": "Animation"
+            },
+            {
+                "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+                "name": "Short"
+            }
+        ],
+        "directors": [
+            {
+                "id": "644e6c33-95fb-4c5c-bda3-5adf48128257",
+                "name": "Arthur Davis"
+            }
+        ],
+        "actors": [],
+        "writers": [
+            {
+                "id": "0497b05c-40c3-4ad1-8fa0-e088b405bc59",
+                "name": "John W. Dunn"
+            }
+        ],
+        "actors_names": [],
+        "writers_names": [
+            "John W. Dunn"
+        ],
+        "directors_names": [
+            "Arthur Davis"
+        ]
+    },
+    {
+        "id": "75475f58-c0ea-4d6d-9f78-bb44d971a21f",
+        "rating": 6.5,
+        "title": "Lego Star Wars: All-Stars",
+        "description": "New faces team-up with iconic heroes Young Han Solo, Chewbacca, Young Lando Calrissian, BB-8, and General Leia for adventures that span all eras of the Star Wars universe.",
+        "genres": [
+            {
+                "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+                "name": "Adventure"
+            },
+            {
+                "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+                "name": "Action"
+            },
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "6a0a479b-cfec-41ac-b520-41b2b007b611",
+                "name": "Animation"
+            },
+            {
+                "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+                "name": "Sci-Fi"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "05cece18-8d6b-4178-89e4-2af0e1afc902",
+                "name": "Matthew Wood"
+            },
+            {
+                "id": "3f6e8134-ce95-43bc-bfa9-dcf45cb89162",
+                "name": "Montse Hernandez"
+            },
+            {
+                "id": "e1e76fc6-c0c6-4f07-9ad5-55d07e925fe9",
+                "name": "Dana Snyder"
+            },
+            {
+                "id": "f1a17244-aa1d-4cec-b435-674c3ad4560b",
+                "name": "John DiMaggio"
+            }
+        ],
+        "writers": [
+            {
+                "id": "6abed654-6c30-4566-a811-6e10e2468496",
+                "name": "Josh Rimes"
+            },
+            {
+                "id": "6ba834a0-1039-4b5c-ab78-d5f1f18a4e7d",
+                "name": "Carrie Beck"
+            },
+            {
+                "id": "6e50ec85-bd49-45e6-9f2c-cd22a828c973",
+                "name": "Bob Roth"
+            },
+            {
+                "id": "76bf1d79-69da-48aa-8f02-05930d4449bf",
+                "name": "Jason Cosler"
+            },
+            {
+                "id": "79a4ab94-9062-4ac8-aa31-7236ba838ae9",
+                "name": "Leland Chee"
+            },
+            {
+                "id": "948d3351-ee5c-48c2-9553-3acd196e7e6b",
+                "name": "Bill Motz"
+            },
+            {
+                "id": "d1591574-8b7d-4436-b633-444e49926553",
+                "name": "Keith Malone"
+            },
+            {
+                "id": "e86eb86b-4115-4dbb-b499-3086e849f36b",
+                "name": "Jake Blais"
+            }
+        ],
+        "actors_names": [
+            "Dana Snyder",
+            "John DiMaggio",
+            "Matthew Wood",
+            "Montse Hernandez"
+        ],
+        "writers_names": [
+            "Bill Motz",
+            "Bob Roth",
+            "Carrie Beck",
+            "Jake Blais",
+            "Jason Cosler",
+            "Josh Rimes",
+            "Keith Malone",
+            "Leland Chee"
+        ],
+        "directors_names": []
+    },
+    {
+        "id": "9f9a2a1f-1d6d-4cb4-b7c2-907dbeb88c03",
+        "rating": 7.2,
+        "title": "An All-Star Tribute to Johnny Cash",
+        "description": "",
+        "genres": [
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            },
+            {
+                "id": "6d141ad2-d407-4252-bda4-95590aaf062a",
+                "name": "Documentary"
+            }
+        ],
+        "directors": [
+            {
+                "id": "f50ff2a0-2606-44d1-9817-634275a5cb11",
+                "name": "Louis J. Horvitz"
+            }
+        ],
+        "actors": [
+            {
+                "id": "0aafa35d-7d04-427c-a9e8-8eba4e0331e5",
+                "name": "Kix Brooks"
+            },
+            {
+                "id": "515c525e-f941-4b84-b97c-56bbc7b7084e",
+                "name": "Bono"
+            },
+            {
+                "id": "622703b7-f35a-427a-b67b-a5a99d551758",
+                "name": "June Carter Cash"
+            },
+            {
+                "id": "9ef9fd78-5715-4ca8-a182-2bb6e9abc9a2",
+                "name": "Johnny Cash"
+            }
+        ],
+        "writers": [
+            {
+                "id": "2d78e38c-b7f9-47a1-8ea1-21df0c3c11fb",
+                "name": "Michael Rainin"
+            },
+            {
+                "id": "d90676de-6443-48c7-b592-294d4c687e7b",
+                "name": "Anthony DeCurtis"
+            }
+        ],
+        "actors_names": [
+            "Bono",
+            "Johnny Cash",
+            "June Carter Cash",
+            "Kix Brooks"
+        ],
+        "writers_names": [
+            "Anthony DeCurtis",
+            "Michael Rainin"
+        ],
+        "directors_names": [
+            "Louis J. Horvitz"
+        ]
+    },
+    {
+        "id": "e95044a7-1f66-4164-9650-3bf2132d7119",
+        "rating": 5.8,
+        "title": "The Young Comedians All-Star Reunion",
+        "description": "Howie Mandel in Toronto, Steven Wright in Boston, Harry Anderson in Los Angeles, Richard Belzer in New York, and Robin Williams in San Fransisco (featured in the original \"Young Comedian\" TV specials) go back to where they started and showcase a new comedian.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            }
+        ],
+        "directors": [
+            {
+                "id": "006d10a0-b0ba-4dac-bcf0-1111411c178b",
+                "name": "Walter C. Miller"
+            }
+        ],
+        "actors": [
+            {
+                "id": "07a54e6c-57ec-4f68-8561-be3abfe2b29a",
+                "name": "Steven Wright"
+            },
+            {
+                "id": "1071dc2b-0fd6-40be-9672-ef62297f2383",
+                "name": "Howie Mandel"
+            },
+            {
+                "id": "18b1fc7d-fc82-4a87-9c11-b90e3607cf6c",
+                "name": "Howard Busgang"
+            },
+            {
+                "id": "ba06c8bb-52c6-434b-b915-a1a673771a1f",
+                "name": "Barry Crimmins"
+            }
+        ],
+        "writers": [
+            {
+                "id": "42bc6979-f4c6-49dc-bdc2-ea6696bb6792",
+                "name": "Rick Mitz"
+            }
+        ],
+        "actors_names": [
+            "Barry Crimmins",
+            "Howard Busgang",
+            "Howie Mandel",
+            "Steven Wright"
+        ],
+        "writers_names": [
+            "Rick Mitz"
+        ],
+        "directors_names": [
+            "Walter C. Miller"
+        ]
+    },
+    {
+        "id": "ff750819-6004-426b-ae66-19a3ba15adcc",
+        "rating": 6.8,
+        "title": "General Electric's All-Star Anniversary",
+        "description": "",
+        "genres": [
+            {
+                "id": "6d141ad2-d407-4252-bda4-95590aaf062a",
+                "name": "Documentary"
+            }
+        ],
+        "directors": [],
+        "actors": [
+            {
+                "id": "1b754e50-fc93-4f7e-b398-47edae55c3eb",
+                "name": "Jon 'Bowzer' Bauman"
+            },
+            {
+                "id": "e1ab5016-1539-47c9-9294-9ff1f96df44b",
+                "name": "Albert Brooks"
+            },
+            {
+                "id": "e22f0a9a-cd7c-4937-a44c-648b4a12f193",
+                "name": "Lucille Ball"
+            },
+            {
+                "id": "ec92a961-92d7-473a-a33f-cfee63946c5a",
+                "name": "John Wayne"
+            }
+        ],
+        "writers": [
+            {
+                "id": "28ae10bf-763b-48d5-9552-5c42e58cf19d",
+                "name": "Bob Howard"
+            },
+            {
+                "id": "c17de384-8c55-46d8-b993-ee24e239d28e",
+                "name": "Paul Keyes"
+            },
+            {
+                "id": "c4e774df-2333-45fa-b5b9-5da3ea1bffdf",
+                "name": "Monty Aidem"
+            },
+            {
+                "id": "e21d95af-81bc-45cd-8d74-d4275aa2da5c",
+                "name": "Jeffrey Barron"
+            }
+        ],
+        "actors_names": [
+            "Albert Brooks",
+            "John Wayne",
+            "Jon 'Bowzer' Bauman",
+            "Lucille Ball"
+        ],
+        "writers_names": [
+            "Bob Howard",
+            "Jeffrey Barron",
+            "Monty Aidem",
+            "Paul Keyes"
+        ],
+        "directors_names": []
+    },
+    {
+        "id": "8167ee1a-61e2-4ec0-bb24-008822cde8cf",
+        "rating": 5.4,
+        "title": "All-Star Party for 'Dutch' Reagan",
+        "description": "A televised event in honor of the 40th president, Ronald Reagan, the year he was sworn in for his second term of office.",
+        "genres": [
+            {
+                "id": "5373d043-3f41-4ea8-9947-4b746c601bbd",
+                "name": "Comedy"
+            },
+            {
+                "id": "56b541ab-4d66-4021-8708-397762bff2d4",
+                "name": "Music"
+            }
+        ],
+        "directors": [
+            {
+                "id": "cc2b4b6e-c5b7-4b96-8a5b-25b05f682659",
+                "name": "Dick McDonough"
+            }
+        ],
+        "actors": [
+            {
+                "id": "55062f51-4656-4110-8dd2-7ebad228a787",
+                "name": "Leon Ames"
+            },
+            {
+                "id": "5aa92ef0-c076-4237-b1bc-1c1f981e36b3",
+                "name": "June Allyson"
+            },
+            {
+                "id": "6acb616f-fec4-4de8-937a-1377580e8b2f",
+                "name": "Steve Allen"
+            },
+            {
+                "id": "7ad0c1ab-9b5c-4e5f-8c3c-216ad32b5057",
+                "name": "Edie Adams"
+            }
+        ],
+        "writers": [
+            {
+                "id": "c17de384-8c55-46d8-b993-ee24e239d28e",
+                "name": "Paul Keyes"
+            }
+        ],
+        "actors_names": [
+            "Edie Adams",
+            "June Allyson",
+            "Leon Ames",
+            "Steve Allen"
+        ],
+        "writers_names": [
+            "Paul Keyes"
+        ],
+        "directors_names": [
+            "Dick McDonough"
+        ]
+    }
+]
 EXPECTED_LIST_FILMS_RESPONSE = [
     {
         "id": "a801e84c-316a-4c0c-a5a5-cc024234b2cb",

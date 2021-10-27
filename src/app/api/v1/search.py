@@ -39,10 +39,6 @@ async def persons_search(
 ) -> list[OutputPersonSchema]:
     try:
         persons = await person_service.search(default.page, default.size, query=query)
-    except NotFoundError:
-        raise HTTPException(
-            status_code=HTTPStatus.NOT_FOUND, detail="person not found."
-        )
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
