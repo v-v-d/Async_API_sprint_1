@@ -1,0 +1,13 @@
+{
+  "_index": "genres",
+  "_type": "_doc",
+  "_id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+  "_version": 1,
+  "_seq_no": 6,
+  "_primary_term": 2,
+  "_source": {
+    "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+    "name": "Action",
+    "description": ""
+  }
+}
