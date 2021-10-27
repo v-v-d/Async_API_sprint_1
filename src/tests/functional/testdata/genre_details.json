@@ -1,11 +1,13 @@
 {
   "_index": "genres",
   "_type": "_doc",
-  "_id": "55c723c1-6d90-4a04-a44b-e9792040251a",
-  "_score": 1.0,
+  "_id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+  "_version": 1,
+  "_seq_no": 6,
+  "_primary_term": 2,
   "_source": {
-    "id": "55c723c1-6d90-4a04-a44b-e9792040251a",
-    "name": "Family",
+    "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+    "name": "Action",
     "description": ""
   }
 }
