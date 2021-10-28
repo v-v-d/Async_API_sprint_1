@@ -25,8 +25,8 @@ async def person_film_list_url(v1_persons_url, person_id):
 
 @pytest.fixture
 async def mocked_es_person_film_valid_response(monkeypatch):
-    monkeypatch.setattr(FilmsService, "_request_elastic", AsyncMock())
-    main.FilmsService._request_elastic.return_value = PERSON_FILM_LIST_ES_RESPONSE  # noqa
+    monkeypatch.setattr(FilmsService, "_execute", AsyncMock())
+    main.FilmsService._execute.return_value = PERSON_FILM_LIST_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio
@@ -49,7 +49,7 @@ async def test_person_film__cached_result(
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == EXPECTED_PERSON_FILM_LIST_RESPONSE
 
-    assert main.FilmsService._request_elastic.call_count == 1
+    assert main.FilmsService._execute.call_count == 1
 
 
 @pytest.mark.asyncio

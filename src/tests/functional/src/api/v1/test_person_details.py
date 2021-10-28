@@ -25,8 +25,8 @@ async def person_details_url(v1_persons_url, person_id):
 
 @pytest.fixture
 async def mocked_es_person_valid_response(monkeypatch):
-    monkeypatch.setattr(PersonService, "_request_elastic", AsyncMock())
-    main.PersonService._request_elastic.return_value = PERSON_DETAILS_ES_RESPONSE  # noqa
+    monkeypatch.setattr(PersonService, "_execute", AsyncMock())
+    main.PersonService._execute.return_value = PERSON_DETAILS_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio
@@ -49,7 +49,7 @@ async def test_person_details__cached_result(
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == EXPECTED_PERSON_DETAILS_RESPONSE
 
-    assert main.PersonService._request_elastic.call_count == 1
+    assert main.PersonService._execute.call_count == 1
 
 
 @pytest.mark.asyncio

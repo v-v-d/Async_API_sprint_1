@@ -25,8 +25,8 @@ async def genre_details_url(v1_genres_url, genre_id):
 
 @pytest.fixture
 async def mocked_es_genre_valid_response(monkeypatch):
-    monkeypatch.setattr(GenreService, "_request_elastic", AsyncMock())
-    main.GenreService._request_elastic.return_value = GENRE_DETAILS_ES_RESPONSE  # noqa
+    monkeypatch.setattr(GenreService, "_execute", AsyncMock())
+    main.GenreService._execute.return_value = GENRE_DETAILS_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio
@@ -49,7 +49,7 @@ async def test_genre_details__cached_result(
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == EXPECTED_GENRE_DETAILS_RESPONSE
 
-    assert main.GenreService._request_elastic.call_count == 1
+    assert main.GenreService._execute.call_count == 1
 
 
 @pytest.mark.asyncio
