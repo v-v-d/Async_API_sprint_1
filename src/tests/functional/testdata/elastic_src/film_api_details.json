@@ -1,0 +1,22 @@
+{
+  "id": "a801e84c-316a-4c0c-a5a5-cc024234b2cb",
+  "rating": 6.5,
+  "title": "Kre-O Star Trek",
+  "description": "A stop-motion animated story about 'Star Trek' featuring Kre-O toy blocks.",
+  "genres": [
+    {
+      "id": "6a0a479b-cfec-41ac-b520-41b2b007b611",
+      "name": "Animation"
+    },
+    {
+      "id": "a886d0ec-c3f3-4b16-b973-dedcf5bfa395",
+      "name": "Short"
+    }
+  ],
+  "directors": [],
+  "actors": [],
+  "writers": [],
+  "actors_names": [],
+  "writers_names": [],
+  "directors_names": []
+}

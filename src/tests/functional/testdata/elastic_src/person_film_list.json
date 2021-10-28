@@ -1,0 +1,96 @@
+{
+  "took": 0,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 1,
+      "relation": "eq"
+    },
+    "max_score": 6.306275,
+    "hits": [
+      {
+        "_index": "movies",
+        "_type": "_doc",
+        "_id": "57beb3fd-b1c9-4f8a-9c06-2da13f95251c",
+        "_score": 6.306275,
+        "_source": {
+          "id": "57beb3fd-b1c9-4f8a-9c06-2da13f95251c",
+          "rating": 6.9,
+          "title": "Solo: A Star Wars Story",
+          "description": "During an adventure into the criminal underworld, Han Solo meets his future co-pilot Chewbacca and encounters Lando Calrissian years before joining the Rebellion.",
+          "genres": [
+            {
+              "id": "120a21cf-9097-479e-904a-13dd7198c1dd",
+              "name": "Adventure"
+            },
+            {
+              "id": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+              "name": "Action"
+            },
+            {
+              "id": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+              "name": "Sci-Fi"
+            }
+          ],
+          "directors": [
+            {
+              "id": "33eb3b88-69f2-4f38-a26d-ff32f1feb1a1",
+              "name": "Ron Howard"
+            }
+          ],
+          "actors": [
+            {
+              "id": "01377f6d-9767-48ce-9e37-3c81f8a3c739",
+              "name": "Woody Harrelson"
+            },
+            {
+              "id": "7a852205-2bf6-4b75-b3b2-8a46ed6e91ef",
+              "name": "Emilia Clarke"
+            },
+            {
+              "id": "c69da9bd-eb87-4a06-be70-95d4ee2da1cc",
+              "name": "Joonas Suotamo"
+            },
+            {
+              "id": "ce06e6d7-600b-4829-badf-5d02c61f1a92",
+              "name": "Alden Ehrenreich"
+            }
+          ],
+          "writers": [
+            {
+              "id": "3217bc91-bcfc-44eb-a609-82d228115c50",
+              "name": "Lawrence Kasdan"
+            },
+            {
+              "id": "a2c091a2-281e-4732-9357-79b213d8d92f",
+              "name": "Jonathan Kasdan"
+            },
+            {
+              "id": "a5a8f573-3cee-4ccc-8a2b-91cb9f55250a",
+              "name": "George Lucas"
+            }
+          ],
+          "actors_names": [
+            "Alden Ehrenreich",
+            "Emilia Clarke",
+            "Joonas Suotamo",
+            "Woody Harrelson"
+          ],
+          "writers_names": [
+            "George Lucas",
+            "Jonathan Kasdan",
+            "Lawrence Kasdan"
+          ],
+          "directors_names": [
+            "Ron Howard"
+          ]
+        }
+      }
+    ]
+  }
+}

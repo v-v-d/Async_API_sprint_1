@@ -34,8 +34,6 @@ async def genres_list(
 ) -> list[OutputGenreSchema]:
     try:
         genres = await genres_service.search(default.page, default.size)
-    except NotFoundError:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="genre not found.")
     except BaseServiceError:
         raise HTTPException(
             status_code=HTTPStatus.FAILED_DEPENDENCY, detail="search service error."
