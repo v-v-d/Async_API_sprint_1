@@ -74,3 +74,4 @@ async def test_film_details__not_found(
 ):
     response = await client.get(path=film_details_url)
     assert response.status_code == status.HTTP_404_NOT_FOUND
+

@@ -12,9 +12,30 @@ def v1_films_url():
 
 
 @pytest.fixture
+def v1_genres_url():
+    return "/api/v1/genres/"
+
+
+@pytest.fixture
+def v1_persons_url():
+    return "/api/v1/persons/"
+
+
+@pytest.fixture
+def v1_search_persons_url():
+    return "/api/v1/search/persons"
+
+
+@pytest.fixture
+def v1_search_film_url():
+    return "/api/v1/search/films"
+
+
+@pytest.fixture
 async def mocked_es_invalid_response(monkeypatch):
     monkeypatch.setattr(base.ElasticsearchService, "_execute", AsyncMock())
     base.ElasticsearchService._execute.return_value = {}  # noqa
+
 
 
 @pytest.fixture
