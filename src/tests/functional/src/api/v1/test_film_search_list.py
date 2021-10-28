@@ -19,8 +19,8 @@ def film_title():
 
 @pytest.fixture
 async def mocked_es_film_search_valid_response(monkeypatch):
-    monkeypatch.setattr(FilmsService, "_request_elastic", AsyncMock())
-    main.FilmsService._request_elastic.return_value = LIST_FILMS_SEARCH_ES_RESPONSE  # noqa
+    monkeypatch.setattr(FilmsService, "_execute", AsyncMock())
+    main.FilmsService._execute.return_value = LIST_FILMS_SEARCH_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio

@@ -4,18 +4,12 @@ from typing import Optional
 from aiocache import cached
 
 from app.cache import CACHE_CONFIG
-from app.elastic import IndexNameEnum
-from app.services.base import (
-    BaseService,
-    MethodEnum,
-)
+from app.services.base import ElasticsearchService
 from app.services.films.schemas import (
     InputFilmSchema,
     InputListFilmSchema,
 )
 from app.services.schemas import (
-    DocSchema,
-    ResponseSchema,
     MultiMatchSchema,
     MatchSchema,
     FilterSchema,
@@ -30,13 +24,11 @@ from app.services.schemas import (
 logger = getLogger(__name__)
 
 
-class FilmsService(BaseService):
+class FilmsService(ElasticsearchService):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
-        response = await self._request_elastic(
-            method=MethodEnum.get.value, index=IndexNameEnum.movies.value, id=film_id
-        )
-        return InputFilmSchema(**DocSchema(**response).source)
+        doc = await self.filter(id=film_id)
+        return InputFilmSchema(**doc.source)
 
     @cached(**CACHE_CONFIG)
     async def get_all(
@@ -48,8 +40,11 @@ class FilmsService(BaseService):
         person_id: Optional[str] = None,
         sort: Optional[str] = None,
     ) -> InputListFilmSchema:
-        return await self._search(
-            page, size, genre_id=genre_id, person_id=person_id, sort=sort
+        q = self.get_query(genre_id=genre_id, person_id=person_id, sort=sort)
+        docs = await self.all(from_=page, size=size, body=q)
+
+        return InputListFilmSchema(
+            __root__=[InputFilmSchema(**doc.source) for doc in docs]
         )
 
     async def search_by_query(
@@ -59,32 +54,11 @@ class FilmsService(BaseService):
         *,
         query: Optional[str] = None,
     ) -> InputListFilmSchema:
-        return await self._search(page, size, query=query)
-
-    async def _search(
-        self,
-        page: int,
-        size: int,
-        *,
-        query: Optional[str] = None,
-        genre_id: Optional[str] = None,
-        person_id: Optional[str] = None,
-        sort: Optional[str] = None,
-    ) -> InputListFilmSchema:
-        q = self.get_query(query, genre_id, person_id, sort)
-
-        response = await self._request_elastic(
-            method=MethodEnum.search.value,
-            index=IndexNameEnum.movies.value,
-            body=q,
-            from_=page,
-            size=size,
-        )
-
-        result = ResponseSchema(**response)
+        q = self.get_query(query=query)
+        docs = await self.all(from_=page, size=size, body=q)
 
         return InputListFilmSchema(
-            __root__=[InputFilmSchema(**doc.source) for doc in result.hits.hits]
+            __root__=[InputFilmSchema(**doc.source) for doc in docs]
         )
 
     def get_query(

@@ -14,8 +14,8 @@ from tests.functional.testdata.api_genres import (
 
 @pytest.fixture
 async def mocked_es_genre_valid_response(monkeypatch):
-    monkeypatch.setattr(GenreService, "_request_elastic", AsyncMock())
-    main.GenreService._request_elastic.return_value = GENRE_LIST_ES_RESPONSE
+    monkeypatch.setattr(GenreService, "_execute", AsyncMock())
+    main.GenreService._execute.return_value = GENRE_LIST_ES_RESPONSE
 
 
 @pytest.mark.asyncio
@@ -41,7 +41,7 @@ async def test_genre_list__cached_result(
         for idx, result_item in enumerate(response.json()):
             assert result_item == EXPECTED_GENRE_LIST_RESPONSE[idx]
 
-    assert main.GenreService._request_elastic.call_count == 1
+    assert main.GenreService._execute.call_count == 1
 
 
 @pytest.mark.asyncio

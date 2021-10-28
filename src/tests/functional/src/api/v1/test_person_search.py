@@ -20,8 +20,8 @@ def person_name():
 
 @pytest.fixture
 async def mocked_es_person_valid_response(monkeypatch):
-    monkeypatch.setattr(PersonService, "_request_elastic", AsyncMock())
-    main.PersonService._request_elastic.return_value = PERSON_LIST_ES_RESPONSE  # noqa
+    monkeypatch.setattr(PersonService, "_execute", AsyncMock())
+    main.PersonService._execute.return_value = PERSON_LIST_ES_RESPONSE  # noqa
 
 
 @pytest.mark.asyncio
