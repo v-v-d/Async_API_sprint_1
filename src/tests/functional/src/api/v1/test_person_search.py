@@ -33,21 +33,6 @@ async def test_search_person__ok(client, v1_search_persons_url, mocked_es_person
 
 
 @pytest.mark.asyncio
-async def test_search_person__cached_result(
-        client, v1_search_persons_url, mocked_es_person_valid_response
-):
-    method_call_count = 1
-
-    for _ in range(method_call_count):
-        response = await client.get(path=v1_search_persons_url, query_string={"query": person_name})
-
-        assert response.status_code == status.HTTP_200_OK
-        assert response.json() == EXPECTED_PERSON_LIST_RESPONSE
-
-    assert main.PersonService._request_elastic.call_count == 1
-
-
-@pytest.mark.asyncio
 async def test_person_details__bad_es_response(
         client, v1_search_persons_url, mocked_es_invalid_response
 ):
