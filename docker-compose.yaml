@@ -19,6 +19,7 @@ services:
     container_name: api-app
     build:
       context: .
+      target: prod
     expose:
       - "8088"
     depends_on:
