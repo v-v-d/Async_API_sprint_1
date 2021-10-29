@@ -7,10 +7,11 @@ from fastapi import status
 
 from app.services.genres import main
 from app.services.genres.main import GenreService
-from tests.functional.testdata.api_genres import (
-    GENRE_DETAILS_ES_RESPONSE,
-    EXPECTED_GENRE_DETAILS_RESPONSE,
-)
+
+
+@pytest.fixture
+def expected(load_fixture):
+    return load_fixture("genre_api_details.json")
 
 
 @pytest.fixture
@@ -24,22 +25,25 @@ async def genre_details_url(v1_genres_url, genre_id):
 
 
 @pytest.fixture
-async def mocked_es_genre_valid_response(monkeypatch):
-    monkeypatch.setattr(GenreService, "_execute", AsyncMock())
-    main.GenreService._execute.return_value = GENRE_DETAILS_ES_RESPONSE  # noqa
+async def mocked_es_genre_valid_response(monkeypatch, load_fixture):
+    monkeypatch.setattr(GenreService, "_execute", AsyncMock(spec=GenreService))
+    mocked_data = load_fixture("genre_details.json")
+    main.GenreService._execute.return_value = mocked_data  # noqa
 
 
 @pytest.mark.asyncio
-async def test_genres_details__ok(client, genre_details_url, mocked_es_genre_valid_response):
+async def test_genres_details__ok(
+    client, genre_details_url, mocked_es_genre_valid_response, expected
+):
     response = await client.get(path=genre_details_url)
 
     assert response.status_code == status.HTTP_200_OK
-    assert response.json() == EXPECTED_GENRE_DETAILS_RESPONSE
+    assert response.json() == expected
 
 
 @pytest.mark.asyncio
 async def test_genre_details__cached_result(
-        client, genre_details_url, mocked_es_genre_valid_response
+    client, genre_details_url, mocked_es_genre_valid_response, expected
 ):
     method_call_count = 2
 
@@ -47,14 +51,14 @@ async def test_genre_details__cached_result(
         response = await client.get(path=genre_details_url)
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == EXPECTED_GENRE_DETAILS_RESPONSE
+        assert response.json() == expected
 
     assert main.GenreService._execute.call_count == 1
 
 
 @pytest.mark.asyncio
 async def test_genre_details__bad_es_response(
-        client, genre_details_url, mocked_es_invalid_response
+    client, genre_details_url, mocked_es_invalid_response
 ):
     with pytest.raises(pydantic.ValidationError):
         await client.get(path=genre_details_url)
@@ -62,7 +66,7 @@ async def test_genre_details__bad_es_response(
 
 @pytest.mark.asyncio
 async def test_genre_details__es_error(
-        client, genre_details_url, mocked_es_unexpected_exception
+    client, genre_details_url, mocked_es_unexpected_exception
 ):
     response = await client.get(path=genre_details_url)
     assert response.status_code == status.HTTP_424_FAILED_DEPENDENCY
@@ -70,7 +74,7 @@ async def test_genre_details__es_error(
 
 @pytest.mark.asyncio
 async def test_genre_details__not_found(
-        client, genre_details_url, mocked_es_not_found_error
+    client, genre_details_url, mocked_es_not_found_error
 ):
     response = await client.get(path=genre_details_url)
     assert response.status_code == status.HTTP_404_NOT_FOUND

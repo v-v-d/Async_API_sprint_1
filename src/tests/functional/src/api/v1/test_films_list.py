@@ -6,41 +6,49 @@ from fastapi import status
 
 from app.services.films import main
 from app.services.films.main import FilmsService
-from tests.functional.testdata.api_films import (
-    LIST_FILMS_ES_RESPONSE,
-    EXPECTED_LIST_FILMS_RESPONSE,
-)
 
 
 @pytest.fixture
-def valid_sort_asc_query(monkeypatch):
+def expected(load_fixture):
+    return load_fixture("film_api_list.json")
+
+
+@pytest.fixture
+def valid_sort_asc_query():
     return "rating"
 
 
 @pytest.fixture
-def valid_sort_desc_query(monkeypatch):
+def valid_sort_desc_query():
     return "-rating"
 
 
 @pytest.fixture
-def invalid_sort_query(monkeypatch):
+def invalid_sort_query():
     return "invalid"
 
 
 @pytest.fixture
-async def mocked_es_valid_response(monkeypatch):
-    monkeypatch.setattr(FilmsService, "_execute", AsyncMock())
-    main.FilmsService._execute.return_value = LIST_FILMS_ES_RESPONSE  # noqa
+async def mocked_es_valid_response(monkeypatch, load_fixture):
+    monkeypatch.setattr(FilmsService, "_execute", AsyncMock(spec=FilmsService))
+    mocked_data = load_fixture("films_list.json")
+    main.FilmsService._execute.return_value = mocked_data  # noqa
 
 
 @pytest.mark.asyncio
-async def test_films_list_ok__default(client, v1_films_url, mocked_es_valid_response):
+async def test_films_list_ok__default(
+    client, v1_films_url, mocked_es_valid_response, expected, load_fixture
+):
     response = await client.get(path=v1_films_url)
 
     assert response.status_code == status.HTTP_200_OK
 
-    for idx, result_item in enumerate(response.json()):
-        assert result_item == EXPECTED_LIST_FILMS_RESPONSE[idx]
+    result = response.json()
+
+    assert len(result) == len(expected)
+
+    for idx, result_item in enumerate(result):
+        assert result_item == expected[idx]
 
 
 @pytest.mark.asyncio
@@ -75,7 +83,7 @@ async def test_films_list__invalid_sort_query(
 
 @pytest.mark.asyncio
 async def test_films_list__cached_result(
-    client, v1_films_url, mocked_es_valid_response
+    client, v1_films_url, mocked_es_valid_response, expected
 ):
     method_call_count = 2
 
@@ -83,8 +91,12 @@ async def test_films_list__cached_result(
         response = await client.get(path=v1_films_url)
         assert response.status_code == status.HTTP_200_OK
 
-        for idx, result_item in enumerate(response.json()):
-            assert result_item == EXPECTED_LIST_FILMS_RESPONSE[idx]
+        result = response.json()
+
+        assert len(result) == len(expected)
+
+        for idx, result_item in enumerate(result):
+            assert result_item == expected[idx]
 
     assert main.FilmsService._execute.call_count == 1
 

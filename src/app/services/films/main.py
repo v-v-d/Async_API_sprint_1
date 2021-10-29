@@ -4,7 +4,7 @@ from typing import Optional
 from aiocache import cached
 
 from app.cache import CACHE_CONFIG
-from app.services.base import ElasticsearchService
+from app.services.base import ElasticsearchService, SortingMixin
 from app.services.films.schemas import (
     InputFilmSchema,
     InputListFilmSchema,
@@ -24,7 +24,7 @@ from app.services.schemas import (
 logger = getLogger(__name__)
 
 
-class FilmsService(ElasticsearchService):
+class FilmsService(ElasticsearchService, SortingMixin):
     @cached(**CACHE_CONFIG)
     async def get_by_id(self, film_id: str) -> InputFilmSchema:
         doc = await self.filter(id=film_id)
@@ -115,14 +115,3 @@ class FilmsService(ElasticsearchService):
         sub_q.bool["must"].append(match)
 
         return FilterSchema(nested=NestedSchema(path=field_name, query=sub_q))
-
-    @staticmethod
-    def _get_sorting_field(sort: str) -> Optional[str]:
-        return sort.removeprefix("-")
-
-    @staticmethod
-    def _get_sorting_type(sort: str) -> str:
-        if sort.startswith("-"):
-            return "desc"
-
-        return "asc"

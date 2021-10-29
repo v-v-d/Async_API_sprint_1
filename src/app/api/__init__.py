@@ -1,7 +1,6 @@
-from app.api import v1
 from fastapi import APIRouter, Depends, status
 
-from app.api import docs
+from app.api import v1, docs
 from app.api.schemas import ErrorSchema
 from app.utils import verify_credentials
 
