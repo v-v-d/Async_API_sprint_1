@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 from logging import getLogger
-from typing import Any, Union
+from typing import Any, Union, Optional
 
 import backoff
 import elasticsearch
@@ -81,7 +81,7 @@ class ElasticsearchService(AbstractService):
         method = getattr(self.elastic, method, None)
 
         if not method:
-            raise MethodNotAllowed("Method %s not allowed.", method)
+            raise MethodNotAllowed(f"Method {method} not allowed.")
 
         try:
             return await method(index=self.index, *args, **kwargs)
@@ -92,3 +92,16 @@ class ElasticsearchService(AbstractService):
         except Exception as err:
             logger.exception("Request to elasticsearch failed!")
             raise BaseServiceError from err
+
+
+class SortingMixin:
+    @staticmethod
+    def _get_sorting_field(sort: str) -> Optional[str]:
+        return sort.removeprefix("-")
+
+    @staticmethod
+    def _get_sorting_type(sort: str) -> str:
+        if sort.startswith("-"):
+            return "desc"
+
+        return "asc"

@@ -1,15 +1,18 @@
 import asyncio
-from unittest.mock import MagicMock
+from pathlib import Path
 
 import aiocache
 import pytest
 from async_asgi_testclient import TestClient
+from orjson import orjson
 
 from app.elastic import get_elastic
 from app.main import app
 from app.settings import settings
 
 assert settings.TESTING, "You must set TESTING=True env for run the tests."
+
+TEST_CONTAINER_SRC_DIR_PATH = Path("/code/tests/functional/testdata/elastic_src")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -22,7 +25,16 @@ def event_loop():
 
 @pytest.fixture(scope="session", autouse=True)
 async def mocked_es():
-    app.dependency_overrides[get_elastic] = lambda: MagicMock
+    app.dependency_overrides[get_elastic] = lambda: None
+
+
+@pytest.fixture
+def load_fixture():
+    def load(filename):
+        with open(TEST_CONTAINER_SRC_DIR_PATH / filename, encoding="utf-8") as f:
+            return orjson.loads(f.read())
+
+    return load
 
 
 @pytest.fixture

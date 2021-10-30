@@ -7,10 +7,11 @@ from fastapi import status
 
 from app.services.persons import main
 from app.services.persons.main import PersonService
-from tests.functional.testdata.api_persons import (
-    PERSON_DETAILS_ES_RESPONSE,
-    EXPECTED_PERSON_DETAILS_RESPONSE,
-)
+
+
+@pytest.fixture
+def expected(load_fixture):
+    return load_fixture("person_api_details.json")
 
 
 @pytest.fixture
@@ -24,22 +25,25 @@ async def person_details_url(v1_persons_url, person_id):
 
 
 @pytest.fixture
-async def mocked_es_person_valid_response(monkeypatch):
-    monkeypatch.setattr(PersonService, "_execute", AsyncMock())
-    main.PersonService._execute.return_value = PERSON_DETAILS_ES_RESPONSE  # noqa
+async def mocked_es_person_valid_response(monkeypatch, load_fixture):
+    monkeypatch.setattr(PersonService, "_execute", AsyncMock(spec=PersonService))
+    mocked_data = load_fixture("person_details.json")
+    main.PersonService._execute.return_value = mocked_data  # noqa
 
 
 @pytest.mark.asyncio
-async def test_person_details__ok(client, person_details_url, mocked_es_person_valid_response):
+async def test_person_details__ok(
+    client, person_details_url, mocked_es_person_valid_response, expected
+):
     response = await client.get(path=person_details_url)
 
     assert response.status_code == status.HTTP_200_OK
-    assert response.json() == EXPECTED_PERSON_DETAILS_RESPONSE
+    assert response.json() == expected
 
 
 @pytest.mark.asyncio
 async def test_person_details__cached_result(
-        client, person_details_url, mocked_es_person_valid_response
+    client, person_details_url, mocked_es_person_valid_response, expected
 ):
     method_call_count = 2
 
@@ -47,14 +51,14 @@ async def test_person_details__cached_result(
         response = await client.get(path=person_details_url)
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == EXPECTED_PERSON_DETAILS_RESPONSE
+        assert response.json() == expected
 
     assert main.PersonService._execute.call_count == 1
 
 
 @pytest.mark.asyncio
 async def test_person_details__bad_es_response(
-        client, person_details_url, mocked_es_invalid_response
+    client, person_details_url, mocked_es_invalid_response
 ):
     with pytest.raises(pydantic.ValidationError):
         await client.get(path=person_details_url)
@@ -62,7 +66,7 @@ async def test_person_details__bad_es_response(
 
 @pytest.mark.asyncio
 async def test_person_details__es_error(
-        client, person_details_url, mocked_es_unexpected_exception
+    client, person_details_url, mocked_es_unexpected_exception
 ):
     response = await client.get(path=person_details_url)
     assert response.status_code == status.HTTP_424_FAILED_DEPENDENCY
@@ -70,7 +74,7 @@ async def test_person_details__es_error(
 
 @pytest.mark.asyncio
 async def test_person_details__not_found(
-        client, person_details_url, mocked_es_not_found_error
+    client, person_details_url, mocked_es_not_found_error
 ):
     response = await client.get(path=person_details_url)
     assert response.status_code == status.HTTP_404_NOT_FOUND

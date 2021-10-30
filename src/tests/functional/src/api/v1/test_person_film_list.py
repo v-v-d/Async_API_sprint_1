@@ -7,10 +7,11 @@ from fastapi import status
 
 from app.services.films import main
 from app.services.films.main import FilmsService
-from tests.functional.testdata.api_persons import (
-    PERSON_FILM_LIST_ES_RESPONSE,
-    EXPECTED_PERSON_FILM_LIST_RESPONSE,
-)
+
+
+@pytest.fixture
+def expected(load_fixture):
+    return load_fixture("person_film_api_list.json")
 
 
 @pytest.fixture
@@ -24,37 +25,52 @@ async def person_film_list_url(v1_persons_url, person_id):
 
 
 @pytest.fixture
-async def mocked_es_person_film_valid_response(monkeypatch):
-    monkeypatch.setattr(FilmsService, "_execute", AsyncMock())
-    main.FilmsService._execute.return_value = PERSON_FILM_LIST_ES_RESPONSE  # noqa
+async def mocked_es_person_film_valid_response(monkeypatch, load_fixture):
+    monkeypatch.setattr(FilmsService, "_execute", AsyncMock(spec=FilmsService))
+    mocked_data = load_fixture("person_film_list.json")
+    main.FilmsService._execute.return_value = mocked_data  # noqa
 
 
 @pytest.mark.asyncio
-async def test_person_film__ok(client, person_film_list_url, mocked_es_person_film_valid_response):
-    response = await client.get(path=person_film_list_url, query_string={"query": person_id})
+async def test_person_film__ok(
+    client, person_film_list_url, mocked_es_person_film_valid_response, expected
+):
+    response = await client.get(
+        path=person_film_list_url, query_string={"query": person_id}
+    )
 
     assert response.status_code == status.HTTP_200_OK
-    assert response.json() == EXPECTED_PERSON_FILM_LIST_RESPONSE
+
+    result = response.json()
+
+    assert len(result) == len(expected)
+    assert result == expected
 
 
 @pytest.mark.asyncio
 async def test_person_film__cached_result(
-        client, person_film_list_url, mocked_es_person_film_valid_response
+    client, person_film_list_url, mocked_es_person_film_valid_response, expected
 ):
     method_call_count = 2
 
     for _ in range(method_call_count):
-        response = await client.get(path=person_film_list_url, query_string={"query": person_id})
+        response = await client.get(
+            path=person_film_list_url, query_string={"query": person_id}
+        )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.json() == EXPECTED_PERSON_FILM_LIST_RESPONSE
+
+        result = response.json()
+
+        assert len(result) == len(expected)
+        assert result == expected
 
     assert main.FilmsService._execute.call_count == 1
 
 
 @pytest.mark.asyncio
 async def test_person_film__bad_es_response(
-        client, person_film_list_url, mocked_es_invalid_response
+    client, person_film_list_url, mocked_es_invalid_response
 ):
     with pytest.raises(pydantic.ValidationError):
         await client.get(path=person_film_list_url, query_string={"query": person_id})
@@ -62,8 +78,9 @@ async def test_person_film__bad_es_response(
 
 @pytest.mark.asyncio
 async def test_person_film__es_error(
-        client, person_film_list_url, mocked_es_unexpected_exception
+    client, person_film_list_url, mocked_es_unexpected_exception
 ):
-    response = await client.get(path=person_film_list_url, query_string={"query": person_id})
+    response = await client.get(
+        path=person_film_list_url, query_string={"query": person_id}
+    )
     assert response.status_code == status.HTTP_424_FAILED_DEPENDENCY
-
