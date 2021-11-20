@@ -1,0 +1,25 @@
+name: requiremnts sort
+on: [pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install sort-requirements
+        run: pip install sort-requirements
+      - name: Run sort-requirements --check ./requirements/base.txt ./requirements/dev.txt ./requirements/prod.txt ./src/tests/functional/requirements.txt
+        run: sort-requirements --check ./requirements/base.txt ./requirements/dev.txt ./requirements/prod.txt ./src/tests/functional/requirements.txt
+      - name: If needed, commit sort-requirements changes to the pull request
+        if: failure()
+        run: |
+          sort-requirements ./requirements/base.txt ./requirements/dev.txt ./requirements/prod.txt ./src/tests/functional/requirements.txt
+          git config --global user.name 'v-v-d'
+          git config --global user.email 'v-v-d@bk.ru'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "fixup: requirements.txt sorted"
+          git push
