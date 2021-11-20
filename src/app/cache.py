@@ -5,7 +5,7 @@ from aiocache.serializers import BaseSerializer
 from app.settings import settings
 
 
-class JsonPickleSerializer(BaseSerializer):
+class JsonPickleSerializer(BaseSerializer):  # pragma: no cover
     def dumps(self, value):
         return jsonpickle.encode(value)
 
