@@ -34,7 +34,7 @@ class MethodEnum(str, Enum):
     search = "search"
 
 
-class AbstractService(ABC):
+class AbstractService(ABC):  # pragma: no cover
     @abstractmethod
     async def filter(self, value: Any, *args, **kwargs):
         pass
