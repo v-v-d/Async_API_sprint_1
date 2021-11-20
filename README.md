@@ -1,4 +1,6 @@
-[![Build Status](https://app.travis-ci.com/v-v-d/Async_API_sprint_1.svg?branch=main)](https://app.travis-ci.com/v-v-d/Async_API_sprint_1)
+![tests](https://github.com/v-v-d/Async_API_sprint_1/actions/workflows/tests.yml/badge.svg)
+[![codecov](https://codecov.io/gh/v-v-d/Async_API_sprint_1/branch/main/graph/badge.svg?token=Q8NOGB813N)](https://codecov.io/gh/v-v-d/Async_API_sprint_1)
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 
 # API для кинотеатра
 
