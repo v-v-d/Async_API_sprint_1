@@ -44,9 +44,7 @@ async def mocked_es_valid_subscription_response(monkeypatch, load_fixture):
 
 @pytest.fixture
 def invalid_jwt_token():
-    token = jwt.encode(
-        {}, "invalid_secret_key", algorithm=settings.AUTH.ALGORITHM
-    )
+    token = jwt.encode({}, "invalid_secret_key", algorithm=settings.AUTH.ALGORITHM)
     app.dependency_overrides[oauth2_scheme] = lambda: token
 
 
@@ -70,9 +68,7 @@ async def test_film_details_ok(
 
 
 @pytest.mark.asyncio
-async def test_film_details_invalid_jwt(
-    client, invalid_jwt_token, film_details_url
-):
+async def test_film_details_invalid_jwt(client, invalid_jwt_token, film_details_url):
     response = await client.get(path=film_details_url)
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
