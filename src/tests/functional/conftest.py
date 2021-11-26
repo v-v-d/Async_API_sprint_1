@@ -4,8 +4,10 @@ from pathlib import Path
 import aiocache
 import pytest
 from async_asgi_testclient import TestClient
+from jose import jwt
 from orjson import orjson
 
+from app.dependencies.auth import oauth2_scheme
 from app.elastic import get_elastic
 from app.main import app
 from app.settings import settings
@@ -35,6 +37,18 @@ def load_fixture():
             return orjson.loads(f.read())
 
     return load
+
+
+@pytest.fixture(autouse=True)
+def default_jwt_token():
+    payload = {
+        "is_admin": False,
+        "roles": [],
+    }
+    token = jwt.encode(
+        payload, settings.AUTH.SECRET_KEY, algorithm=settings.AUTH.ALGORITHM
+    )
+    app.dependency_overrides[oauth2_scheme] = lambda: token
 
 
 @pytest.fixture

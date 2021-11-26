@@ -6,9 +6,14 @@
 
 Точка входа для всех клиентов.
 
-- Репозиторий для сервиса API: https://github.com/v-v-d/Async_API_sprint_1
-- Репозиторий для сервиса ETL: https://github.com/v-v-d/ETL
+## Ресурсы
 - Доска: https://github.com/users/v-v-d/projects/3
+
+Репозитории:
+- сервис Auth API: https://github.com/v-v-d/Auth_sprint_1
+- сервис API: https://github.com/v-v-d/Async_API_sprint_1
+- сервис ETL: https://github.com/v-v-d/ETL
+- сервис Admin panel: https://github.com/v-v-d/Admin_panel_sprint_1
 
 
 ### Основные сущности
@@ -35,15 +40,15 @@
 ## Запуск
 1. Создать общую сеть для всех проектов практикума, чтобы была связь между всеми контейнерами курса
 ```shell
-sudo docker network create yandex
+docker network create yandex
 ```
 2. Собрать и запустить проект ETL https://github.com/v-v-d/ETL
 ```shell
-sudo docker-compose up --build
+docker-compose up --build
 ```
 3. Очистить данные по последним выгрузкам:
 ```shell
-sudo docker exec -it etl-redis redis-cli
+docker exec -it etl-redis redis-cli
 ```
 и в командной оболочке выполнить очистку хранилища
 ```shell
@@ -51,16 +56,16 @@ sudo docker exec -it etl-redis redis-cli
 ```
 4. Наполнить индексы эластика данными
 ```shell
-sudo docker exec -it srv-etl python manage.py start-etl
+docker exec -it srv-etl python manage.py start-etl
 ```
 5. Собрать и запустить текущий проект
 ```shell
-sudo docker-compose up --build
+docker-compose up --build
 ```
 6. Перейти к документации по адресу 0.0.0.0/api/docs. Дока закрыта бэйсик авторизацией.
 
 ## Тестирование
 Собрать тестовое окружение и запустить тесты
 ```shell
-sudo docker-compose -f docker-compose.test.yaml up --build
+docker-compose -f docker-compose.test.yaml up --build
 ```

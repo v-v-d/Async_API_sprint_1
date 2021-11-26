@@ -20,6 +20,7 @@ class OutputFilmSchema(ORJSONModel):
     actors_names: list[str]
     writers_names: list[str]
     directors_names: list[str]
+    subscription_required: bool
 
 
 class OutputGenreSchema(ORJSONModel):

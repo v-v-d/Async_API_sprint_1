@@ -69,6 +69,14 @@ class BackoffSettings(BaseSettings):
         env_prefix = "BACKOFF_"
 
 
+class AuthSettings(BaseSettings):
+    SECRET_KEY: str = "super-secret"
+    ALGORITHM: str = "HS256"
+
+    class Config:
+        env_prefix = "AUTH_"
+
+
 class CommonSettings(BaseSettings):
     PROJECT_NAME: str = "movies"
     OPENAPI_URL: str = "/api/openapi.json"
@@ -88,3 +96,4 @@ class CommonSettings(BaseSettings):
     CACHE: CacheSettings = CacheSettings()
     ES: ElasticSearchSettings = ElasticSearchSettings()
     BACKOFF: BackoffSettings = BackoffSettings()
+    AUTH: AuthSettings = AuthSettings()

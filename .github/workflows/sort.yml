@@ -1,4 +1,4 @@
-name: requiremnts sort
+name: requirements sort
 on: [pull_request]
 jobs:
   build:

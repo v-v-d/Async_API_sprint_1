@@ -1,6 +1,6 @@
 from typing import Optional
 
-from app.services.schemas import ORJSONModel
+from app.services.schemas import ORJSONModel, BaseListRootModel
 
 
 class InputItemSchema(ORJSONModel):
@@ -20,13 +20,8 @@ class InputFilmSchema(ORJSONModel):
     actors_names: list[str]
     writers_names: list[str]
     directors_names: list[str]
+    subscription_required: bool
 
 
-class InputListFilmSchema(ORJSONModel):
+class InputListFilmSchema(BaseListRootModel):
     __root__: list[InputFilmSchema]
-
-    def __iter__(self):
-        return self.__root__.__iter__()
-
-    def __getitem__(self, item):
-        return self.__root__.__getitem__(item)

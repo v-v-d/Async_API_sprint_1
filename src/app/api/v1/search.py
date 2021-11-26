@@ -4,9 +4,10 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from app.api.v1.schemas import OutputFilmSchema, OutputPersonSchema
 from app.dependencies.api import DefaultParamsSchema, get_default_query_params
+from app.dependencies.auth import check_for_subscription
 from app.dependencies.films import get_film_service
 from app.dependencies.persons import get_persons_service
-from app.services.base import BaseServiceError, NotFoundError
+from app.services.base import BaseServiceError
 from app.services.films.main import FilmsService
 from app.services.persons.main import PersonService
 
@@ -18,10 +19,14 @@ async def films_search(
     query: str,
     default: DefaultParamsSchema = Depends(get_default_query_params),
     film_service: FilmsService = Depends(get_film_service),
+    is_subscriber: bool = Depends(check_for_subscription),
 ) -> list[OutputFilmSchema]:
     try:
         films = await film_service.search_by_query(
-            default.page, default.size, query=query
+            default.page,
+            default.size,
+            query=query,
+            is_subscriber=is_subscriber,
         )
     except BaseServiceError:
         raise HTTPException(
