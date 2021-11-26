@@ -1,4 +1,4 @@
-from app.services.schemas import ORJSONModel
+from app.services.schemas import ORJSONModel, BaseListRootModel
 
 
 class InputGenreSchema(ORJSONModel):
@@ -7,11 +7,5 @@ class InputGenreSchema(ORJSONModel):
     description: str
 
 
-class InputListGenreSchema(ORJSONModel):
+class InputListGenreSchema(BaseListRootModel):
     __root__: list[InputGenreSchema]
-
-    def __iter__(self):
-        return self.__root__.__iter__()
-
-    def __getitem__(self, item):
-        return self.__root__.__getitem__(item)

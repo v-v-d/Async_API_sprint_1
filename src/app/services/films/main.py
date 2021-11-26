@@ -19,16 +19,26 @@ from app.services.schemas import (
     RootQuerySchema,
     BoolSchema,
     MultiMatchQuerySchema,
+    TermSchema,
 )
 
 logger = getLogger(__name__)
 
 
+class FilmSubscriptionError(Exception):
+    pass
+
+
 class FilmsService(ElasticsearchService, SortingMixin):
     @cached(**CACHE_CONFIG)
-    async def get_by_id(self, film_id: str) -> InputFilmSchema:
+    async def get_by_id(self, film_id: str, is_subscriber: bool) -> InputFilmSchema:
         doc = await self.filter(id=film_id)
-        return InputFilmSchema(**doc.source)
+        film = InputFilmSchema(**doc.source)
+
+        if film.subscription_required and not is_subscriber:
+            raise FilmSubscriptionError
+
+        return film
 
     @cached(**CACHE_CONFIG)
     async def get_all(
@@ -39,8 +49,14 @@ class FilmsService(ElasticsearchService, SortingMixin):
         genre_id: Optional[str] = None,
         person_id: Optional[str] = None,
         sort: Optional[str] = None,
+        is_subscriber: bool,
     ) -> InputListFilmSchema:
-        q = self.get_query(genre_id=genre_id, person_id=person_id, sort=sort)
+        q = self.get_query(
+            genre_id=genre_id,
+            person_id=person_id,
+            sort=sort,
+            is_subscriber=is_subscriber,
+        )
         docs = await self.all(from_=page, size=size, body=q)
 
         return InputListFilmSchema(
@@ -53,8 +69,12 @@ class FilmsService(ElasticsearchService, SortingMixin):
         size: int,
         *,
         query: Optional[str] = None,
+        is_subscriber: bool,
     ) -> InputListFilmSchema:
-        q = self.get_query(query=query)
+        q = self.get_query(
+            query=query,
+            is_subscriber=is_subscriber,
+        )
         docs = await self.all(from_=page, size=size, body=q)
 
         return InputListFilmSchema(
@@ -67,12 +87,15 @@ class FilmsService(ElasticsearchService, SortingMixin):
         genre_id: Optional[str] = None,
         person_id: Optional[str] = None,
         sort: Optional[str] = None,
+        is_subscriber: bool = False,
     ) -> str:
         """Query management imitation."""
         q = RootQuerySchema(__root__={"query": BoolSchema(bool={})})
+        q.__root__["query"].bool["must"] = []
 
-        if query or genre_id or person_id:
-            q.__root__["query"].bool["must"] = []
+        if not is_subscriber:
+            subscription_q = TermSchema(term={"subscription_required": False})
+            q.__root__["query"].bool["must"].append(subscription_q)
 
         if query:
             mm_q = MultiMatchSchema(

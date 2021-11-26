@@ -39,7 +39,8 @@
           "writers": [],
           "actors_names": [],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -89,7 +90,8 @@
             "Lori Alan"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -162,7 +164,8 @@
           ],
           "directors_names": [
             "Stephen Vitale"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -219,7 +222,8 @@
           "writers_names": [
             "M. David Melvin"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -282,7 +286,8 @@
             "Mark Critch",
             "Tim McAuliffe"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -339,7 +344,8 @@
           "writers_names": [],
           "directors_names": [
             "Leslie Small"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -399,7 +405,8 @@
           ],
           "directors_names": [
             "Jason Boritz"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -486,7 +493,8 @@
             "Dave Filoni",
             "Simon Kinberg"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -575,7 +583,8 @@
             "Kirsten Beyer",
             "Michael Chabon"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -633,7 +642,8 @@
           "directors_names": [
             "Glen Milner",
             "Ian Bucknole(co-director)"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -679,7 +689,8 @@
             "Simone Lahbib"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -744,7 +755,8 @@
           ],
           "directors_names": [
             "Alecs Nastoiu"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -790,7 +802,8 @@
             "Michael Stahl-David"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -893,7 +906,8 @@
           ],
           "directors_names": [
             "David Scott"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -966,7 +980,8 @@
           "directors_names": [
             "Andrew Iverson",
             "Henrik Markarian"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1044,7 +1059,8 @@
           ],
           "directors_names": [
             "Daniel Lee"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1113,7 +1129,8 @@
           ],
           "directors_names": [
             "Hugh Munro Neely"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1181,7 +1198,8 @@
           ],
           "directors_names": [
             "Daron Stinnett"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1254,7 +1272,8 @@
           ],
           "directors_names": [
             "Don Bitters III"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1299,7 +1318,8 @@
           ],
           "directors_names": [
             "Hamish Hamilton"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1339,7 +1359,8 @@
             "Robert Elms"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -1416,7 +1437,8 @@
           "writers_names": [
             "Hajime Yatate"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -1485,7 +1507,8 @@
           ],
           "directors_names": [
             "Alberto Lecchi"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1558,7 +1581,8 @@
           ],
           "directors_names": [
             "Saygi Uygur"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1589,7 +1613,8 @@
             "Rolf Harris"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -1635,7 +1660,8 @@
             "Lee Dr. Nelson"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -1703,7 +1729,8 @@
           ],
           "directors_names": [
             "Damien Valentine"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1757,7 +1784,8 @@
           ],
           "directors_names": [
             "Mickey Duzyj"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1821,7 +1849,8 @@
           ],
           "directors_names": [
             "Fabienne Gschwind"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1867,7 +1896,8 @@
             "Vince McMahon"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -1937,7 +1967,8 @@
           ],
           "directors_names": [
             "Martin Fric"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2001,7 +2032,8 @@
           ],
           "directors_names": [
             "Danny Buday"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2066,7 +2098,8 @@
           "writers_names": [
             "Gene Roddenberry"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2139,7 +2172,8 @@
           "directors_names": [
             "Bill Tytla",
             "George Germanetti"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2174,7 +2208,8 @@
             "Dragan Petric"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2235,7 +2270,8 @@
           "writers_names": [
             "Daniel Greenberg"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2317,7 +2353,8 @@
           ],
           "directors_names": [
             "Justin Lin"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2395,7 +2432,8 @@
           ],
           "directors_names": [
             "Bob Clark"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2464,7 +2502,8 @@
           ],
           "directors_names": [
             "Arthur Lubin"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2505,7 +2544,8 @@
             "Malese Jow"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2578,7 +2618,8 @@
           ],
           "directors_names": [
             "Ray Taylor"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2646,7 +2687,8 @@
           ],
           "directors_names": [
             "Howard Bretherton"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2712,7 +2754,8 @@
           ],
           "directors_names": [
             "Takao Miyoshi"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2766,7 +2809,8 @@
             "Tommy Blacha"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2850,7 +2894,8 @@
           "directors_names": [
             "Piet De Rycker",
             "Thilo Rothkirch"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2923,7 +2968,8 @@
           "writers_names": [
             "George Lucas"
           ],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -2976,7 +3022,8 @@
           "writers_names": [],
           "directors_names": [
             "Leslie Small"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -3029,7 +3076,8 @@
           "writers_names": [],
           "directors_names": [
             "Damon Packard"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -3079,7 +3127,8 @@
             "Zvika Hadar"
           ],
           "writers_names": [],
-          "directors_names": []
+          "directors_names": [],
+          "subscription_required": false
         }
       },
       {
@@ -3131,7 +3180,8 @@
           "directors_names": [
             "Tim Drage",
             "Tony Mines"
-          ]
+          ],
+          "subscription_required": false
         }
       }
     ]

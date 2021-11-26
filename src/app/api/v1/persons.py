@@ -8,6 +8,7 @@ from app.api.v1.schemas import (
     OutputFilmSchema,
 )
 from app.dependencies.api import DefaultParamsSchema, get_default_query_params
+from app.dependencies.auth import check_for_subscription
 from app.dependencies.films import get_film_service
 from app.dependencies.persons import get_persons_service
 from app.services.base import BaseServiceError, NotFoundError
@@ -41,6 +42,7 @@ async def films_by_person_search(
     sort: Optional[str] = Query(None),
     default: DefaultParamsSchema = Depends(get_default_query_params),
     film_service: FilmsService = Depends(get_film_service),
+    is_subscriber: bool = Depends(check_for_subscription),
 ) -> list[OutputFilmSchema]:
     try:
         films = await film_service.get_all(
@@ -48,6 +50,7 @@ async def films_by_person_search(
             default.size,
             person_id=person_id,
             sort=sort,
+            is_subscriber=is_subscriber,
         )
     except BaseServiceError:
         raise HTTPException(

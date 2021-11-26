@@ -1,5 +1,5 @@
-name: requiremnts sort
-on: [pull_request]
+name: requirements sort
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest

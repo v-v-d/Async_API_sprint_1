@@ -57,7 +57,8 @@
             "Ray Allen"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -103,7 +104,8 @@
             "Mark Aguirre"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -149,7 +151,8 @@
             "Tim McCarver"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -202,7 +205,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Bill Webb"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -255,7 +259,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Bill Webb"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -301,7 +306,8 @@
             "Joe Morgan"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -354,7 +360,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Bill Webb"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -407,7 +414,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Bill Webb"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -453,7 +461,8 @@
             "Tim McCarver"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -506,7 +515,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Bill Webb"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -552,7 +562,8 @@
             "Joe Morgan"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -598,7 +609,8 @@
             "Luis Aparicio"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -644,7 +656,8 @@
             "Tim McCarver"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -690,7 +703,8 @@
             "Tim McCarver"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -736,7 +750,8 @@
             "Vin Scully"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -786,7 +801,8 @@
             "Warwick Davis"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -880,7 +896,8 @@
           ],
           "directors_names" : [
             "H. Quinn"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -940,7 +957,8 @@
           ],
           "directors_names" : [
             "Dick McDonough"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -993,7 +1011,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Leslie Small"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1053,7 +1072,8 @@
           ],
           "directors_names" : [
             "Art Spigel"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1121,7 +1141,8 @@
           ],
           "directors_names" : [
             "Jon Burton"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1181,7 +1202,8 @@
           ],
           "directors_names" : [
             "Bud Schaetzle"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1242,7 +1264,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Jean Claude Guiter"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1288,7 +1311,8 @@
             "Ted Allen"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -1376,7 +1400,8 @@
           ],
           "directors_names" : [
             "Sam Liu"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1422,7 +1447,8 @@
             "Jimmy Durante"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -1483,7 +1509,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Roy Mack"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1551,7 +1578,8 @@
           ],
           "directors_names" : [
             "Jon Burton"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1604,7 +1632,8 @@
           ],
           "directors_names" : [
             "Junji Nishimura"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1650,7 +1679,8 @@
             "Vince McMahon"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -1700,7 +1730,8 @@
             "Steve Corino"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -1753,7 +1784,8 @@
           "writers_names" : [
             "David Wild"
           ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -1853,7 +1885,8 @@
           ],
           "directors_names" : [
             "John F.D. Northover"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1914,7 +1947,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "McG"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -1964,7 +1998,8 @@
             "Penny Banner"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2005,7 +2040,8 @@
             "Phillip Schofield"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2062,7 +2098,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Leslie Small"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2130,7 +2167,8 @@
           ],
           "directors_names" : [
             "Michael Audley"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2171,7 +2209,8 @@
             "Vernon Kay"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2241,7 +2280,8 @@
           ],
           "directors_names" : [
             "Walter C. Miller"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2287,7 +2327,8 @@
             "Tom Basden"
           ],
           "writers_names" : [ ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2352,7 +2393,8 @@
           ],
           "directors_names" : [
             "Randolph Longjas"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2399,7 +2441,8 @@
           "writers_names" : [ ],
           "directors_names" : [
             "Les Landau"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2488,7 +2531,8 @@
             "Kirsten Beyer",
             "Michael Chabon"
           ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2534,7 +2578,8 @@
           ],
           "directors_names" : [
             "Arthur Davis"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2638,7 +2683,8 @@
             "Keith Malone",
             "Leland Chee"
           ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2707,7 +2753,8 @@
           ],
           "directors_names" : [
             "Louis J. Horvitz"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2767,7 +2814,8 @@
           ],
           "directors_names" : [
             "Walter C. Miller"
-          ]
+          ],
+          "subscription_required": false
         }
       },
       {
@@ -2835,7 +2883,8 @@
             "Monty Aidem",
             "Paul Keyes"
           ],
-          "directors_names" : [ ]
+          "directors_names" : [ ],
+          "subscription_required": false
         }
       },
       {
@@ -2899,7 +2948,8 @@
           ],
           "directors_names" : [
             "Dick McDonough"
-          ]
+          ],
+          "subscription_required": false
         }
       }
     ]

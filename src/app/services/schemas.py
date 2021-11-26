@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Any, Union, List
 
 import orjson
 from pydantic import BaseModel, Field
@@ -12,6 +12,16 @@ class ORJSONModel(BaseModel):
     class Config:
         json_loads = orjson.loads
         json_dumps = orjson_dumps
+
+
+class BaseListRootModel(ORJSONModel):
+    __root__: List
+
+    def __iter__(self):
+        return self.__root__.__iter__()
+
+    def __getitem__(self, item):
+        return self.__root__.__getitem__(item)
 
 
 class MultiMatchQuerySchema(ORJSONModel):
@@ -30,6 +40,10 @@ class MatchSchema(ORJSONModel):
 
 class MustSchema(ORJSONModel):
     must: list[ORJSONModel]
+
+
+class TermSchema(ORJSONModel):
+    term: dict[str, Any]
 
 
 class ShouldSchema(ORJSONModel):

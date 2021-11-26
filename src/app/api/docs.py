@@ -1,11 +1,16 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.openapi.docs import get_swagger_ui_html, get_redoc_html
 from fastapi.openapi.utils import get_openapi
 
 import app.main
 from app.settings import settings
+from app.utils import verify_credentials
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",
+    dependencies=[Depends(verify_credentials)],
+    include_in_schema=False,
+)
 
 
 @router.get("/docs")

@@ -37,7 +37,8 @@
       "Ray Allen"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "e49c02da-e7ee-4da7-bae4-538a5dc7c0f2",
@@ -77,7 +78,8 @@
       "Mark Aguirre"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "667dbe90-4648-47fc-83a9-ca7c71392a4e",
@@ -117,7 +119,8 @@
       "Tim McCarver"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "a0bdd4e7-84a0-4ec5-9dae-0d16371dc303",
@@ -164,7 +167,8 @@
     "writers_names": [],
     "directors_names": [
       "Bill Webb"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "efb73bf5-9b65-453e-a627-3435e0c11904",
@@ -211,7 +215,8 @@
     "writers_names": [],
     "directors_names": [
       "Bill Webb"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "2f2486ba-23b2-46c8-90e7-bf0680f2e482",
@@ -251,7 +256,8 @@
       "Joe Morgan"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "2c009dda-f637-4a7a-a3e2-9419ca0ad6e6",
@@ -298,7 +304,8 @@
     "writers_names": [],
     "directors_names": [
       "Bill Webb"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "80e23a27-2306-4734-9987-c76d229e8d2a",
@@ -345,7 +352,8 @@
     "writers_names": [],
     "directors_names": [
       "Bill Webb"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "97bddcae-bf97-4c4f-be11-f0d7e060c230",
@@ -385,7 +393,8 @@
       "Tim McCarver"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "a5ae834a-050e-44ac-9dae-071f41b6fe8f",
@@ -432,7 +441,8 @@
     "writers_names": [],
     "directors_names": [
       "Bill Webb"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "d2e3536d-07f7-490d-9801-e69253ab518e",
@@ -472,7 +482,8 @@
       "Joe Morgan"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "92f303c3-58f4-41bf-b5db-e00f0e6f70a7",
@@ -512,7 +523,8 @@
       "Luis Aparicio"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "63401833-6692-4d9a-aaa0-de803a92b64d",
@@ -552,7 +564,8 @@
       "Tim McCarver"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "6ab2d71d-106c-4af8-bbec-822a87f94909",
@@ -592,7 +605,8 @@
       "Tim McCarver"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "d0e7e53a-8de1-4a21-b869-4ff8fc0e846e",
@@ -632,7 +646,8 @@
       "Vin Scully"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "c604ca5d-4d07-4412-a7f6-ebb3942232b5",
@@ -676,7 +691,8 @@
       "Warwick Davis"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "3e21bf14-ae47-40f0-b71d-459ec61eb4f8",
@@ -764,7 +780,8 @@
     ],
     "directors_names": [
       "H. Quinn"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "ded3515c-3220-42f4-9ec6-0d04556229e9",
@@ -818,7 +835,8 @@
     ],
     "directors_names": [
       "Dick McDonough"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "d569ac4e-4e9f-4dcd-af3b-8267118d4664",
@@ -865,7 +883,8 @@
     "writers_names": [],
     "directors_names": [
       "Leslie Small"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "96bf7310-dbd3-4372-924d-bf920f38276d",
@@ -919,7 +938,8 @@
     ],
     "directors_names": [
       "Art Spigel"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "daae47e4-cbd0-4ffd-a150-55201b357d5b",
@@ -981,7 +1001,8 @@
     ],
     "directors_names": [
       "Jon Burton"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "2c856df1-be00-46ff-b9c7-f9e880d6f4c7",
@@ -1035,7 +1056,8 @@
     ],
     "directors_names": [
       "Bud Schaetzle"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "87c64348-61a0-4e6c-99c5-a6bd8b0bcbc3",
@@ -1090,7 +1112,8 @@
     "writers_names": [],
     "directors_names": [
       "Jean Claude Guiter"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "22cd1a60-c386-462f-b5a3-e421b354226f",
@@ -1130,7 +1153,8 @@
       "Ted Allen"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "9c7dc26a-489d-4c08-9bba-6ae9dc8117f1",
@@ -1212,7 +1236,8 @@
     ],
     "directors_names": [
       "Sam Liu"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "c11df3f1-8b6a-4899-82f1-67a1c326a4b4",
@@ -1252,7 +1277,8 @@
       "Jimmy Durante"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "1ca9a4b7-d78d-4cee-b590-c99c063bbd67",
@@ -1307,7 +1333,8 @@
     "writers_names": [],
     "directors_names": [
       "Roy Mack"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "73ecd1e6-6326-405a-b51b-69008f383b72",
@@ -1369,7 +1396,8 @@
     ],
     "directors_names": [
       "Jon Burton"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "6d6a04d9-3e89-4f66-9256-7799beca0458",
@@ -1416,7 +1444,8 @@
     ],
     "directors_names": [
       "Junji Nishimura"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "af749d09-d3cb-40f6-a01c-c49f13df35ee",
@@ -1456,7 +1485,8 @@
       "Vince McMahon"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "f7b7dc7e-d5cc-4ea2-bd66-7496b6551c61",
@@ -1500,7 +1530,8 @@
       "Steve Corino"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "f09581c8-f364-4673-836e-ef584e8ebcb7",
@@ -1547,7 +1578,8 @@
     "writers_names": [
       "David Wild"
     ],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "2b301aa8-7c13-4be7-a552-d80c14af7487",
@@ -1641,7 +1673,8 @@
     ],
     "directors_names": [
       "John F.D. Northover"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "5353633e-bd6d-4e6d-b284-918d66e5848f",
@@ -1696,7 +1729,8 @@
     "writers_names": [],
     "directors_names": [
       "McG"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "7b9ead63-df01-4a5d-b34e-2252173df08a",
@@ -1740,7 +1774,8 @@
       "Penny Banner"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "938eebcd-dc24-4026-beaf-c5d7fd3d958b",
@@ -1775,7 +1810,8 @@
       "Phillip Schofield"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "a9b57067-b910-47b8-bb83-3169429c84e1",
@@ -1826,7 +1862,8 @@
     "writers_names": [],
     "directors_names": [
       "Leslie Small"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "572814ae-165a-44a8-8420-db0ebf299ac2",
@@ -1888,7 +1925,8 @@
     ],
     "directors_names": [
       "Michael Audley"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "dd410e88-0c6a-4954-80ac-4c004bcba229",
@@ -1923,7 +1961,8 @@
       "Vernon Kay"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "5f1a4219-b533-489f-8af2-0d2692504857",
@@ -1987,7 +2026,8 @@
     ],
     "directors_names": [
       "Walter C. Miller"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "5f51ddbc-4966-40a6-9030-262faa3b9b79",
@@ -2027,7 +2067,8 @@
       "Tom Basden"
     ],
     "writers_names": [],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "f20e8a75-a7b0-4204-b3e6-edbc366e31d4",
@@ -2086,7 +2127,8 @@
     ],
     "directors_names": [
       "Randolph Longjas"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "0ddc8a23-e625-4aa8-91f5-5aeb7ac82253",
@@ -2127,7 +2169,8 @@
     "writers_names": [],
     "directors_names": [
       "Les Landau"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "a9ee0b3f-ec56-4107-9b6d-0458dfa3f415",
@@ -2210,7 +2253,8 @@
       "Kirsten Beyer",
       "Michael Chabon"
     ],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "61dcf7a8-63b4-4cca-b6ea-e3f574acf93c",
@@ -2250,7 +2294,8 @@
     ],
     "directors_names": [
       "Arthur Davis"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "75475f58-c0ea-4d6d-9f78-bb44d971a21f",
@@ -2348,7 +2393,8 @@
       "Keith Malone",
       "Leland Chee"
     ],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "9f9a2a1f-1d6d-4cb4-b7c2-907dbeb88c03",
@@ -2411,7 +2457,8 @@
     ],
     "directors_names": [
       "Louis J. Horvitz"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "e95044a7-1f66-4164-9650-3bf2132d7119",
@@ -2465,7 +2512,8 @@
     ],
     "directors_names": [
       "Walter C. Miller"
-    ]
+    ],
+    "subscription_required": false
   },
   {
     "id": "ff750819-6004-426b-ae66-19a3ba15adcc",
@@ -2527,7 +2575,8 @@
       "Monty Aidem",
       "Paul Keyes"
     ],
-    "directors_names": []
+    "directors_names": [],
+    "subscription_required": false
   },
   {
     "id": "8167ee1a-61e2-4ec0-bb24-008822cde8cf",
@@ -2585,6 +2634,7 @@
     ],
     "directors_names": [
       "Dick McDonough"
-    ]
+    ],
+    "subscription_required": false
   }
 ]
