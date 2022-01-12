@@ -27,6 +27,7 @@ def traced(name: str) -> Callable:
     Decorator that allow to trace all requests and queries that not
     covered by the project tracer.
     """
+
     def wrapper(func: Callable) -> Callable:
         @wraps(func)
         async def inner(*args: tuple[Any, ...], **kwargs: dict[str, Any]) -> Any:
@@ -35,5 +36,7 @@ def traced(name: str) -> Callable:
 
             async with async_capture_span(name, labels={"args": args, **kwargs}):
                 return await func(*args, **kwargs)
+
         return inner
+
     return wrapper
