@@ -1,9 +1,7 @@
 from logging import getLogger
 from typing import Optional
 
-from aiocache import cached
-
-from app.cache import CACHE_CONFIG
+from app.cache import cached_and_traced
 from app.services.base import ElasticsearchService, SortingMixin
 from app.services.films.schemas import (
     InputFilmSchema,
@@ -30,7 +28,7 @@ class FilmSubscriptionError(Exception):
 
 
 class FilmsService(ElasticsearchService, SortingMixin):
-    @cached(**CACHE_CONFIG)
+    @cached_and_traced
     async def get_by_id(self, film_id: str, is_subscriber: bool) -> InputFilmSchema:
         doc = await self.filter(id=film_id)
         film = InputFilmSchema(**doc.source)
@@ -40,7 +38,7 @@ class FilmsService(ElasticsearchService, SortingMixin):
 
         return film
 
-    @cached(**CACHE_CONFIG)
+    @cached_and_traced
     async def get_all(
         self,
         page: int,

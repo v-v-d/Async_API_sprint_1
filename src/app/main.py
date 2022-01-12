@@ -8,6 +8,7 @@ from fastapi.responses import ORJSONResponse
 from app import elastic
 from app.api import api_root
 from app.api.docs import router as api_docs
+from app.apm import init_apm
 from app.settings import settings
 from app.settings.logging import LOGGING
 
@@ -39,3 +40,5 @@ async def shutdown():
 
 app.include_router(api_docs)
 app.include_router(api_root, prefix="/api")
+
+init_apm(app)

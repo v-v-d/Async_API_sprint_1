@@ -77,6 +77,16 @@ class AuthSettings(BaseSettings):
         env_prefix = "AUTH_"
 
 
+class APMSettings(BaseSettings):
+    ENABLED: bool
+    SERVER_URL: str
+    SERVICE_NAME: str
+    ENVIRONMENT: str
+
+    class Config:
+        env_prefix = "APM_"
+
+
 class CommonSettings(BaseSettings):
     PROJECT_NAME: str = "movies"
     OPENAPI_URL: str = "/api/openapi.json"
@@ -97,3 +107,4 @@ class CommonSettings(BaseSettings):
     ES: ElasticSearchSettings = ElasticSearchSettings()
     BACKOFF: BackoffSettings = BackoffSettings()
     AUTH: AuthSettings = AuthSettings()
+    APM: APMSettings = APMSettings()

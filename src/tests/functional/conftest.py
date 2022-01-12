@@ -6,6 +6,7 @@ import pytest
 from async_asgi_testclient import TestClient
 from jose import jwt
 from orjson import orjson
+from pytest_mock import MockerFixture
 
 from app.dependencies.auth import oauth2_scheme
 from app.elastic import get_elastic
@@ -23,6 +24,11 @@ def event_loop():
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def disable_apm(session_mocker: MockerFixture):
+    session_mocker.patch.object(settings.APM, "ENABLED", False)
 
 
 @pytest.fixture(scope="session", autouse=True)

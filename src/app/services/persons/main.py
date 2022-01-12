@@ -1,9 +1,7 @@
 from logging import getLogger
 from typing import Optional
 
-from aiocache import cached
-
-from app.cache import CACHE_CONFIG
+from app.cache import cached_and_traced
 from app.services.base import ElasticsearchService
 from app.services.persons.schemas import InputPersonSchema, InputListPersonSchema
 
@@ -11,7 +9,7 @@ logger = getLogger(__name__)
 
 
 class PersonService(ElasticsearchService):
-    @cached(**CACHE_CONFIG)
+    @cached_and_traced
     async def get_by_id(self, person_id: str) -> Optional[InputPersonSchema]:
         doc = await self.filter(id=person_id)
         return InputPersonSchema(**doc.source)

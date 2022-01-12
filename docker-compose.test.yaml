@@ -14,3 +14,4 @@ services:
       - .env.sample
     environment:
       - TESTING=True
+      - APM_ENABLED=False
