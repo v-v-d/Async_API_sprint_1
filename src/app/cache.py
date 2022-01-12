@@ -1,7 +1,9 @@
 import jsonpickle
+from aiocache import cached
 from aiocache.backends.redis import RedisCache
 from aiocache.serializers import BaseSerializer
 
+from app.apm import traced
 from app.settings import settings
 
 
@@ -25,3 +27,10 @@ DEFAULT_CACHE_CONFIG = {
 }
 
 CACHE_CONFIG = {} if settings.TESTING else DEFAULT_CACHE_CONFIG
+
+
+def cached_and_traced(func):
+    """
+    Decorator that allow to cache and trace aiocache requests.
+    """
+    return traced("aiocache")(cached(**CACHE_CONFIG)(func))

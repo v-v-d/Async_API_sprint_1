@@ -1,4 +1,6 @@
 import os
+
+from app.settings.base import CommonSettings
 from app.settings.dev import DevSettings
 from app.settings.prod import ProdSettings
 
@@ -15,4 +17,4 @@ if settings_module not in settings_classes:
         f"Wrong SETTINGS env value! Expected {expected}, got {settings_module}."
     )
 
-settings = settings_classes[settings_module]()
+settings: CommonSettings = settings_classes[settings_module]()
