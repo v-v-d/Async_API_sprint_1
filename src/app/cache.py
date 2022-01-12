@@ -31,6 +31,6 @@ CACHE_CONFIG = {} if settings.TESTING else DEFAULT_CACHE_CONFIG
 
 def cached_and_traced(func):
     """
-    Decorator that allow to trace aiocache requests.
+    Decorator that allow to cache and trace aiocache requests.
     """
     return traced("aiocache")(cached(**CACHE_CONFIG)(func))
